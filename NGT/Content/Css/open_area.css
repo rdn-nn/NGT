@@ -1,0 +1,176 @@
+﻿/*https://pt.stackoverflow.com/questions/347779/carregar-select-de-cidade-ap%C3%B3s-selecionar-estado*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+body {
+    background: #EFEFEF !important;
+    color: #F4F6F9;
+    
+}
+.bodyimg {
+    background-image: url('../images/bgngt.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll, fixed;
+    background-blend-mode: hard-light;
+}
+.txtWhite {
+    color: #F4F6F9;
+}
+.txtBlack,
+form label {
+    color: #00204A;
+}
+.brand{
+    font-size: 25px;
+}
+
+.nav-link {
+    color: #F4F6F9 !important;
+}
+    .nav-link:hover {
+        color: #00204A !important;
+        background: #4e79b7ff !important;
+    }
+
+.sidebar ul li a.active {
+    background: #4e79b7ff !important;
+}
+/*NavBarStyles*/
+.bgtop, .bgbottom {
+    background: #00204A;
+    color: #F4F6F9;
+    height: 100px;
+}
+.bgtop {
+    -webkit-box-shadow: 0px 5px 20px 0px #00204a7c !important;
+    -moz-box-shadow: 0px 5px 20px 0px #00204a7c !important;
+    box-shadow: 0px 5px 20px 0px #00204a7c !important;
+}
+.bgbottom {
+    height: 50px;
+    -webkit-box-shadow: 0px -5px 20px 0px #00204a7c !important;
+    -moz-box-shadow: 0px -5px 20px 0px #00204a7c !important;
+    box-shadow: 0px -5px 20px 0px #00204a7c !important;
+}
+.bgSidebar {
+    background: #00204A;
+    color: #F4F6F9;
+}
+.topSidebar {
+    height: 100px;
+}
+body .contentView{
+    min-height:85vh;
+}
+
+    footer a,
+    footer a:hover {
+        color: #F4F6F9;
+    }
+
+.imgNotFound{
+    max-width:600px;
+    width:80%;
+    opacity:0.5;
+}
+.imgLogo {
+    max-width: 750px;
+    width: 100%;
+}
+form{
+    min-width:500px;
+}
+.cardBg {
+    color: #EFEFEF;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #00204a71 !important;
+}
+.card .btnlight {
+    color: #00204A;
+    background: #d8d8d8;
+    box-shadow: 2px 2px 1px #808080ff;
+    font-weight: bold;
+}
+    .card .btnlight:hover {
+        color: #00204A;
+        background: #d8d8d8;
+        box-shadow: 1px 1px 3px #00204a71 inset;
+    }
+
+
+
+/*Configurações do CARD defs Chamados > Tela Inicial*/
+#cardChamado:hover{
+    background:#d5e5fcff;
+    cursor: pointer;
+}
+#cardChamado .bg-warning {
+    background: #d5e5fcff !important;
+}
+#cardChamado:hover .bg-warning {
+    background: #d8d8d8 !important;
+}
+
+
+
+.btnLogout, .otherLink {
+    font-size: 20px;
+    color: #F4F6F9;
+}
+.otherLink {
+    font-size: 15px;
+}
+    .otherLink:hover {
+        color: #4e79b7ff;
+    }
+
+
+
+    .imgFooter {    
+        max-width: 30px;
+    }
+
+.theadbg {
+    text-align:center;
+    background: #00204A;
+    color: #F4F6F9;
+}
+.tbodybg {
+    text-align: center;
+    background: #d5e5fcff !important;
+    color: #00204A;
+}
+#example1_filter {
+    color: #00204A;   
+}
+#navbarCollapse {
+    /*    position: fixed !important;
+    right: 60px;
+    top: 30px;
+    display: flex !important;
+    justify-content: space-between !important;*/
+}
+@media (max-width:720px) {
+    .hideCollapse {
+        display: none !important;
+    }
+    .brand {
+        font-size: 20px;
+    }
+    footer {
+        font-size: 10px;
+    }
+    .sepImg{
+        /*padding-left:15px;*/
+    }
+    .imgNavbar {
+        /*right: 75px;*/
+    }
+}

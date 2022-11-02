@@ -1,0 +1,116 @@
+﻿@model NGT.Models.Usuario
+
+@{
+    ViewBag.Title = "Home";
+}
+<div class="content contentView bodyimg d-flex justify-content-around align-items-center flex-wrap p-5">
+
+    <div>
+        <img src="~/Content/images/NewGenTechDark.png" class="imgLogo" />
+
+        <div class="pt-5 pb-5 txtBlack">
+            <h5 class="mb-2 mt-2 text-center">Escolha uma das opções abaixo:</h5>
+            <div class="row justify-content-around">
+
+                <div class="col-md-6 col-sm-12 col-lg-6">
+                    <div id="cardChamado" class="info-box shadow">
+                        <span class="info-box-icon bg-warning">
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">Abrir chamado</span>
+                            <span class="info-box-text">
+                                <small>
+                                    (Criar um novo chamado)
+                                </small>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-lg-6">
+                    <div id="cardChamado" class="info-box shadow">
+                        <span class="info-box-icon bg-warning">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+
+                        <div class="info-box-content">
+
+                            <span class="info-box-number">Consultar chamado</span>
+                            <span class="info-box-text">
+                                <small>
+                                    (Consultar o status do seu chamado aberto)
+                                </small>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="p-5">
+        <div class="card cardBg">
+
+            @if (IsPost)
+            {
+                <div class="alert alert-default-danger m-0 pb-0">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    @Html.ValidationSummary(true, "", new { @class = "text-muted pl-2" })
+                </div>
+            }
+
+            <h3 class="txtBlack pt-3 align-self-center">Área de Login</h3>
+            <form action="@Url.RouteUrl("Home.Acesso")" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, "E-mail: ", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "email", @class = "form-control", @placeholder = "E-mail..." } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Senha, "Senha: ", htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @type = "password", @class = "form-control", @placeholder = "Senha..." } })
+                        @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="permanecer">
+                        <label class="form-check-label" for="permanecer">Permanecer logado</label>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="d-flex justify-content-center p-2 mb-3">
+                    <button type="submit" class="btn btnlight pl-5 pr-5">Entrar</button>
+                </div>
+            </form>
+
+        </div>
+
+        @*<div class="card mt-5">
+            <a href="@Url.RouteUrl("Home.Ocorrencia")" class="btn btnlight btn-block"><h4>Registrar Ocorrências</h4></a>
+        </div>*@
+    </div>
+
+
+
+</div>
+
+
+@section CssPage{
+    @*<link href="~/Content/libs/validate/jquery.validate.css" rel="stylesheet" />*@
+}
+
+@section ScriptPage{
+
+    @*<script src="~/Content/libs/jquery-validation/jquery.validate.min.js"></script>*@
+    @*<script src="~/Content/libs/jquery-validation/additional-methods.min.js"></script>*@
+    @*<script src="~/Content/js/loginFormValidate.js"></script>*@
+}
