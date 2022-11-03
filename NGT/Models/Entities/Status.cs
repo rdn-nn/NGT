@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace NGT.Models
+namespace NGT.Models.Entities
 {
     public class Status
     {
@@ -15,6 +15,5 @@ namespace NGT.Models
 
 
         public virtual ICollection<Usuario> Usuario { get; set; }
-        public virtual ICollection<Perfil> Perfil { get; set; }
     }
 }
