@@ -102,6 +102,7 @@
     <Content Include="Content\Images\buscaVazia.png" />
     <Content Include="Content\Images\NewGenTechDark.png" />
     <Content Include="Content\Images\NGT.png" />
+    <Content Include="Content\Js\CheckPerm.js" />
     <Content Include="Content\Js\dropdownOcorrencias.js" />
     <Content Include="Content\Js\tableLoad.js" />
     <Content Include="Content\Libs\adminlte\css\adminlte.css" />
@@ -2322,21 +2323,60 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OcorrenciaController.cs" />
     <Compile Include="Data\Funcoes.cs" />
+    <Compile Include="Data\Mapping\BlocoMap.cs" />
+    <Compile Include="Data\Mapping\CategoriaMap.cs" />
+    <Compile Include="Data\Mapping\ItemMap.cs" />
+    <Compile Include="Data\Mapping\LocalMap.cs" />
+    <Compile Include="Data\Mapping\MotivoMap.cs" />
+    <Compile Include="Data\Mapping\OcorrenciaMap.cs" />
     <Compile Include="Data\Mapping\PerfilMap.cs" />
     <Compile Include="Data\Mapping\StatusMap.cs" />
+    <Compile Include="Data\Mapping\StatusTicketMap.cs" />
     <Compile Include="Data\Mapping\UsuarioMap.cs" />
     <Compile Include="Data\NgtContexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202211022022092_Inicial.cs" />
-    <Compile Include="Migrations\202211022022092_Inicial.designer.cs">
-      <DependentUpon>202211022022092_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\202211051723216_InicialBD.cs" />
+    <Compile Include="Migrations\202211051723216_InicialBD.designer.cs">
+      <DependentUpon>202211051723216_InicialBD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051732083_BDComplement.cs" />
+    <Compile Include="Migrations\202211051732083_BDComplement.designer.cs">
+      <DependentUpon>202211051732083_BDComplement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051737246_BDComplement-2.cs" />
+    <Compile Include="Migrations\202211051737246_BDComplement-2.designer.cs">
+      <DependentUpon>202211051737246_BDComplement-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051741455_BDComplement-3.cs" />
+    <Compile Include="Migrations\202211051741455_BDComplement-3.designer.cs">
+      <DependentUpon>202211051741455_BDComplement-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051748401_BDComplement-4.cs" />
+    <Compile Include="Migrations\202211051748401_BDComplement-4.designer.cs">
+      <DependentUpon>202211051748401_BDComplement-4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051755390_BDComplement-5.cs" />
+    <Compile Include="Migrations\202211051755390_BDComplement-5.designer.cs">
+      <DependentUpon>202211051755390_BDComplement-5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211051803371_BDComplement-6.cs" />
+    <Compile Include="Migrations\202211051803371_BDComplement-6.designer.cs">
+      <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entities\Bloco.cs" />
+    <Compile Include="Models\Entities\Categoria.cs" />
+    <Compile Include="Models\Entities\Item.cs" />
+    <Compile Include="Models\Entities\Local.cs" />
+    <Compile Include="Models\Entities\Motivo.cs" />
+    <Compile Include="Models\Entities\Ocorrencia.cs" />
     <Compile Include="Models\Entities\Perfil.cs" />
     <Compile Include="Models\Entities\Status.cs" />
+    <Compile Include="Models\Entities\StatusTicket.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Models\Logon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2427,6 +2467,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Ocorrencia\NovaOcorrencia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2440,8 +2481,26 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202211022022092_Inicial.resx">
-      <DependentUpon>202211022022092_Inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202211051723216_InicialBD.resx">
+      <DependentUpon>202211051723216_InicialBD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051732083_BDComplement.resx">
+      <DependentUpon>202211051732083_BDComplement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051737246_BDComplement-2.resx">
+      <DependentUpon>202211051737246_BDComplement-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051741455_BDComplement-3.resx">
+      <DependentUpon>202211051741455_BDComplement-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051748401_BDComplement-4.resx">
+      <DependentUpon>202211051748401_BDComplement-4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051755390_BDComplement-5.resx">
+      <DependentUpon>202211051755390_BDComplement-5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211051803371_BDComplement-6.resx">
+      <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Inicial : DbMigration
+    public partial class InicialBD : DbMigration
     {
         public override void Up()
         {
@@ -44,6 +44,15 @@
                     })
                 .PrimaryKey(t => t.sta_codigo);
             
+            CreateTable(
+                "dbo.sti_statusticket",
+                c => new
+                    {
+                        sti_codigo = c.Int(nullable: false, identity: true),
+                        sti_nome = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.sti_codigo);
+            
         }
         
         public override void Down()
@@ -52,6 +61,7 @@
             DropForeignKey("dbo.usu_usuario", "per_codigo", "dbo.per_perfil");
             DropIndex("dbo.usu_usuario", new[] { "sta_codigo" });
             DropIndex("dbo.usu_usuario", new[] { "per_codigo" });
+            DropTable("dbo.sti_statusticket");
             DropTable("dbo.sta_status");
             DropTable("dbo.usu_usuario");
             DropTable("dbo.per_perfil");

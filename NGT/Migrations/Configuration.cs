@@ -1,4 +1,6 @@
-﻿namespace NGT.Migrations
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NGT.Migrations
 {
     using NGT.Models.Entities;
     using System;
@@ -8,7 +10,7 @@
     using System.Runtime.Remoting.Contexts;
     using System.Web.Razor.Parser.SyntaxTree;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<NGT.Data.NgtContexto>
+    internal sealed class Configuration : DbMigrationsConfiguration<Data.NgtContexto>
     {
         public Configuration()
         {
@@ -16,44 +18,30 @@
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(NGT.Data.NgtContexto cont)
+        protected override void Seed(Data.NgtContexto cont)
         {
-            //cont.Blocos.AddOrUpdate(
-            //b => b.Nome,
-            //    new Models.Entities.Bloco { Nome = "Bloco A", Status = Bloco.TipoBlo.ATIVO },
-            //    new Models.Entities.Bloco { Nome = "Bloco B", Status = Bloco.TipoBlo.ATIVO }
-            //);
-            //cont.Categorias.AddOrUpdate(
-            //    c => c.Nome,
-            //    new Models.Entities.Categoria { Nome = "Mobília", Status = Categoria.TipoCat.ATIVO },
-            //    new Models.Entities.Categoria { Nome = "Infraestrutura", Status = Categoria.TipoCat.ATIVO }
-            //);
-            //cont.Locais.AddOrUpdate(
-            //l => l.Nome,
-            //new Models.Entities.Local { Nome = "Sala 1", Bloco = context.Blocos.Find(1), Status = Local.TipoLoc.ATIVO },
-            //new Models.Entities.Local { Nome = "Sala 2", Bloco = context.Blocos.Find(2), Status = Local.TipoLoc.ATIVO },
-            //    new Models.Entities.Local { Nome = "Sala 3", Bloco = context.Blocos.Find(1), Status = Local.TipoLoc.ATIVO }
-            //);
-            //cont.Itens.AddOrUpdate(
-            //i => i.Nome,
-            //new Models.Entities.Item { Nome = "Cadeira", TemPlaca = Item.Tipo.NÃO, PatInterno = Item.Tipo.NÃO, Local = context.Locais.Find(1), Categoria = context.Categorias.Find(1), Status = Item.TipoIte.ATIVO },
-            //new Models.Entities.Item { Nome = "Mesa", TemPlaca = Item.Tipo.SIM, PatInterno = Item.Tipo.SIM, Local = context.Locais.Find(2), Categoria = context.Categorias.Find(1), Status = Item.TipoIte.ATIVO },
-            //new Models.Entities.Item { Nome = "Janela", TemPlaca = Item.Tipo.NÃO, PatInterno = Item.Tipo.SIM, Local = context.Locais.Find(3), Categoria = context.Categorias.Find(2), Status = Item.TipoIte.ATIVO }
-            //);
 
-            cont.Statuses.AddOrUpdate(
+            cont.Status.AddOrUpdate(
                 s => s.Nome,
                 new Status { Nome = "Desativado" },
                 new Status { Nome = "Ativado" }
             );
 
+            cont.StatusTickets.AddOrUpdate(
+                s => s.Nome,
+                new StatusTicket { Nome = "Pendente" },
+                new StatusTicket { Nome = "Em Andamento" },
+                new StatusTicket { Nome = "Concluído" },
+                new StatusTicket { Nome = "Cancelado" }
+            );
+
             cont.Perfis.AddOrUpdate(
             p => p.Nome,
-                new Perfil { Nome = "Administrador"  },
+                new Perfil { Nome = "Administrador" },
                 new Perfil { Nome = "Gerente" }
             );
 
-            ////Abc123
+            ////////Abc123
             cont.Usuarios.AddOrUpdate(
             u => u.Email,
                  new Usuario { Nome = "Nice Montarroyos", Email = "nice.montarroyos@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 },
@@ -61,6 +49,40 @@
                  new Usuario { Nome = "Rudson Nunes", Email = "rudson.nunes@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 2, PerfilId = 1 },
                  new Usuario { Nome = "Wanderson dos Santos", Email = "wanderson.santos6@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 }
             );
+
+            cont.Blocos.AddOrUpdate(
+            b => b.Nome,
+                new Bloco { Nome = "Bloco A", StatusId = 2 },
+                new Bloco { Nome = "Bloco B", StatusId = 2 }
+            );
+
+            cont.Categorias.AddOrUpdate(
+            c => c.Nome,
+                new Categoria { Nome = "mobília", StatusId = 2 },
+                new Categoria { Nome = "infraestrutura", StatusId = 2 }
+            );
+
+            cont.Motivos.AddOrUpdate(
+            m => m.Nome,
+                new Motivo { Nome = "Quebrado", StatusId = 2 },
+                new Motivo { Nome = "Não funciona", StatusId = 2 }
+            );
+
+            cont.Locais.AddOrUpdate(
+            l => l.Nome,
+                new Local { Nome = "Sala 1", BlocoId = 1, StatusId = 2 },
+                new Local { Nome = "Sala 2", BlocoId = 2, StatusId = 2 },
+                new Local { Nome = "Sala 3", BlocoId = 1, StatusId = 2 }
+            );
+
+            cont.Itens.AddOrUpdate(
+            i => i.Nome,
+                new Item { Nome = "Cadeira", LocalId = 1, CategoriaId = 1, StatusId = 2 },
+                new Item { Nome = "Mesa", LocalId = 1, CategoriaId = 1, StatusId = 2 },
+                new Item { Nome = "Janela", LocalId = 2, CategoriaId = 2, StatusId = 2 }
+            );
+
+
         }
     }
 }

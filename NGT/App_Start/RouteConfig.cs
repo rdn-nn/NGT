@@ -26,15 +26,15 @@ namespace NGT
 
             routes.MapRoute(
                 name: "Home.Acesso",
-                url: "home/acesso",
+                url: "acesso",
                 defaults: new { controller = "Home", action = "Acesso" },
                 namespaces: namespaces
             );
 
             routes.MapRoute(
                 name: "Home.Ocorrencia",
-                url: "ocorrencias",
-                defaults: new { controller = "Ocorrencia", action = "Ocorrencias" },
+                url: "nova-ocorrencia",
+                defaults: new { controller = "Ocorrencia", action = "Criar" },
                 namespaces: namespaces
             );
         }

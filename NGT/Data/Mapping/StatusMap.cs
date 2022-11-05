@@ -9,7 +9,8 @@ namespace NGT.Data.Mapping
 {
     public class StatusMap : EntityTypeConfiguration<Status>
     {
-        public StatusMap(){
+        public StatusMap()
+        {
             ToTable("sta_status");
             HasKey(x => x.Id);
             Property(x => x.Id).HasColumnName("sta_codigo");
