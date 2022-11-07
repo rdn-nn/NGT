@@ -15,29 +15,64 @@
     @RenderSection("CssPage", false)
 </head>
 <body class="hold-transition layout-top-nav">
+
     <div class="wrapper">
         @Html.Partial("Parts/_Header")
 
         <div>
 
             @RenderBody()
-
         </div>
 
         @Html.Partial("Parts/_Footer")
     </div>
+
     <script src="~/Content/Libs/jquery/jquery.min.js"></script>
     <script src="~/Content/Libs/bootstrap4/js/bootstrap.bundle.min.js"></script>
     <script src="~/Content/Libs/adminlte/js/adminlte.min.js"></script>
-    @*<script src="~/Content/libs/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/Content/libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/Content/libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/Content/libs/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/Content/libs/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/Content/libs/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/Content/libs/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/Content/js/tableLoad.js"></script>*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @RenderSection("ScriptPage", false)
+    @*<script src="~/Content/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/Content/libs/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/Content/js/tableLoad.js"></script>*@
+
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+            $(document).ready(function ()
+            {
+                var title = "";
+                if ("@TempData["MSG"].ToString().Split('|')[2]" !== "x") {
+                    switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+                        case "success":
+                            title = "Chamado registrado - Nº: " + "@TempData["MSG"].ToString().Split('|')[2]";
+                            break;
+                    }
+                } else {
+                    switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+                        case "success":
+                            title = "Sucesso!";
+                            break;
+                        case "warning":
+                            title = "Atenção!";
+                            break;
+                        case "error":
+                            title = "Erro!";
+                            break;
+                        case "info":
+                            title = "Informação!";
+                            break;
+                    }
+                }
+                swal(title, "@Html.Raw(TempData["MSG"].ToString().Split('|')[1])", "@TempData["MSG"].ToString().Split('|')[0]");
+            });
+        </script>
+    }
 
 </body>
 </html>

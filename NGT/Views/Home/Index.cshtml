@@ -5,7 +5,7 @@
 }
 <div class="content contentView bodyimg d-flex justify-content-around align-items-center flex-wrap p-5">
 
-    <div>
+    <div class="p-5">
         <img src="~/Content/images/NewGenTechDark.png" class="imgLogo" />
 
         <div class="pt-5 pb-5 txtBlack">
@@ -108,22 +108,19 @@
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalOcorrencia" aria-hidden="true" />
 
 @section CssPage{
-    <link href="~/Content/Libs/jquery-ui/jquery-ui.css" rel="stylesheet" />
+
 }
 
 @section ScriptPage{
 
     <script>
-
         $(function () {
-
             $('#cardChamado').click(function () {
                 $("#modal").load("@Url.RouteUrl("Home.Ocorrencia")", function () {
                     $("#modal").modal();
                 });
             });
         });
-
     </script>
 
     <script src="~/Content/Js/CheckPerm.js"></script>

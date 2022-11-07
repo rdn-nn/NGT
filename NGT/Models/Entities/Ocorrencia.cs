@@ -9,7 +9,7 @@ namespace NGT.Models.Entities
     public class Ocorrencia
     {
         public int Id { get; set; }
-        [Required, MaxLength(250)]
+        [MaxLength(250)]
         public string Obs { get; set; }
         public string Imagem { get; set; }
         public DateTime DataCriacao { get; set; }
