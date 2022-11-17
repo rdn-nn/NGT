@@ -26,5 +26,6 @@ namespace NGT.Models.Entities
         public virtual Categoria Categoria { get; set; }
         public virtual Status Status { get; set; }
         public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
+        public virtual ICollection<OrdServico> OrdServico { get; set; }
     }
 }

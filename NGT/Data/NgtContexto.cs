@@ -20,7 +20,9 @@ namespace NGT.Data
         public DbSet<Local> Locais { get; set; }
         public DbSet<Item> Itens { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
-        
+        public DbSet<OrdServico> OrdServicos { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder mb)
         {
             mb.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -34,6 +36,8 @@ namespace NGT.Data
             mb.Configurations.Add(new LocalMap());
             mb.Configurations.Add(new ItemMap());
             mb.Configurations.Add(new OcorrenciaMap());
+            mb.Configurations.Add(new OrdServicoMap());
+            mb.Configurations.Add(new FornecedorMap());
             base.OnModelCreating(mb);
         }
     }

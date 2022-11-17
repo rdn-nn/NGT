@@ -4582,16 +4582,21 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlocoController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Admin\Controllers\OcorrenciaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OSController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OcorrenciaController.cs" />
     <Compile Include="Data\Funcoes.cs" />
     <Compile Include="Data\Mapping\BlocoMap.cs" />
     <Compile Include="Data\Mapping\CategoriaMap.cs" />
+    <Compile Include="Data\Mapping\FornecedorMap.cs" />
     <Compile Include="Data\Mapping\ItemMap.cs" />
     <Compile Include="Data\Mapping\LocalMap.cs" />
     <Compile Include="Data\Mapping\MotivoMap.cs" />
     <Compile Include="Data\Mapping\OcorrenciaMap.cs" />
+    <Compile Include="Data\Mapping\OrdServicoMap.cs" />
     <Compile Include="Data\Mapping\PerfilMap.cs" />
     <Compile Include="Data\Mapping\StatusMap.cs" />
     <Compile Include="Data\Mapping\StatusTicketMap.cs" />
@@ -4628,13 +4633,19 @@
     <Compile Include="Migrations\202211051803371_BDComplement-6.designer.cs">
       <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211172338068_BDComplement-7.cs" />
+    <Compile Include="Migrations\202211172338068_BDComplement-7.designer.cs">
+      <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
     <Compile Include="Models\Entities\Categoria.cs" />
+    <Compile Include="Models\Entities\Fornecedor.cs" />
     <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\Local.cs" />
     <Compile Include="Models\Entities\Motivo.cs" />
     <Compile Include="Models\Entities\Ocorrencia.cs" />
+    <Compile Include="Models\Entities\OrdServico.cs" />
     <Compile Include="Models\Entities\Perfil.cs" />
     <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\Entities\StatusTicket.cs" />
@@ -4824,6 +4835,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Fornecedor\" />
+    <Folder Include="Areas\Admin\Views\OS\" />
+    <Folder Include="Areas\Admin\Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202211051723216_InicialBD.resx">
@@ -4846,6 +4860,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211051803371_BDComplement-6.resx">
       <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211172338068_BDComplement-7.resx">
+      <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

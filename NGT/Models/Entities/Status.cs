@@ -18,5 +18,6 @@ namespace NGT.Models.Entities
         public virtual ICollection<Motivo> Motivo { get; set; }
         public virtual ICollection<Local> Local { get; set; }
         public virtual ICollection<Item> Item { get; set; }
+        public virtual ICollection<Fornecedor> Fornecedor { get; set; }
     }
 }

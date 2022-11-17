@@ -6,15 +6,12 @@ using System.Web;
 
 namespace NGT.Models.Entities
 {
-    public class Ocorrencia
+    public class OrdServico
     {
+
         public int Id { get; set; }
-        [MaxLength(250)]
-        public string Obs { get; set; }
-        public string Imagem { get; set; }
-        public DateTime DataCriacao { get; set; }
-        public DateTime? DataAtualizacao { get; set; }
-        public string NumTicket { get; set; }
+        public int OcorrenciaId { get; set; }
+        public int Patrimonio { get; set; }
         [Required]
         public int BlocoId { get; set; }
         [Required]
@@ -25,22 +22,37 @@ namespace NGT.Models.Entities
         public int ItemId { get; set; }
         [Required]
         public int MotivoId { get; set; }
+        [MaxLength(250)]
+        public string Obs { get; set; }
         [Required]
+        public int FornecedorId { get; set; }
+        [MaxLength(11)]
+        public string NotaF { get; set; }
+        [MaxLength(20)]
+        public string CentroCusto { get; set; }
+        public double Valor { get; set; }
+        public double Desconto { get; set; }
+        public DateTime DataEntregaPrevis { get; set; }
+        public DateTime DataEntregaReal { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public DateTime? DataAtualizacao { get; set; }
+        [Required]
+        public string NumTicketOS { get; set; }
         public int StatusTicketId { get; set; }
-        
-        public Ocorrencia()
+
+        public OrdServico()
         {
             DataCriacao = DateTime.Now;
         }
 
-
+        public virtual Ocorrencia Ocorrencia { get; set; }
         public virtual Bloco Bloco { get; set; }
         public virtual Local Local { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual Item Item { get; set; }
         public virtual Motivo Motivo { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
         public virtual StatusTicket StatusTicket { get; set; }
-        public virtual ICollection<OrdServico> OrdServico { get; set; }
 
     }
 }

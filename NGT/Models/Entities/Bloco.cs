@@ -16,5 +16,6 @@ namespace NGT.Models.Entities
         public virtual Status Status { get; set; }
         public virtual ICollection<Local> Local { get; set; }
         public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
+        public virtual ICollection<OrdServico> OrdServico { get; set; }
     }
 }

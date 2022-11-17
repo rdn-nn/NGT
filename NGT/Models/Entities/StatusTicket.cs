@@ -14,5 +14,6 @@ namespace NGT.Models.Entities
         public string Nome { get; set; }
 
         public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
+        public virtual ICollection<OrdServico> OrdServico { get; set; }
     }
 }
