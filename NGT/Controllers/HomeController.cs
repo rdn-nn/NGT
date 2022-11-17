@@ -43,13 +43,14 @@ namespace NGT.Controllers
                         return View("Index");
                     }
                     string permissoes = usu.Perfil.Nome;
-                    FormsAuthentication.SetAuthCookie(usu.Id + "|" + usu.Nome.Split(' ')[0] + "|" + usu.Nome.Split(' ')[1] + "|" + permissoes, persist);
-                    //3|Rudson Nunes|Admin,Comun
-                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, usu.Id + "|" + usu.Nome.Split(' ')[0] + "|" + usu.Nome.Split(' ')[1] + "|" + permissoes, DateTime.Now, DateTime.Now.AddMinutes(30), persist, permissoes);
+                    FormsAuthentication.SetAuthCookie(usu.Id + "|" + usu.Nome.Split(' ')[0] + "|" + usu.Nome.Split(' ')[1] + "|" + permissoes + "|" + usu.FotoPerfil, persist);
+                    //3|Rudson|Nunes|Admin|Foto
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, usu.Id + "|" + usu.Nome.Split(' ')[0] + "|" + usu.Nome.Split(' ')[1] + "|" + permissoes + "|" + usu.FotoPerfil, DateTime.Now, DateTime.Now.AddMinutes(30), persist, permissoes);
                     string hash = FormsAuthentication.Encrypt(ticket);
                     HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
                     Response.Cookies.Add(cookie);
 
+                    TempData["MSG"] = "success|Login realizado com sucesso!!!|x";
                     return RedirectToAction("Index");
                 }
             }

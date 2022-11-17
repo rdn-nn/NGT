@@ -1,0 +1,173 @@
+﻿@model NGT.Models.Entities.Bloco
+@{
+    ViewBag.Title = "Blocos";
+    ViewBag.MenuLinkBlocos = true;
+}
+
+<section class="content-header pt-2">
+    <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="@Url.RouteUrl("Admin.Dashboard.Index")">Admin</a></li>
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<div class="pl-3 pr-3 pb-3">
+
+    @using (Html.BeginForm("Criar", "Bloco"))
+    {
+        <div class="card card-default collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title">Novo Bloco</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="card-body overflow-hidden">
+
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
+                <button type="submit" class="btn btn-default ">Gravar</button>
+            </div>
+        </div>
+
+    }
+
+    <div class="row d-flex justify-content-center align-items-center">
+        @foreach (var item in @ViewBag.blocos)
+        {
+            bool status;
+            if (item.Status.Nome == "Ativado")
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
+
+
+            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-3">
+
+                <div class="card card-widget widget-user">
+
+                    <div class="widget-user-header bg-info">
+
+                        <div class="removeBloc" >
+                            <button ref="@item.Id" class="btn btn-tool removeBloco">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                        <h3 class="widget-user-username">@item.Nome</h3>
+                        <h5 class="widget-user-desc">Fatec Guaratinguetá</h5>
+                    </div>
+                    <div class="widget-user-image">
+                        <span id="imgBloco" class="far fa-building"></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-3 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">@item.Id</h5>
+                                    <span class="description-text">ID</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">
+                                        @Html.CheckBox("chk", status, new { @class = "status", @rel = @item.Id })
+                                        <span id="status_@item.Id">@item.Status.Nome</span>
+                                    </h5>
+                                    <span class="description-text">Status</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="description-block">
+                                    <h5 class="description-header">35</h5>
+                                    <span class="description-text">Itens</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+@section ScriptPage {
+    <script>
+        $(".status").click(function () {
+            var id = $(this).attr("rel");
+            $.ajax({
+                dataType: "json",
+                type: "POST",
+                url: "/admin/blocos/trocarstatus",
+                data: { id },
+                success: function (retorno) {
+
+                    if (retorno == "t") {
+                        $("#status_" + id).removeClass();
+                        $("#status_" + id).addClass("font-weight-bold text-success");
+                        $("#status_" + id).text("Ativado");
+                    }
+                    else if (retorno == "f") {
+                        $("#status_" + id).removeClass();
+                        $("#status_" + id).addClass("font-weight-bold text-danger");
+                        $("#status_" + id).text("Desativado");
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $(".removeBloco").click(function () {
+            var id = $(this).attr("ref");
+           /* alert(id);*/
+             $.ajax({
+                dataType: "json",
+                type: "POST",
+                url: "/admin/blocos/remove-bloco",
+                data: { id },
+                success: function (retorno) {
+
+                    if (retorno == "t") {
+                       
+                        window.location.replace("/admin/blocos");
+
+                    }
+                    else if (retorno == "f") {
+                       
+                        window.location.replace("/admin/blocos");
+                    }
+                }
+            });
+        });
+    </script>
+}

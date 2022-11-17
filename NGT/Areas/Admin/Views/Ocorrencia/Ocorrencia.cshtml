@@ -1,0 +1,343 @@
+﻿@model NGT.Models.Entities.Ocorrencia
+@{
+    ViewBag.Title = "Chamados";
+    ViewBag.MenuLinkOcorrencias = true;
+}
+<section class="content-header pt-2">
+    <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="@Url.RouteUrl("Admin.Dashboard.Index")">Admin</a></li>
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<div class="pl-3 pr-3 pb-3">
+
+
+    @using (Html.BeginForm("Criar", "Ocorrencia"))
+    {
+        <div class="card card-default collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title">Novo Chamado</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="card-body overflow-hidden">
+
+
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BlocoId, "Bloco: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("BlocoId", null, "Selecione o bloco", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+
+                <div class="form-group d-none" id="divLocais">
+                    @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divCategs">
+                    @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12  pl-3 pr-3">
+                        @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divItens">
+                    @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divMotivos">
+                    @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divObs">
+                    @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer d-none justify-content-end col-11 col-md-12" id="divSubmit">
+                <button type="submit" class="btn btn-default ">Gravar</button>
+            </div>
+        </div>
+
+    }
+
+    <div class="row">
+        <div id="idPendente" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.Pendente</h3>
+                    <p>Pendente</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-solid fa-circle-pause"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idAndamento" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@ViewBag.Andamento</h3>
+                    <p>Andamento</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-solid fa-arrow-rotate-right"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idConcluido" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@ViewBag.Concluido</h3>
+                    <p>Concluídos</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idCancelado" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>@ViewBag.Cancelado</h3>
+                    <p>Cancelados</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <div>
+        @if (ViewBag.Ocorrencias.Count >= 1)
+        {
+
+            <div class="card-body">
+                <table id="ocorrenciasTable" class="table table-bordered table-striped table-hover table-sm">
+                    <thead class="theadbg">
+                        <tr>
+                            <th>Ticket</th>
+                            <th>@Html.DisplayNameFor(model => model.Bloco)</th>
+                            <th>@Html.DisplayNameFor(model => model.Local)</th>
+                            <th>@Html.DisplayNameFor(model => model.Categoria)</th>
+                            <th>@Html.DisplayNameFor(model => model.Item)</th>
+                            <th>@Html.DisplayNameFor(model => model.Motivo)</th>
+                            <th>@Html.DisplayNameFor(model => model.Obs)</th>
+                            <th>Criado</th>
+                            <th>Atualização</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodybg">
+                        @foreach (var item in @ViewBag.Ocorrencias)
+                        {
+                            <tr>
+                                <th>@item.NumTicket</th>
+                                <td>@item.Bloco.Nome</td>
+                                <td>@item.Local.Nome</td>
+                                <td>@item.Categoria.Nome</td>
+                                <td>@item.Item.Nome</td>
+                                <td>@item.Motivo.Nome</td>
+                                <td>@item.Obs</td>
+                                <td>@item.DataCriacao.ToShortDateString()</td>
+                                <td>
+                                    @if (item.DataAtualizacao != null)
+                                    {
+                                        item.DataAtualizacao.ToShortDateString();
+                                    }
+                                    else
+                                    {
+                                        @item.DataAtualizacao;
+                                    }
+                                </td>
+                                <td>@item.StatusTicket.Nome</td>
+                                <td>
+                                    <a class="botaoAlteraSt" href="#">
+                                        Alterar Status
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        }
+    </div>
+
+</div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalOcorrencia" aria-hidden="true" />
+
+
+@section CssPage{
+    <link href="~/Areas/Admin/Content/Libs/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/datatables-buttons/css/buttons.bootstrap4.css" rel="stylesheet" />
+}
+
+
+@section ScriptPage{
+    <script src="~/Areas/Admin/Content/Libs/datatables/jquery.dataTables.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/jszip/jszip.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.html5.js"></script>
+    @*<script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.flash.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.print.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.colVis.js"></script>
+
+    <script>
+
+        $(function () {
+            $("#ocorrenciasTable").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#ocorrenciasTable_wrapper .col-md-6:eq(0)');
+        });
+
+
+        $('#idAndamento').click(function () {
+            $("#tabSearch").val("Andamento").trigger('keyup');
+        });
+
+        $('#idPendente').click(function () {
+            $("#tabSearch").val("Pendente").trigger('keyup');
+        });
+
+        $('#idConcluido').click(function () {
+            $("#tabSearch").val("Concluído").trigger('keyup');
+        });
+
+        $('#idCancelado').click(function () {
+            $("#tabSearch").val("Cancelado").trigger('keyup');
+        });
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#BlocoId').change(function () {
+                $.ajax({
+                    url: 'ocorrencias/carregaLocal',
+                    type: 'POST',
+                    data: { blocoId: $(this).val() },
+                    datatype: 'json',
+                    success: function (data) {
+                        var options = '';
+                        options += '<option value>Selecione o Local</option>';
+                        $.each(data, function () {
+                            options += '<option value="' + this.id + '">' + this.nome + '</option>';
+                        });
+                        $('#LocalId').html(options);
+                        $('#divLocais').removeClass('d-none');
+                        $('#divCategs').removeClass('d-none');
+                    },
+                });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('#CategoriaId').change(function () {
+                if ($('#CategoriaId').val() || $('#LocalId').val() !== "") {
+                    $.ajax({
+                        url: 'ocorrencias/carregaitem',
+                        type: 'POST',
+                        data: {
+                            localId: $('#LocalId').val(),
+                            categId: $('#CategoriaId').val()
+                        },
+                        datatype: 'json',
+                        success: function (data) {
+                            var options = '';
+                            options += '<option>Selecione o Item</option>';
+                            $.each(data, function () {
+                                options += '<option value="' + this.id + '">' + this.nome + '</option>';
+                            });
+                            $('#ItemId').html(options);
+                            $('#divItens').removeClass('d-none');
+                            $('#divMotivos').removeClass('d-none');
+                            $('#divObs').removeClass('d-none');
+                        }
+                    });
+                }
+            });
+
+            $('#LocalId').change(function () {
+                if ($('#CategoriaId').val() || $('#LocalId').val() !== "") {
+                    $.ajax({
+                        url: 'ocorrencias/carregaitem',
+                        type: 'POST',
+                        data: {
+                            localId: $('#LocalId').val(),
+                            categId: $('#CategoriaId').val()
+                        },
+                        datatype: 'json',
+                        success: function (data) {
+                            var options = '';
+                            options += '<option>Selecione o Item</option>';
+                            $.each(data, function () {
+                                options += '<option value="' + this.id + '">' + this.nome + '</option>';
+                            });
+                            $('#ItemId').html(options);
+                            $('#divItens').removeClass('d-none');
+                            $('#divMotivos').removeClass('d-none');
+                            $('#divObs').removeClass('d-none');
+                        }
+                    });
+                }
+            });
+
+        });
+
+        $(document).ready(function () {
+            $('#MotivoId').change(function () {
+                $('#divSubmit').removeClass('d-none');
+            });
+        });
+
+    </script>
+
+
+}

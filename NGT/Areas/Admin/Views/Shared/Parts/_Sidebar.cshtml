@@ -1,0 +1,111 @@
+﻿<aside class="main-sidebar bgSidebar elevation-4">
+    <!-- Brand Logo -->
+    <div class="brand-link topSidebar justify-content-center align-items-center pt-4">
+        <img src="~/Content/images/NGT.png" alt="NGT Logo" class="brand-image mt-2" />
+        <div class="mt-2">
+            <span class="brand-text font-weight-light">NewGenTech</span>
+        </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="side-menu">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="@Url.RouteUrl("Admin.Dashboard.Index")" class="@SetActive(ViewBag.MenuLinkDashboard) nav-link">
+                        <i class="nav-icon fas fa-chart-line "></i>
+                        <p class="">
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link @SetActive(ViewBag.MenuLinkUsuarios)">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Usuários
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-industry"></i>
+                        <p>
+                            Fornecedores
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                                <a href="@Url.RouteUrl("Admin.Bloco.Index")" class="nav-link @SetActive(ViewBag.MenuLinkBlocos)">
+                                    <i class="nav-icon fas fa-building"></i>
+                                    <p>
+                                        Blocos
+                                    </p>
+                                </a>
+                            </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-map-marker-alt"></i>
+                        <p>
+                            Locais
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            Categorias
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tags"></i>
+                        <p>
+                            Itens
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                                <a href="@Url.RouteUrl("Admin.Ocorrencia.Index")" class="nav-link @SetActive(ViewBag.MenuLinkOcorrencias)">
+                                    <i class="nav-icon fas fa-receipt"></i>
+                                    <p>
+                                        Ocorrencias
+                                    </p>
+                                </a>
+                            </li>
+                <li class="nav-item">
+                    @*@Url.RouteUrl("Admin.OS.Index")*@
+                                <a href="" class="nav-link  @SetActive(ViewBag.MenuLinkOS)">
+                                    <i class="nav-icon fas fa-list-alt"></i>
+                                    <p>
+                                        Ordens de Serviço
+                                    </p>
+                                </a>
+                            </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+<!-- ./wrapper -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+
+@functions {
+    string SetActive(bool? isActive)
+    {
+        return (isActive.HasValue && isActive.Value) ? "active" : "";
+    }
+}

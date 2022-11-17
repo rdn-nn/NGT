@@ -1,0 +1,25 @@
+﻿@using System
+@{
+    ViewBag.Title = "Página não encontrada";
+}
+<div class="content contentView bodyimg d-flex justify-content-center align-items-center txtBlack">
+    <div class="text-center">
+        <h3>PÁGINA NÃO ENCONTRADA!</h3>
+
+        <p>Não foi possível encontrar a página: @ViewBag.RequestedUrl</p>
+        @if (ViewBag.ReferrerUrl != null)
+        {
+            <p>Voltar para a <a href="@ViewBag.ReferrerUrl">página anterior</a>.</p>
+        }
+
+        <script type="text/javascript">
+                        var GOOG_FIXURL_LANG = '@System.Globalization.CultureInfo.CurrentCulture.Name.Substring(0,2)';
+                        var GOOG_FIXURL_SITE = '@Request.Url.GetLeftPart(UriPartial.Authority)'
+        </script>
+        <script type="text/javascript" src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+
+        @(new string(' ', 512))
+
+        <img src="~/Areas/Admin/Content/Images/buscaVazia.png" class="imgNotFound"  />
+    </div>
+</div>

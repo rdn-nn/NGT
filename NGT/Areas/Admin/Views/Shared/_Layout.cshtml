@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - NGT</title>
+
+    @RenderSection("CssPage", false)
+    <link href="~/Areas/Admin/Content/Libs/adminlte/css/adminlte.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/fontawesome-free/css/all.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Css/open_area.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/sweetalert2/sweetalert2.css" rel="stylesheet" />
+    @*<link href="~/Areas/Admin/Content/Libs/sweetalert2-theme-bootstrap-4/bootstrap-4.css" rel="stylesheet" />
+        <link href="~/Content/libs/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+            <link href="~/Content/libs/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+            <link href="~/Content/libs/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />*@
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+    <div class="wrapper">
+        @Html.Partial("Parts/_Sidebar")
+        @Html.Partial("Parts/_Header")
+
+        <div class="content-wrapper bodyimg txtBlack">
+
+            @RenderBody()
+
+        </div>
+
+        @Html.Partial("Parts/_Footer")
+    </div>
+
+    <script src="~/Areas/Admin/Content/Libs/jquery/jquery.min.js"></script>
+    @RenderSection("ScriptPage", false)
+    <script src="~/Areas/Admin/Content/Libs/bootstrap4/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/adminlte/js/adminlte.min.js"></script>
+    @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/Libs/sweetalert2/sweetalert2.js"></script>
+
+    @*<script src="~/Content/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/Content/libs/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="~/Content/libs/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/Content/js/tableLoad.js"></script>*@
+
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+            $(document).ready(function ()
+            {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+                        case "success":
+                            Toast.fire({
+                                icon: 'success',
+                                title: '@Html.Raw(TempData["MSG"].ToString().Split('|')[1])'
+                            })
+                            break;
+                        case "warning":
+                            Toast.fire({
+                                icon: 'warning',
+                                title: '@Html.Raw(TempData["MSG"].ToString().Split('|')[1])'
+                            })
+                            break;
+                    case "error":
+                            Toast.fire({
+                                icon: 'error',
+                                title: '@Html.Raw(TempData["MSG"].ToString().Split('|')[1])'
+                            })
+                            title = "Erro!";
+                            break;
+                        case "info":
+                            Toast.fire({
+                                icon: 'info',
+                                title: '@Html.Raw(TempData["MSG"].ToString().Split('|')[1])'
+                            })
+                            break;
+                    }
+            });
+
+        </script>
+    }
+
+</body>
+</html>

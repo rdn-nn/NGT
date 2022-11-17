@@ -47,22 +47,6 @@ namespace NGT.Controllers
                 ocorrencia.ItemId = Oco.ItemId;
                 ocorrencia.MotivoId = Oco.MotivoId;
                 ocorrencia.StatusTicketId = db.StatusTickets.Where(x => x.Nome == "Pendente").FirstOrDefault().Id;
-                //public string Obs { get; set; }
-                //public string Imagem { get; set; }
-                //public DateTime DataCriacao { get; set; }
-                //public DateTime? DataAtualizacao { get; set; }
-                //public string NumTicket { get; set; }
-                //[Required]
-
-
-                //ocorrencia.Bloco = db.Blocos.FirstOrDefault(b => b.Id == Bloco);
-                //ocorrencia.Local = db.Locais.FirstOrDefault(l => l.Id == Local);
-                //ocorrencia.Categoria = db.Categorias.FirstOrDefault(c => c.Id == Categoria);
-                //ocorrencia.Item = db.Itens.FirstOrDefault(i => i.Id == Item);
-                //ocorrencia.Motivo = motivo;
-                //ocorrencia.Obs = obs;
-                //ocorrencia.Status = Models.Entities.Ocorrencia.Boolean.PENDENTE;
-                //ocorrencia.Recorrencia = 1;
 
                 db.Ocorrencias.Add(ocorrencia);
                 db.SaveChanges();

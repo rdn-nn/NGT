@@ -1,0 +1,40 @@
+﻿<nav class="main-header navbar navbar-expand bgtop navbar-dark d-flex justify-content-between align-items-center overflow-visible">
+    <div class="justify-content-center align-items-center">
+        <a class="otherLink pl-3" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </div>
+    <div class="justify-content-center align-items-center">
+        <div>
+            <h1 class="brand">@User.Identity.Name.Split('|')[3] - @ViewBag.Title</h1>
+        </div>
+    </div>
+    <div class="user-panel d-flex justify-content-center align-items-center">
+
+        <div class="image pr-3">
+            <img src="@User.Identity.Name.Split('|')[4]" class="img-circle elevation-2" alt="User Image" />
+        </div>
+
+        <ul class="navbar-nav pr-3">
+            <li class="nav-item dropdown">
+                <a id="dpMenuUser" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="otherLink dropdown-toggle">
+                    <span class="hideCollapse">
+                        @User.Identity.Name.Split('|')[1]
+                    </span>
+                </a>
+
+                @*<ul aria-labelledby="dpMenuUser" class="dropdown-menu border-0 shadow">
+                        <li><a href="#" class="dropdown-item">Meus dados</a></li>
+                    </ul>*@
+            </li>
+        </ul>
+
+        <div class="sepImg">
+            |
+        </div>
+        <div class="pl-3">
+            <a href="@Url.RouteUrl("Admin.LogOut")" class="btnLogout">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </div>
+
+</nav>
