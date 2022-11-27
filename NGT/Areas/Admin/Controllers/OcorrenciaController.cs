@@ -17,19 +17,17 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Index()
         {
             ViewBag.Ocorrencias = db.Ocorrencias.Include(x => x.Bloco).Include(x => x.Categoria).Include(x => x.Item).Include(x => x.Local).Include(x => x.Motivo).Include(x => x.StatusTicket).ToList();
+
             ViewBag.BlocoId = new SelectList(db.Blocos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
             ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
             ViewBag.MotivoId = new SelectList(db.Motivos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+
             ViewBag.Pendente = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Pendente").Count();
             ViewBag.Andamento = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Andamento").Count();
             ViewBag.Concluido = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Concluído").Count();
             ViewBag.Cancelado = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Cancelado").Count();
             return View("Ocorrencia");
         }
-        //Id = 1, Nome = "Pendente" },
-        //Id = 2, Nome = "Em Andamento" },
-        //Id = 3, Nome = "Concluído" },
-        //Id = 4, Nome = "Cancelado" }
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Criar(Ocorrencia Oco)
@@ -47,15 +45,17 @@ namespace NGT.Areas.Admin.Controllers
 
                 var ticket = letraBloco + idoco + DateTime.Now.Day + DateTime.Now.Second;
 
-                Ocorrencia ocorrencia = new Ocorrencia();
-                ocorrencia.Obs = Oco.Obs;
-                ocorrencia.NumTicket = ticket;
-                ocorrencia.BlocoId = Oco.BlocoId;
-                ocorrencia.LocalId = Oco.LocalId;
-                ocorrencia.CategoriaId = Oco.CategoriaId;
-                ocorrencia.ItemId = Oco.ItemId;
-                ocorrencia.MotivoId = Oco.MotivoId;
-                ocorrencia.StatusTicketId = db.StatusTickets.Where(x => x.Nome == "Pendente").FirstOrDefault().Id;
+                Ocorrencia ocorrencia = new Ocorrencia
+                {
+                    Obs = Oco.Obs,
+                    NumTicket = ticket,
+                    BlocoId = Oco.BlocoId,
+                    LocalId = Oco.LocalId,
+                    CategoriaId = Oco.CategoriaId,
+                    ItemId = Oco.ItemId,
+                    MotivoId = Oco.MotivoId,
+                    StatusTicketId = db.StatusTickets.Where(x => x.Nome == "Pendente").FirstOrDefault().Id
+                };
 
                 db.Ocorrencias.Add(ocorrencia);
                 db.SaveChanges();

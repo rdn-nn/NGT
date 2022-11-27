@@ -107,13 +107,15 @@ form{
 
 
 /*Configurações do CARD defs Chamados > Tela Inicial*/
-#cardChamado:hover{
-    background:#d5e5fcff;
+#cardChamado:hover, #cardConsuta:hover {
+    background: #d5e5fcff;
     cursor: pointer;
 }
+#cardConsuta .bg-warning,
 #cardChamado .bg-warning {
     background: #d5e5fcff !important;
 }
+#cardConsuta:hover .bg-warning,
 #cardChamado:hover .bg-warning {
     background: #d8d8d8 !important;
 }

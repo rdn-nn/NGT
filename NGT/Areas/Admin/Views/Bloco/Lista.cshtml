@@ -54,6 +54,7 @@
     <div class="row d-flex justify-content-center align-items-center">
         @foreach (var item in @ViewBag.blocos)
         {
+            var totItens = 0;
             bool status;
             if (item.Status.Nome == "Ativado")
             {
@@ -62,6 +63,21 @@
             else
             {
                 status = false;
+            }
+
+            foreach (var l in ViewBag.locais)
+            {
+                if(item.Id == l.BlocoId)
+                {
+                    foreach (var i in ViewBag.itens)
+                    {
+                        if (i.LocalId == l.Id)
+                        {
+                            totItens = totItens + 1;
+                        }
+                    }
+
+                }
             }
 
 
@@ -106,7 +122,9 @@
 
                             <div class="col-sm-3">
                                 <div class="description-block">
-                                    <h5 class="description-header">35</h5>
+                                    <h5 class="description-header">
+                                        @totItens
+                                        </h5>
                                     <span class="description-text">Itens</span>
                                 </div>
 

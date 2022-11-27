@@ -35,20 +35,20 @@ namespace NGT
             //Rotas de Ocorrencias
             routes.MapRoute(
                 name: "Home.Ocorrencia",
-                url: "nova-ocorrencia",
-                defaults: new { controller = "Ocorrencia", action = "Criar" }, 
+                url: "novaocorrencia",
+                defaults: new { controller = "Ocorrencias", action = "Criar" }, 
                 namespaces: namespaces
             );
             routes.MapRoute(
                 name: "Home.Ocorrencia.CarregaLocal",
                 url: "ocorrencias/carregaLocal",
-                defaults: new { controller = "Ocorrencia", action = "CarregaLocal" },
+                defaults: new { controller = "Ocorrencias", action = "CarregaLocal" },
                 namespaces: namespaces
             );
             routes.MapRoute(
                 name: "Home.Ocorrencia.CarregaItem",
                 url: "ocorrencias/carregaitem",
-                defaults: new { controller = "Ocorrencia", action = "CarregaItem" },
+                defaults: new { controller = "Ocorrencias", action = "CarregaItem" },
                 namespaces: namespaces
             );
 

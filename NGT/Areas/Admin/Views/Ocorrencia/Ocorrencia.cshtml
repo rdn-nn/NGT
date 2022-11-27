@@ -3,6 +3,8 @@
     ViewBag.Title = "Chamados";
     ViewBag.MenuLinkOcorrencias = true;
 }
+
+
 <section class="content-header pt-2">
     <div class="row">
         <div class="col-sm-6"></div>
@@ -89,13 +91,13 @@
 
     <div class="row">
         <div id="idPendente" class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-info">
+            <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Pendente</h3>
-                    <p>Pendente</p>
+                    <p>Pendentes</p>
                 </div>
-                <div class="icon">
+
+                <div class="icon text-info">
                     <i class="fas fa-solid fa-circle-pause"></i>
                 </div>
             </div>
@@ -103,12 +105,12 @@
         <!-- ./col -->
         <div id="idAndamento" class="col-lg-3 col-6">
             <!-- small card -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Andamento</h3>
                     <p>Andamento</p>
                 </div>
-                <div class="icon">
+                <div class="icon text-warning">
                     <i class="fas fa-solid fa-arrow-rotate-right"></i>
                 </div>
             </div>
@@ -116,12 +118,12 @@
         <!-- ./col -->
         <div id="idConcluido" class="col-lg-3 col-6">
             <!-- small card -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Concluido</h3>
                     <p>Concluídos</p>
                 </div>
-                <div class="icon">
+                <div class="icon text-success">
                     <i class="fas fa-solid fa-circle-check"></i>
                 </div>
             </div>
@@ -129,12 +131,12 @@
         <!-- ./col -->
         <div id="idCancelado" class="col-lg-3 col-6">
             <!-- small card -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Cancelado</h3>
                     <p>Cancelados</p>
                 </div>
-                <div class="icon">
+                <div class="icon text-danger">
                     <i class="fas fa-times-circle"></i>
                 </div>
             </div>
@@ -145,7 +147,7 @@
         @if (ViewBag.Ocorrencias.Count >= 1)
         {
 
-            <div class="card-body">
+            <div>
                 <table id="ocorrenciasTable" class="table table-bordered table-striped table-hover table-sm">
                     <thead class="theadbg">
                         <tr>
@@ -199,9 +201,8 @@
         }
     </div>
 
-</div>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalOcorrencia" aria-hidden="true" />
+</div>
 
 
 @section CssPage{

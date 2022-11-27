@@ -15,7 +15,6 @@ namespace NGT.Models.Entities
 
         [Required, MaxLength(100), EmailAddress]
         public string Email { get; set; }
-        [Required]
         public string Senha { get; set; }
         public string Hash { get; set; }
         public string FotoPerfil { get; set; }

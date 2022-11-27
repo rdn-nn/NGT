@@ -24,14 +24,18 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link @SetActive(ViewBag.MenuLinkUsuarios)">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Usuários
-                        </p>
-                    </a>
-                </li>
+                @if (User.Identity.Name.Split('|')[3] == "Administrador")
+            {
+<li class="nav-item">
+    <a href="@Url.RouteUrl("Admin.Usuario.Index")" class="nav-link @SetActive(ViewBag.MenuLinkUsuarios)">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+            Usuários
+        </p>
+    </a>
+</li>
+            }
+                
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-industry"></i>
@@ -76,13 +80,12 @@
                                 <a href="@Url.RouteUrl("Admin.Ocorrencia.Index")" class="nav-link @SetActive(ViewBag.MenuLinkOcorrencias)">
                                     <i class="nav-icon fas fa-receipt"></i>
                                     <p>
-                                        Ocorrencias
+                                        Chamados
                                     </p>
                                 </a>
                             </li>
                 <li class="nav-item">
-                    @*@Url.RouteUrl("Admin.OS.Index")*@
-                                <a href="" class="nav-link  @SetActive(ViewBag.MenuLinkOS)">
+                                <a href="@Url.RouteUrl("Admin.OS.Index")" class="nav-link  @SetActive(ViewBag.MenuLinkOS)">
                                     <i class="nav-icon fas fa-list-alt"></i>
                                     <p>
                                         Ordens de Serviço

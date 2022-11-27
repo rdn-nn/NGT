@@ -120,11 +120,21 @@ div.removeBloc{
     right:10px;
     top:10px;
 }
-/*Configurações do CARD defs Chamados > Tela Inicial*/
-#cardChamado:hover {
-    background: #d5e5fcff;
-    cursor: pointer;
+
+.card-profile{
+    min-height: 100% !important;
 }
+.opt {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+
+}
+    /*Configurações do CARD defs Chamados > Tela Inicial*/
+    #cardChamado:hover {
+        background: #d5e5fcff;
+        cursor: pointer;
+    }
 #cardChamado .bg-warning {
     background: #d5e5fcff !important;
 }
@@ -164,12 +174,36 @@ div.removeBloc{
 .dt-print-view {
     color: #00204A;
 }
-#navbarCollapse {
-    /*    position: fixed !important;
+
+.bg-cardsAdmin {
+    background-color: #D5E5FC;
+    color: #4E79B7;
+    background-image: url('../images/bgngt.png');
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+    .bg-cardsAdmin .icon {
+/*        color: #4E79B7;*/
+        opacity: .75 ;
+    }
+    #navbarCollapse {
+        /*    position: fixed !important;
     right: 60px;
     top: 30px;
     display: flex !important;
     justify-content: space-between !important;*/
+    }
+
+.select2-results__options {
+    color: #00204A !important;
+    
+}
+.select2-selection__choice {
+    color: #F4F6F9 !important;
+    background: #00204A !important;
+    border-color: #4E79B7 !important;
+    box-shadow: 1px 1px 0px #808080ff;
 }
 @media (max-width:720px) {
     .hideCollapse {

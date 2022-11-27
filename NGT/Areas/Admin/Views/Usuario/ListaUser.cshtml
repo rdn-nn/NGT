@@ -1,0 +1,219 @@
+﻿@model NGT.Models.Entities.Usuario
+@{
+    ViewBag.Title = "Usuários";
+    ViewBag.MenuLinkUsuarios = true;
+}
+
+<section class="content-header pt-2">
+    <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="@Url.RouteUrl("Admin.Dashboard.Index")">Admin</a></li>
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<section class="pl-3 pr-3">
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+
+            <form action="@Url.RouteUrl("Admin.Usuario.Filtrar")" method="get" role="search" class="d-inline">
+                <div class="input-group input-group-sm">
+                    <input class="form-control" type="text" name="termo" placeholder="Buscar usuários">
+                    <div class="input-group-append">
+                        <button class="btn input-group-text" type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-sm-6 mb-3">
+            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoUser">
+                Criar Novo Usuário
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="pl-3 pr-3 pb-3">
+    <div class="row d-flex justify-content-center">
+
+
+        @foreach (var item in ViewBag.usuarios)
+
+        {
+
+            bool status;
+            if (item.Status.Nome == "Ativado")
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
+
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-12 mb-3">
+                <div class="card card-primary card-outline card-profile">
+
+                    <div class="removeBloc">
+                        <button ref="@item.Id" class="btn btn-tool removeUsuario">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="@item.FotoPerfil" alt="User profile picture" />
+                        </div>
+
+                        <h3 class="profile-username text-center mt-4">@item.Nome</h3>
+                        <p class="text-muted text-center">@item.Email</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Perfil: </b> <a class="float-right">@item.Perfil.Nome</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>
+                                    @Html.CheckBox("chk", status, new { @class = "status", @rel = @item.Id })
+                                    Status:
+                                </b>
+                                <a class="float-right" id="status_@item.Id">
+                                    @item.Status.Nome
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="text-right opt">
+
+                            <a class="btn btn-primary btn-sm" id="DetailsUser">
+                                <i class="fas fa-folder"></i>
+                                Ver Mais
+                            </a>
+                            @*<a class="btn btn-info btn-sm" href="#">
+                                     <i class="fas fa-pencil-alt">
+                                     </i>
+                                     Editar
+                                 </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                         <i class="fas fa-trash">
+                                         </i>
+                                         Excluir
+                                     </a>*@
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoUser" aria-hidden="true"></div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DetailsUser" aria-hidden="true"></div>
+
+@section ScriptPage {
+    <script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#novoUser').click(function () {
+                $("#modal").load("@Url.RouteUrl("Admin.Usuario.NovoUser")", function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>
+    @*<script>
+        $(function () {
+            $('#DetailsUser').click(function () {
+                $("#modal").load("@Url.RouteUrl("Admin.Usuario.DetalhesUser")", function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>*@
+    <script>
+        $(".status").click(function () {
+            var id = $(this).attr("rel");
+            $.ajax({
+                dataType: "json",
+                type: "POST",
+                url: "/admin/usuarios/trocarstatus",
+                data: { id },
+                success: function (retorno) {
+
+                    if (retorno == "t") {
+                        $("#status_" + id).removeClass("font-weight-bold text-danger");
+                        $("#status_" + id).addClass("font-weight-bold text-success");
+                        $("#status_" + id).text("Ativado");
+                    }
+                    else if (retorno == "f") {
+                        $("#status_" + id).removeClass("font-weight-bold text-success");
+                        $("#status_" + id).addClass("font-weight-bold text-danger");
+                        $("#status_" + id).text("Desativado");
+
+                    } else if (retorno == "n") {
+                        window.location.replace("/admin/usuarios");
+                    }
+                }
+            });
+        });
+
+    </script>
+    <script>
+        $(".removeUsuario").click(function () {
+            var id = $(this).attr("ref");
+
+            Swal.fire({
+                title: 'Deseja confirmar a exclusão deste usuário?',
+                text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        dataType: "json",
+                        type: "POST",
+                        url: "/admin/usuarios/deletausuario",
+                        data: { id },
+                        success: function (retorno) {
+
+                            if (retorno == "t") {
+
+                                window.location.replace("/admin/usuarios");
+
+                            }
+                            else if (retorno == "f") {
+
+                                window.location.replace("/admin/usuarios");
+                            }
+                        }
+                    });
+
+                    //Swal.fire(
+                    //    'Excluído!',
+                    //    'Todos os dados deste usuário foram excluídos!',
+                    //    'success'
+                    //)
+                    //window.location.replace("/admin/usuarios");
+                }
+            })
+
+
+            /* alert(id);*/
+
+        });
+    </script>
+}

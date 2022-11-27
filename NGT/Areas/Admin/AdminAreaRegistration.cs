@@ -27,6 +27,44 @@ namespace NGT.Areas.Admin
 
 
             context.MapRoute(
+                name: "Admin.Usuario.Index",
+                url: "admin/usuarios",
+                defaults: new { controller = "Usuario", action = "Listar" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Usuario.Filtrar",
+                url: "admin/usuarios/filtrar",
+                defaults: new { controller = "Usuario", action = "ListarFiltrado" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Usuario.TrocarStatus",
+                url: "admin/usuarios/trocarstatus",
+                defaults: new { controller = "Usuario", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Usuario.NovoUser",
+                url: "admin/usuarios/cadastrausuario",
+                defaults: new { controller = "Usuario", action = "NovoUser" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Usuario.RemoveUser",
+                url: "admin/usuarios/deletausuario",
+                defaults: new { controller = "Usuario", action = "RemoveUser" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Usuario.DetalhesUser",
+                url: "admin/usuarios/detalhesusuario",
+                defaults: new { controller = "Usuario", action = "DetalhesUser" },
+                namespaces: namespaces
+            );
+
+
+            context.MapRoute(
                 name: "Admin.Ocorrencia.Index",
                 url: "admin/ocorrencias",
                 defaults: new { controller = "Ocorrencia", action = "Index" },
@@ -85,6 +123,23 @@ namespace NGT.Areas.Admin
                defaults: new { controller = "Bloco", action = "Remover" },
                namespaces: namespaces
            );
+
+
+
+            context.MapRoute(
+                name: "Admin.OS.Index",
+                url: "admin/os",
+                defaults: new { controller = "OS", action = "Index" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.OS.CarregarPatrimonio",
+                url: "admin/os/carregapatrimonio",
+                defaults: new { controller = "OS", action = "CarregaPatrimonio" },
+                namespaces: namespaces
+            );
+
+
 
             context.MapRoute(
                 name: "Admin.LogOut",

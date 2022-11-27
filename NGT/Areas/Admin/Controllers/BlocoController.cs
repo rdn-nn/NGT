@@ -14,6 +14,21 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Listar()
         {
             ViewBag.blocos = db.Blocos.ToList().OrderByDescending(b => b.StatusId);
+            
+            ViewBag.itens = db.Itens.Include(x=>x.Local).ToList();
+            ViewBag.locais = db.Locais.Include(x=>x.Bloco).ToList();
+
+            //ViewBag.itens = db.Itens.ToList();
+
+            //var locais = db.Locais.Include(i=>i.Item);
+
+            //foreach (Local l in locais)
+            //{
+            //    foreach (Item i in l.Item)
+            //    {
+            //        ViewBag.TotalList = l.BlocoId + i.Id;
+            //    }
+            //}
             return View("Lista");
         }
 

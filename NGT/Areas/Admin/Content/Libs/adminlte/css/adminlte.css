@@ -3894,7 +3894,7 @@ input[type="button"].btn-block {
   width: 1rem;
   height: 1rem;
   content: "";
-  background: 50% / 50% 50% no-repeat;
+  background: 50% / 50% 100% no-repeat;
 }
 
 .custom-checkbox .custom-control-label::before {
@@ -4069,7 +4069,7 @@ input[type="button"].btn-block {
 }
 
 .custom-file-input:lang(en) ~ .custom-file-label::after {
-  content: "Browse";
+  content: "Buscar";
 }
 
 .custom-file-input ~ .custom-file-label[data-browse]::after {
