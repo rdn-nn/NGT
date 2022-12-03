@@ -4798,8 +4798,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlocoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\FornecedorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocalController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MotivoController.cs" />
     <Compile Include="Areas\Admin\Controllers\OcorrenciaController.cs" />
     <Compile Include="Areas\Admin\Controllers\OSController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuarioController.cs" />
@@ -4814,6 +4818,7 @@
     <Compile Include="Data\Mapping\MotivoMap.cs" />
     <Compile Include="Data\Mapping\OcorrenciaMap.cs" />
     <Compile Include="Data\Mapping\OrdServicoMap.cs" />
+    <Compile Include="Data\Mapping\OrdServicoOcorrenciaMap.cs" />
     <Compile Include="Data\Mapping\PerfilMap.cs" />
     <Compile Include="Data\Mapping\StatusMap.cs" />
     <Compile Include="Data\Mapping\StatusTicketMap.cs" />
@@ -4854,6 +4859,10 @@
     <Compile Include="Migrations\202211172338068_BDComplement-7.designer.cs">
       <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212022218092_BDCOmplement-8.cs" />
+    <Compile Include="Migrations\202212022218092_BDCOmplement-8.designer.cs">
+      <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
     <Compile Include="Models\Entities\Categoria.cs" />
@@ -4863,6 +4872,7 @@
     <Compile Include="Models\Entities\Motivo.cs" />
     <Compile Include="Models\Entities\Ocorrencia.cs" />
     <Compile Include="Models\Entities\OrdServico.cs" />
+    <Compile Include="Models\Entities\OrdServicoOcorrencia.cs" />
     <Compile Include="Models\Entities\Perfil.cs" />
     <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\Entities\StatusTicket.cs" />
@@ -5041,7 +5051,14 @@
     <Content Include="Areas\Admin\Views\Usuario\ListaUser.cshtml" />
     <Content Include="Areas\Admin\Content\Libs\bs-custom-file-input\bs-custom-file-input.js.map" />
     <Content Include="Areas\Admin\Content\Libs\bs-custom-file-input\bs-custom-file-input.min.js.map" />
-    <Content Include="Areas\Admin\Views\Usuario\DetailsUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuario\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Fornecedor\Lista.cshtml" />
+    <Content Include="Areas\Admin\Views\Fornecedor\NovoFornec.cshtml" />
+    <Content Include="Areas\Admin\Views\Fornecedor\EditFornec.cshtml" />
+    <Content Include="Areas\Admin\Views\Fornecedor\ShowFornec.cshtml" />
+    <Content Include="Areas\Admin\Views\Local\ListaLocal.cshtml" />
+    <Content Include="Areas\Admin\Views\Local\NovoLocal.cshtml" />
+    <Content Include="Areas\Admin\Views\Local\EditLocal.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5062,7 +5079,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Js\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Fornecedor\" />
+    <Folder Include="Areas\Admin\Views\Categoria\" />
+    <Folder Include="Areas\Admin\Views\Item\" />
+    <Folder Include="Areas\Admin\Views\Motivo\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202211051723216_InicialBD.resx">
@@ -5088,6 +5107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211172338068_BDComplement-7.resx">
       <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212022218092_BDCOmplement-8.resx">
+      <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

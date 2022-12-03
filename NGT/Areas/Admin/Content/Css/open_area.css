@@ -115,13 +115,45 @@ span#imgBloco {
     border-radius: 50%;
     box-shadow: 2px 2px 1px #808080ff;
 }
-div.removeBloc{
-    position:absolute;
-    right:10px;
-    top:10px;
+span#imgForn {
+    color: #00204A;
+    height: 100px;
+    width: 100px;
+    padding: 25px;
+    padding-left: 30px;
+    font-size: 50px;
+    text-shadow: 2px 2px 1px #808080ff;
+}
+h3.tel {
+    font-size: 13px;
+}
+.showdesc {
+    font-size: 20px !important;
+}
+.list-group-item.fornec {
+    font-size: 14px;
+}
+h3.fornec {
+    font-size: 15px;
+}
+div.removeForn,
+div.removeBloc,
+div.removeLoc {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-.card-profile{
+div.editBloc,
+div.editLoc {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.card-fornec,
+.card-profile,
+.card-widget.widget-user {
     min-height: 100% !important;
 }
 .opt {
@@ -173,6 +205,14 @@ div.removeBloc{
 }
 .dt-print-view {
     color: #00204A;
+}
+
+
+.widget-user-header.locais{
+    height:auto !important;
+}
+.widget-user .card-footer.locais {
+    padding-top: 0px !important;
 }
 
 .bg-cardsAdmin {

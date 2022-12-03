@@ -1,13 +1,19 @@
-﻿using NGT.Application;
+﻿using ImageResizer.Configuration.Xml;
+using NGT.Application;
 using NGT.Data;
 using NGT.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace NGT.Areas.Admin.Controllers
 {
@@ -16,7 +22,7 @@ namespace NGT.Areas.Admin.Controllers
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()
         {
-            
+
             ViewBag.usuarios = db.Usuarios.ToList().OrderBy(u => u.Nome);
             return View("ListaUser");
         }
@@ -68,8 +74,6 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult NovoUser()
         {
             ViewBag.PerfilId = new SelectList(db.Perfis, "Id", "Nome");
-            ViewBag.StatusId = new SelectList(db.Status, "Id", "Nome");
-            
             return View("NovoUser");
         }
 
@@ -107,7 +111,7 @@ namespace NGT.Areas.Admin.Controllers
                         db.Entry(user).State = EntityState.Modified;
                         db.SaveChanges();
                         TempData["MSG"] = "success|Usuário cadastrado com sucesso";
-                        return RedirectToAction("Listar", "Usuario"); 
+                        return RedirectToAction("Listar", "Usuario");
                     }
                     else
                     {
@@ -131,13 +135,23 @@ namespace NGT.Areas.Admin.Controllers
             return Listar();
         }
 
-
         [AcceptVerbs(HttpVerbs.Post), ValidateInput(false)]
         public JsonResult RemoveUser(string id)
         {
             try
             {
-                Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
+                string newId = "";
+                if (id.Contains("_"))
+                {
+                    newId = id.Substring(7);
+                }
+                else
+                {
+                    newId = id;
+                }
+
+
+                Usuario u = db.Usuarios.Find(Convert.ToInt32(newId));
 
                 if (u != null)
                 {
@@ -146,15 +160,41 @@ namespace NGT.Areas.Admin.Controllers
                     {
                         @TempData["MSG"] = "error|Não é possível excluir seu próprio usuário!|x";
                         return Json("f");
-                    } else if (u.StatusId == db.Status.Where(s => s.Nome == "Ativado").FirstOrDefault().Id)
+                    }
+
+                    if (id != "remove_" + u.Id)
                     {
-                        @TempData["MSG"] = "error|Não é possível excluir um usuário com status ATIVADO!|x";
-                        return Json("f");
+                        if (u.StatusId == db.Status.Where(s => s.Nome == "Ativado").FirstOrDefault().Id)
+                        {
+                            @TempData["MSG"] = "error|Não é possível excluir um usuário com status ATIVADO!|x";
+                            return Json("f");
+                        }
+                    }
+                    int tamPath = u.FotoPerfil.Length;
+                    int tamImg = u.FotoPerfil.Split('\\').Last().Length;
+                    string path = u.FotoPerfil.Substring(0, tamPath - tamImg - 1);
+
+                    //if you want to get virtual application path, you could try the code below.
+                    //HttpContext.Current.Request.ApplicationPath;
+                    //Or the code
+                    //HttpRuntime.AppDomainAppVirtualPath;
+                    //        But if you want to get physical application path, the following code is fit for you.
+                    //        HttpRuntime.AppDomainAppPath
+                    //        Or convert the virtual path to physical path
+                    //HttpContext.Current.Request.MapPath(HttpContext.Current.Request.ApplicationPath)
+
+                    path = HttpRuntime.AppDomainAppPath + path;
+                    if (Directory.Exists(path))
+                    {
+                        Directory.Delete(path, true);
                     }
 
                     db.Usuarios.Remove(u);
                     db.SaveChanges();
                     @TempData["MSG"] = "success|Usuário removido com sucesso!|x";
+
+
+
                     return Json(u != null ? "t" : "f");
 
                 }
@@ -171,16 +211,77 @@ namespace NGT.Areas.Admin.Controllers
             }
         }
 
-
-        public ActionResult DetalhesUser(int id)
+        public ActionResult EditaUser(string id)
         {
             Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
             if (u != null)
             {
-                ViewBag.usuarios = u;
+                ViewBag.Usuario = u;
+                if (u.Status.Nome == "Ativado")
+                {
+
+                    ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome");
+                }
+                else
+                {
+                    ViewBag.StatusId = new SelectList(db.Status.OrderBy(s => s.Id), "Id", "Nome");
+                }
+
+                if (u.Perfil.Nome == "Administrador")
+                {
+                    ViewBag.PerfilId = new SelectList(db.Perfis.OrderBy(s => s.Id), "Id", "Nome");
+                }
+                else
+                {
+                    ViewBag.PerfilId = new SelectList(db.Perfis.OrderByDescending(s => s.Id), "Id", "Nome");
+                }
             }
-            return View();
+            return View("EditUser");
         }
 
+        [HttpPost, ValidateAntiForgeryToken, Obsolete]
+        public ActionResult EditaUser(Usuario usu, HttpPostedFileBase FotoPerfil)
+        {
+            string valor = "";
+            if (ModelState.IsValid)
+            {
+                Usuario u = db.Usuarios.Find(usu.Id);
+
+                u.Nome = usu.Nome;
+                u.Email = usu.Email;
+                //u.Senha = usu.Senha,
+                u.FotoPerfil = usu.FotoPerfil;
+                u.PerfilId = usu.PerfilId;
+                u.StatusId = usu.StatusId;
+
+                db.Entry(u).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (FotoPerfil != null)
+                {
+                    Funcoes.CriarDiretorio(u.Id);
+                    string nomearq = "FotoPerfil" + u.Id + ".png";
+                    valor = Funcoes.UploadArquivo(FotoPerfil, nomearq, u.Id);
+                    if (valor == "sucesso")
+                    {
+                        u.FotoPerfil = "\\Areas\\Admin\\Content\\Images\\" + u.Id + "\\" + nomearq;
+                        db.Entry(u).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["MSG"] = "success|Usuário atualizado com sucesso";
+                        return RedirectToAction("Listar", "Usuario");
+                    }
+                    else
+                    {
+                        u.FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg";
+                        db.Entry(u).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["MSG"] = "warning|Problema no Upload da foto: " + valor;
+                        return RedirectToAction("Listar", "Usuario");
+                    }
+                }
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos|x";
+            return Listar();
+        }
     }
 }

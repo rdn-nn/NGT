@@ -102,7 +102,7 @@
                 </div>
             </div>
         </div>
-        <!-- ./col -->
+
         <div id="idAndamento" class="col-lg-3 col-6">
             <!-- small card -->
             <div class="small-box bg-cardsAdmin">
@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <!-- ./col -->
+
         <div id="idConcluido" class="col-lg-3 col-6">
             <!-- small card -->
             <div class="small-box bg-cardsAdmin">
@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <!-- ./col -->
+
         <div id="idCancelado" class="col-lg-3 col-6">
             <!-- small card -->
             <div class="small-box bg-cardsAdmin">
@@ -141,7 +141,6 @@
                 </div>
             </div>
         </div>
-        <!-- ./col -->
     </div>
     <div>
         @if (ViewBag.Ocorrencias.Count >= 1)
@@ -186,12 +185,12 @@
                                         @item.DataAtualizacao;
                                     }
                                 </td>
-                                <td>@item.StatusTicket.Nome</td>
-                                <td>
-                                    <a class="botaoAlteraSt" href="#">
-                                        Alterar Status
-                                    </a>
-                                </td>
+                                @*<td>
+                                    <select class="form-control col-11 col-md-12" id="BlocoId" name="BlocoId">
+                                        <option value="@item.StatusTicketId">@item.StatusTicket.Nome</option>
+                                        <option value="1">Bloco A</option>
+                                    </select>
+                                </td>*@
                             </tr>
                         }
                     </tbody>
@@ -235,8 +234,8 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#ocorrenciasTable_wrapper .col-md-6:eq(0)');
         });
-
-
+    </script>
+    <script>
         $('#idAndamento').click(function () {
             $("#tabSearch").val("Andamento").trigger('keyup');
         });

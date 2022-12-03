@@ -26,6 +26,7 @@ namespace NGT.Areas.Admin.Controllers
             ViewBag.Andamento = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Andamento").Count();
             ViewBag.Concluido = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Concluído").Count();
             ViewBag.Cancelado = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Cancelado").Count();
+
             return View("Ocorrencia");
         }
 

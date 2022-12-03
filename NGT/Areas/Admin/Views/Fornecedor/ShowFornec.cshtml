@@ -1,0 +1,79 @@
+﻿@model NGT.Models.Entities.Fornecedor
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title txtBlack" id="ShowFornec">Dados do Fornecedor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="overflow-hidden">
+
+            <div class="pl-4 pr-4">
+                <h3 class="profile-username text-center mb-0 pt-2">@ViewBag.Fornecedor.NomeFantasia</h3>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center flex-nowrap">
+
+                <div class="">
+                    <span id="imgForn" class="far fa-solid fa-industry"></span>
+                </div>
+                <div class="pr-2 flex-grow-1">
+
+                    <h3 class="profile-username fornec">Contato: @ViewBag.Fornecedor.NomeResp</h3>
+                    <h3 class="profile-username fornec">Função: @ViewBag.Fornecedor.CargoResp</h3>
+                    <h3 class="profile-username tel text-muted">
+                        Tel.: @ViewBag.Fornecedor.Telefone
+                        / Email: @ViewBag.Fornecedor.Email
+                    </h3>
+                </div>
+            </div>
+
+
+            @if (ViewBag.Fornecedor.Obs != null)
+            {
+                <div class="d-flex justify-content-center align-items-center flex-nowrap">
+                    <h3 class="profile-username tel text-muted">
+                        <h3 class="profile-username fornec">Observações: </h3>
+                        @ViewBag.Fornecedor.Obs
+                    </h3>
+                </div>
+            }
+
+
+        </div>
+        <div class="pl-4 pr-4">
+            <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item fornec">
+                    <b>Razão Social: </b> <a class="float-right">@ViewBag.Fornecedor.RazaoSoc</a>
+                    <div>
+                        <b>CNPJ: </b> <a class="float-right">@ViewBag.Fornecedor.CNPJ</a>
+                    </div>
+                    <div>
+                        <b>Inscrição Estaduall: </b> <a class="float-right">@ViewBag.Fornecedor.IE</a>
+                    </div>
+                </li>
+                <li class="list-group-item fornec">
+                    <b>Ramo Ativ.: </b> <a class="float-right">@ViewBag.Fornecedor.RamoAtiv</a>
+                    <div>
+                        <b>Serviço Prestado: </b> <a class="float-right">@ViewBag.Fornecedor.ServPrestado</a>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <b>
+                        Status:
+                    </b>
+                    <a class="float-right">
+                        @ViewBag.Fornecedor.Status.Nome
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

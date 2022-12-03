@@ -80,10 +80,7 @@ namespace NGT.Data
                     else
                     {
 
-                        ImageResizer.ImageJob img = new ImageResizer.ImageJob(
-                        flpUpload, diretorio,
-                        new ImageResizer.ResizeSettings("width=1000;height=1000;format=png;mode=pad")
-                        );
+                        ImageResizer.ImageJob img = new ImageResizer.ImageJob(flpUpload, diretorio, new ImageResizer.ResizeSettings("width=500;height=500;format=jpg;mode=pad"));
                         img.Build();
                         //diretorio = img.FinalPath;
                         //flpUpload.SaveAs(diretorio);

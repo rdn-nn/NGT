@@ -41,7 +41,7 @@ namespace NGT.Areas.Admin.Controllers
                     var teste = OcoId[0];
                 //}
 
-                var patrim = (from o in db.Ocorrencias.Include(i => i.Item) where o.Id == teste
+                var patrim = (from o in db.Ocorrencias.Include(x=>x.Item).Where(i => OcoId.Contains(i.Id))
                               select new
                               {
                                   id = o.ItemId,

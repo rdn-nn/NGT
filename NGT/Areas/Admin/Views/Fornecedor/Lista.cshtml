@@ -1,7 +1,7 @@
-﻿@model NGT.Models.Entities.Usuario
+﻿@model NGT.Models.Entities.Fornecedor
 @{
-    ViewBag.Title = "Usuários";
-    ViewBag.MenuLinkUsuarios = true;
+    ViewBag.Title = "Fornecedores";
+    ViewBag.MenuLinkFornecedores = true;
 }
 
 <section class="content-header pt-2">
@@ -15,13 +15,14 @@
         </div>
     </div>
 </section>
+
 <section class="pl-3 pr-3">
     <div class="row">
         <div class="col-sm-6 mb-3">
 
-            <form action="@Url.RouteUrl("Admin.Usuario.Filtrar")" method="get" role="search" class="d-inline">
+            <form action="@Url.RouteUrl("Admin.Fornecedor.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar usuários">
+                    <input class="form-control" type="text" name="termo" placeholder="Buscar Fornecedor">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -32,8 +33,8 @@
 
         </div>
         <div class="col-sm-6 mb-3">
-            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoUser">
-                Novo Usuário
+            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoFornec">
+                Novo Fornecedor
             </a>
         </div>
     </div>
@@ -42,8 +43,7 @@
 <div class="pl-3 pr-3 pb-3">
     <div class="row d-flex justify-content-center">
 
-
-        @foreach (var item in ViewBag.usuarios)
+        @foreach (var item in ViewBag.fornecedores)
 
         {
 
@@ -56,29 +56,42 @@
             {
                 status = false;
             }
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-4 col-12 mb-3">
 
-            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-12 mb-3">
-                <div class="card card-primary card-outline card-profile">
+                <div class="card card-info card-outline card-fornec">
 
-                    <div class="removeBloc">
-                        <button ref="@item.Id" class="btn btn-tool removeUsuario">
+                    <div class="removeForn">
+                        <button ref="@item.Id" class="btn btn-tool removeFornec">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
 
-                    <div class="card-body box-profile">
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="@item.FotoPerfil" alt="User profile picture" />
+                    <div class="pl-4 pr-4">
+                        <h3 class="profile-username text-center mb-0 pt-2">@item.NomeFantasia</h3>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center align-items-center flex-nowrap">
+
+                        <div class="">
+                            <span id="imgForn" class="far fa-solid fa-industry"></span>
                         </div>
+                        <div class="pr-2 flex-grow-1">
 
-                        <h3 class="profile-username text-center mt-4">@item.Nome</h3>
-                        <p class="text-muted text-center">@item.Email</p>
-
+                            <h3 class="profile-username fornec">Contato: @item.NomeResp</h3>
+                            <h3 class="profile-username fornec">Função: @item.CargoResp</h3>
+                            <h3 class="profile-username tel text-muted">
+                                Tel.: @item.Telefone
+                                / Email: @item.Email
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="pl-4 pr-4">
                         <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Perfil: </b> <a class="float-right">@item.Perfil.Nome</a>
+                            <li class="list-group-item fornec">
+                                <b>Ramo Ativ.: </b> <a class="float-right">@item.RamoAtiv</a>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item fornec">
                                 <b>
                                     @Html.CheckBox("chk", status, new { @class = "status", @rel = @item.Id })
                                     Status:
@@ -88,56 +101,66 @@
                                 </a>
                             </li>
                         </ul>
+                    </div>
 
-                        <div class="text-right opt">
+                    <div class="text-right pr-3 pb-2">
 
+                        <button rel="@item.Id" class="btn btn-info btn-sm EditFornec">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Editar
+                        </button>
 
-                            <button rel="@item.Id" class="btn btn-info btn-sm EditUser">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Editar
-                            </button>
-                            @*
-                                    <button rel="@item.Id" class="btn btn-primary btn-sm DetailsUser">
-                                    <i class="fas fa-folder"></i>
-                                    Ver Mais
-                                </button>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Excluir
-                                </a>*@
-                        </div>
+                        <button rel="@item.Id" class="btn btn-primary btn-sm ShowFornec">
+                            <i class="fas fa-folder"></i>
+                            Ver Mais
+                        </button>
+
                     </div>
 
 
+
+
                 </div>
+
+
             </div>
         }
     </div>
 </div>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoUser" aria-hidden="true"></div>
-<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditUser" aria-hidden="true"></div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoFornec" aria-hidden="true"></div>
+<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditFornec" aria-hidden="true"></div>
+<div id="modalS" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ShowFornec" aria-hidden="true"></div>
 
 @section ScriptPage {
     <script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
     <script>
+            $(function () {
+                $('#novoFornec').click(function () {
+                    $("#modal").load("@Url.RouteUrl("Admin.Fornecedor.NovoFornecedor")", function () {
+                        $("#modal").modal();
+                    });
+                });
+            });
+    </script>
+    <script>
         $(function () {
-            $('#novoUser').click(function () {
-                $("#modal").load("@Url.RouteUrl("Admin.Usuario.NovoUser")", function () {
-                    $("#modal").modal();
+            $('.EditFornec').click(function () {
+                var id = $(this).attr("rel");
+                $("#modalE").load("/admin/fornecedores/editafornecedor/" + id, function () {
+                    $("#modalE").modal();
                 });
             });
         });
     </script>
     <script>
         $(function () {
-            $('.EditUser').click(function () {
+            $('.ShowFornec').click(function () {
                 var id = $(this).attr("rel");
-                $("#modalE").load("/admin/usuarios/editausuario/"+id, function () {
-                    $("#modalE").modal();
+                $("#modalS").load("/admin/fornecedores/exibefornecedor/" + id, function () {
+                    $("#modalS").modal();
                 });
             });
         });
@@ -148,7 +171,7 @@
             $.ajax({
                 dataType: "json",
                 type: "POST",
-                url: "/admin/usuarios/trocarstatus",
+                url: "/admin/fornecedores/trocarstatus",
                 data: { id },
                 success: function (retorno) {
 
@@ -163,19 +186,17 @@
                         $("#status_" + id).text("Desativado");
 
                     } else if (retorno == "n") {
-                        window.location.replace("/admin/usuarios");
+                        window.location.replace("/admin/fornecedores");
                     }
                 }
             });
-        });
-
-    </script>
+        });</script>
     <script>
-        $(".removeUsuario").click(function () {
+        $(".removeFornec").click(function () {
             var id = $(this).attr("ref");
 
             Swal.fire({
-                title: 'Deseja confirmar a exclusão deste usuário?',
+                title: 'Deseja confirmar a exclusão deste Fornecedor?',
                 text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -189,34 +210,23 @@
                     $.ajax({
                         dataType: "json",
                         type: "POST",
-                        url: "/admin/usuarios/deletausuario",
+                        url: "/admin/fornecedores/deletafornecedor",
                         data: { id },
                         success: function (retorno) {
 
                             if (retorno == "t") {
 
-                                window.location.replace("/admin/usuarios");
+                                window.location.replace("/admin/fornecedores");
 
                             }
                             else if (retorno == "f") {
 
-                                window.location.replace("/admin/usuarios");
+                                window.location.replace("/admin/fornecedores");
                             }
                         }
                     });
-
-                    //Swal.fire(
-                    //    'Excluído!',
-                    //    'Todos os dados deste usuário foram excluídos!',
-                    //    'success'
-                    //)
-                    //window.location.replace("/admin/usuarios");
                 }
             })
 
-
-            /* alert(id);*/
-
-        });
-    </script>
+        });</script>
 }

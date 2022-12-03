@@ -1,0 +1,134 @@
+﻿@model NGT.Models.Entities.Usuario
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title txtBlack" id="EditUser">Edição de Usuário</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @*@ViewBag.Usuario.Nome*@
+        <div class="overflow-hidden">
+
+            <div class="overflow-hidden">
+
+                @using (Html.BeginForm("EditaUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="modal-footer col-11 col-md-12 m-0 pb-0 justify-content-between">
+                        <div>
+                            <label class="control-label text-muted">ID de registro:</label>
+                            @ViewBag.Usuario.Id
+                        </div>
+
+                        <a ref="remove_@ViewBag.Usuario.Id" class="btn btn-danger btn-sm remUser">
+                            <i class="fas fa-trash"></i>
+                            Excluir
+                        </a>
+                    </div>
+
+                    <div class="form-group m-0 pt-0">
+                        @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            <input type="text" name="Nome" class="form-control col-11 col-md-12" value="@ViewBag.Usuario.Nome">
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group m-0">
+                        @Html.LabelFor(model => model.Email, "Email: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            <input type="email" name="Email" class="form-control col-11 col-md-12" value="@ViewBag.Usuario.Email">
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group m-0">
+                        @Html.LabelFor(model => model.PerfilId, "Perfil: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("PerfilId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
+                    </div>
+
+                    <div class="form-group m-0">
+                        @Html.LabelFor(model => model.StatusId, "Status: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FotoPerfil, "Foto de Perfil: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            <div class="input-group">
+                                <input type="file" class="form-control-file" name="FotoPerfil">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer col-11 col-md-12">
+
+
+                        <button type="submit" class="btn btn-default float-right">
+                            <i class="fas fa-solid fa-floppy-disk"></i>
+                            Salvar
+                        </button>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".remUser").click(function () {
+        var id = $(this).attr("ref");
+        alert(id);
+        Swal.fire({
+            title: 'Deseja confirmar a exclusão deste usuário?',
+            text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Sim, excluir!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: "/admin/usuarios/deletausuario",
+                    data: { id },
+                    success: function (retorno) {
+
+                        if (retorno == "t") {
+
+                            window.location.replace("/admin/usuarios");
+
+                        }
+                        else if (retorno == "f") {
+
+                            window.location.replace("/admin/usuarios");
+                        }
+                    }
+                });
+            }
+        })
+
+
+    });
+</script>
+@section ScriptPage {
+    
+}

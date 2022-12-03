@@ -57,11 +57,13 @@ namespace NGT.Areas.Admin
                 namespaces: namespaces
             );
             context.MapRoute(
-                name: "Admin.Usuario.DetalhesUser",
-                url: "admin/usuarios/detalhesusuario",
-                defaults: new { controller = "Usuario", action = "DetalhesUser" },
+                name: "Admin.Usuario.EditaUser",
+                url: "admin/usuarios/editausuario/{id}",
+                defaults: new { controller = "Usuario", action = "EditaUser" },
                 namespaces: namespaces
             );
+
+
 
 
             context.MapRoute(
@@ -141,10 +143,100 @@ namespace NGT.Areas.Admin
 
 
 
+
+
+            context.MapRoute(
+                name: "Admin.Fornecedor.Index",
+                url: "admin/fornecedores",
+                defaults: new { controller = "Fornecedor", action = "Listar" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Fornecedor.Filtrar",
+               url: "admin/fornecedores/filtrar",
+               defaults: new { controller = "Fornecedor", action = "ListarFiltrado" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Fornecedor.TrocarStatus",
+                url: "admin/fornecedores/trocarstatus",
+                defaults: new { controller = "Fornecedor", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Fornecedor.NovoFornecedor",
+                url: "admin/fornecedores/cadastrafornecedor",
+                defaults: new { controller = "Fornecedor", action = "NovoFornecedor" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Fornecedor.RemoveFornecedor",
+                url: "admin/fornecedores/deletafornecedor",
+                defaults: new { controller = "Fornecedor", action = "RemoveFornecedor" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Fornecedor.EditaFornecedor",
+                url: "admin/fornecedores/editafornecedor/{id}",
+                defaults: new { controller = "Fornecedor", action = "EditaFornecedor" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Fornecedor.ExibeFornecedor",
+                url: "admin/fornecedores/exibefornecedor/{id}",
+                defaults: new { controller = "Fornecedor", action = "ExibeFornecedor" },
+                namespaces: namespaces
+            );
+
             context.MapRoute(
                 name: "Admin.LogOut",
                 url: "admin/sair",
                 defaults: new { controller = "Dashboard", action = "LogOut" },
+                namespaces: namespaces
+            );
+
+
+
+
+
+
+
+
+            //LOCAL
+            context.MapRoute(
+               name: "Admin.Local.Index",
+               url: "admin/locais",
+               defaults: new { controller = "Local", action = "Listar" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Local.TrocarStatus",
+                url: "admin/locais/trocarstatus",
+                defaults: new { controller = "Local", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Local.Novo",
+               url: "admin/locais/novo-local",
+               defaults: new { controller = "Local", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Local.Remover",
+               url: "admin/locais/remove-local",
+               defaults: new { controller = "Local", action = "Remover" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Local.Filtrar",
+               url: "admin/locais/filtrar",
+               defaults: new { controller = "Local", action = "ListarFiltrado" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Local.EditaFornecedor",
+                url: "admin/locais/editalocais/{id}",
+                defaults: new { controller = "Local", action = "EditaLocal" },
                 namespaces: namespaces
             );
         }

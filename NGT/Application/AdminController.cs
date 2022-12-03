@@ -7,7 +7,6 @@ using System.Web.Mvc;
 namespace NGT.Application
 {
     [Authorize]
-    public class AdminController: BaseController
-    {
-    }
+    public class AdminController: Controller
+    {}
 }

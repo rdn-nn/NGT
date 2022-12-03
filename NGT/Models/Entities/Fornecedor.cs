@@ -13,9 +13,9 @@ namespace NGT.Models.Entities
         public string RazaoSoc { get; set; }
         public string NomeFantasia { get; set; }
         [Required]
-        public int CNPJ { get; set; }
+        public long CNPJ { get; set; }
         [Required]
-        public int IE { get; set; }
+        public long IE { get; set; }
         [Required]
         [MaxLength(250)]
         public string Endereco { get; set; }
