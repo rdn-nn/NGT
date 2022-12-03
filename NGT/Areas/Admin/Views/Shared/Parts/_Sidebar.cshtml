@@ -15,7 +15,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="side-menu">
                 <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="@Url.RouteUrl("Admin.Dashboard.Index")" class="@SetActive(ViewBag.MenuLinkDashboard) nav-link">
                         <i class="nav-icon fas fa-chart-line "></i>
@@ -25,17 +25,17 @@
                     </a>
                 </li>
                 @if (User.Identity.Name.Split('|')[3] == "Administrador")
-            {
-<li class="nav-item">
-    <a href="@Url.RouteUrl("Admin.Usuario.Index")" class="nav-link @SetActive(ViewBag.MenuLinkUsuarios)">
-        <i class="nav-icon fas fa-users"></i>
-        <p>
-            Usuários
-        </p>
-    </a>
-</li>
-            }
-                
+                {
+                    <li class="nav-item">
+                        <a href="@Url.RouteUrl("Admin.Usuario.Index")" class="nav-link @SetActive(ViewBag.MenuLinkUsuarios)">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Usuários
+                            </p>
+                        </a>
+                    </li>
+                }
+
                 <li class="nav-item">
                     <a href="@Url.RouteUrl("Admin.Fornecedor.Index")" class="nav-link @SetActive(ViewBag.MenuLinkFornecedores)">
                         <i class="nav-icon fas fa-industry"></i>
@@ -45,13 +45,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                                <a href="@Url.RouteUrl("Admin.Bloco.Index")" class="nav-link @SetActive(ViewBag.MenuLinkBlocos)">
-                                    <i class="nav-icon fas fa-building"></i>
-                                    <p>
-                                        Blocos
-                                    </p>
-                                </a>
-                            </li>
+                    <a href="@Url.RouteUrl("Admin.Bloco.Index")" class="nav-link @SetActive(ViewBag.MenuLinkBlocos)">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Blocos
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="@Url.RouteUrl("Admin.Local.Index")" class="nav-link @SetActive(ViewBag.MenuLinkLocais)">
                         <i class="nav-icon fas fa-map-marker-alt"></i>
@@ -77,21 +77,29 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                                <a href="@Url.RouteUrl("Admin.Ocorrencia.Index")" class="nav-link @SetActive(ViewBag.MenuLinkOcorrencias)">
-                                    <i class="nav-icon fas fa-receipt"></i>
-                                    <p>
-                                        Chamados
-                                    </p>
-                                </a>
-                            </li>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-question-circle"></i>
+                        <p>
+                            Motivos
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
-                                <a href="@Url.RouteUrl("Admin.OS.Index")" class="nav-link  @SetActive(ViewBag.MenuLinkOS)">
-                                    <i class="nav-icon fas fa-list-alt"></i>
-                                    <p>
-                                        Ordens de Serviço
-                                    </p>
-                                </a>
-                            </li>
+                    <a href="@Url.RouteUrl("Admin.Ocorrencia.Index")" class="nav-link @SetActive(ViewBag.MenuLinkOcorrencias)">
+                        <i class="nav-icon fas fa-receipt"></i>
+                        <p>
+                            Chamados
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.RouteUrl("Admin.OS.Index")" class="nav-link  @SetActive(ViewBag.MenuLinkOS)">
+                        <i class="nav-icon fas fa-list-alt"></i>
+                        <p>
+                            Ordens de Serviço
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

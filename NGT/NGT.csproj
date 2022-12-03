@@ -4863,6 +4863,14 @@
     <Compile Include="Migrations\202212022218092_BDCOmplement-8.designer.cs">
       <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212031916144_BDComplement-9.cs" />
+    <Compile Include="Migrations\202212031916144_BDComplement-9.designer.cs">
+      <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212031934259_BDComplement-10.cs" />
+    <Compile Include="Migrations\202212031934259_BDComplement-10.designer.cs">
+      <DependentUpon>202212031934259_BDComplement-10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
     <Compile Include="Models\Entities\Categoria.cs" />
@@ -5110,6 +5118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212022218092_BDCOmplement-8.resx">
       <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212031916144_BDComplement-9.resx">
+      <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212031934259_BDComplement-10.resx">
+      <DependentUpon>202212031934259_BDComplement-10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

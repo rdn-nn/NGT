@@ -35,22 +35,29 @@ namespace NGT.Areas.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Criar(Bloco blo)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                Bloco bloco = new Bloco
+                if (ModelState.IsValid)
                 {
-                    Nome = blo.Nome,
-                    StatusId = db.Status.Where(x => x.Nome == "Desativado").FirstOrDefault().Id
-                };
+                    Bloco bloco = new Bloco
+                    {
+                        Nome = blo.Nome,
+                        StatusId = db.Status.Where(x => x.Nome == "Desativado").FirstOrDefault().Id
+                    };
 
-                db.Blocos.Add(bloco);
-                db.SaveChanges();
-                TempData["MSG"] = "success|Novo Bloco registrado com sucesso!|x";
+                    db.Blocos.Add(bloco);
+                    db.SaveChanges();
+                    TempData["MSG"] = "success|Novo Bloco registrado com sucesso!|x";
+                    return RedirectToAction("Listar", "Bloco");
+                }
+                TempData["MSG"] = "error|Preencha todos os campos|x";
                 return RedirectToAction("Listar", "Bloco");
             }
-            TempData["MSG"] = "error|Preencha todos os campos|x";
-            return RedirectToAction("Listar", "Bloco");
+            catch (Exception)
+            {
+                @TempData["MSG"] = "error|Erro ao gravar novo Bloco. O nome indicado já existe!|x";
+                return RedirectToAction("Listar", "Bloco");
+            }
         }
 
 

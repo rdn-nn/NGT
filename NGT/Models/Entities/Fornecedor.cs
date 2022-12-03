@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,7 @@ namespace NGT.Models.Entities
         [Required, MaxLength(250)]
         public string RazaoSoc { get; set; }
         public string NomeFantasia { get; set; }
-        [Required]
+        [Required, Index(IsUnique = true)]
         public long CNPJ { get; set; }
         [Required]
         public long IE { get; set; }

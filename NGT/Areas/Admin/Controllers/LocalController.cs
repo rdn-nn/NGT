@@ -157,22 +157,30 @@ namespace NGT.Areas.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult EditaLocal(Local loc)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Local local = db.Locais.Find(loc.Id);
+                if (ModelState.IsValid)
+                {
+                    Local local = db.Locais.Find(loc.Id);
 
-                local.Nome = loc.Nome;
-                local.BlocoId = loc.BlocoId;
-                local.StatusId = loc.StatusId;
+                    local.Nome = loc.Nome;
+                    local.BlocoId = loc.BlocoId;
+                    local.StatusId = loc.StatusId;
 
-                db.Entry(local).State = EntityState.Modified;
-                db.SaveChanges();
+                    db.Entry(local).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                TempData["MSG"] = "success|Local atualizado com sucesso";
+                    TempData["MSG"] = "success|Local atualizado com sucesso";
+                    return Listar();
+                }
+                TempData["MSG"] = "warning|Preencha todos os campos|x";
                 return Listar();
             }
-            TempData["MSG"] = "warning|Preencha todos os campos|x";
-            return Listar();
+            catch (Exception)
+            {
+                @TempData["MSG"] = "error|Impossível registrar dois locais com o mesmo nome!|x";
+                return Listar();
+            }
         }
 
     }
