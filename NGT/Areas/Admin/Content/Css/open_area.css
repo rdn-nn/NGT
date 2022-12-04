@@ -161,8 +161,12 @@ div.editLoc {
     min-height: 100% !important;
 }
 
-
-
+.description-text {
+    font-size: 13px;
+}
+.description-header{
+    font-size: 15px !important;
+}
 .opt {
     position: absolute;
     bottom: 10px;

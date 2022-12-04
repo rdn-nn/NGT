@@ -1,5 +1,5 @@
 ﻿<aside class="main-sidebar bgSidebar elevation-4">
-    <!-- Brand Logo -->
+
     <div class="brand-link topSidebar justify-content-center align-items-center pt-4">
         <img src="~/Content/images/NGT.png" alt="NGT Logo" class="brand-image mt-2" />
         <div class="mt-2">
@@ -8,14 +8,13 @@
 
     </div>
 
-    <!-- Sidebar -->
+
     <div class="sidebar">
 
-        <!-- Sidebar Menu -->
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="side-menu">
-                <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+
                 <li class="nav-item">
                     <a href="@Url.RouteUrl("Admin.Dashboard.Index")" class="@SetActive(ViewBag.MenuLinkDashboard) nav-link">
                         <i class="nav-icon fas fa-chart-line "></i>
@@ -69,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="@Url.RouteUrl("Admin.Item.Index")" class="nav-link @SetActive(ViewBag.MenuLinkItens)">
                         <i class="nav-icon fas fa-tags"></i>
                         <p>
                             Itens
@@ -77,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="@Url.RouteUrl("Admin.Motivo.Index")" class="nav-link @SetActive(ViewBag.MenuLinkMotivo)">
                         <i class="nav-icon fas fa-question-circle"></i>
                         <p>
                             Motivos
@@ -102,16 +101,14 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
+
     </div>
-    <!-- /.sidebar -->
+
 </aside>
 
 
-<!-- ./wrapper -->
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
+
 </aside>
 
 @functions {

@@ -279,6 +279,84 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "Categoria", action = "EditaCategoria" },
                 namespaces: namespaces
             );
+
+
+            //Itens
+            context.MapRoute(
+               name: "Admin.Item.Index",
+               url: "admin/itens",
+               defaults: new { controller = "Item", action = "Listar" },
+               namespaces: namespaces
+           );
+            // context.MapRoute(
+            //     name: "Admin.Item.TrocarStatus",
+            //     url: "admin/itens/trocarstatus",
+            //     defaults: new { controller = "Item", action = "TrocarStatus" },
+            //     namespaces: namespaces
+            // );
+            // context.MapRoute(
+            //    name: "Admin.Item.Novo",
+            //    url: "admin/itens/novo-item",
+            //    defaults: new { controller = "Item", action = "Novo" },
+            //    namespaces: namespaces
+            //);
+            // context.MapRoute(
+            //    name: "Admin.Item.Remover",
+            //    url: "admin/itens/remove-item",
+            //    defaults: new { controller = "CategoItemria", action = "Remover" },
+            //    namespaces: namespaces
+            //);
+            // context.MapRoute(
+            //    name: "Admin.Item.Filtrar",
+            //    url: "admin/itens/filtrar",
+            //    defaults: new { controller = "Item", action = "ListarFiltrado" },
+            //    namespaces: namespaces
+            //);
+            // context.MapRoute(
+            //     name: "Admin.Item.EditaCategoria",
+            //     url: "admin/itens/editaitens/{id}",
+            //     defaults: new { controller = "Item", action = "EditaCategoria" },
+            //     namespaces: namespaces
+            // );
+
+
+            //MOTIVOS
+            context.MapRoute(
+               name: "Admin.Motivo.Index",
+               url: "admin/motivos",
+               defaults: new { controller = "Motivo", action = "Listar" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Motivo.TrocarStatus",
+                url: "admin/motivos/trocarstatus",
+                defaults: new { controller = "Motivo", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Motivo.Novo",
+               url: "admin/motivos/nova-motivo",
+               defaults: new { controller = "Motivo", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Motivo.Remover",
+               url: "admin/motivos/remove-motivo",
+               defaults: new { controller = "Motivo", action = "Remover" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Motivo.Filtrar",
+               url: "admin/motivos/filtrar",
+               defaults: new { controller = "Motivo", action = "ListarFiltrado" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Motivo.EditaCategoria",
+                url: "admin/motivos/editamotivos/{id}",
+                defaults: new { controller = "Motivo", action = "EditaMotivos" },
+                namespaces: namespaces
+            );
         }
     }
 }
