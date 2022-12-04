@@ -234,9 +234,49 @@ namespace NGT.Areas.Admin
                namespaces: namespaces
            );
             context.MapRoute(
-                name: "Admin.Local.EditaFornecedor",
+                name: "Admin.Local.EditaLocais",
                 url: "admin/locais/editalocais/{id}",
                 defaults: new { controller = "Local", action = "EditaLocal" },
+                namespaces: namespaces
+            );
+
+
+
+            //CATEGORIA
+            context.MapRoute(
+               name: "Admin.Categoria.Index",
+               url: "admin/categorias",
+               defaults: new { controller = "Categoria", action = "Listar" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Categoria.TrocarStatus",
+                url: "admin/categorias/trocarstatus",
+                defaults: new { controller = "Categoria", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Categoria.Novo",
+               url: "admin/categorias/nova-categoria",
+               defaults: new { controller = "Categoria", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Categoria.Remover",
+               url: "admin/categorias/remove-categoria",
+               defaults: new { controller = "Categoria", action = "Remover" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Categoria.Filtrar",
+               url: "admin/categorias/filtrar",
+               defaults: new { controller = "Categoria", action = "ListarFiltrado" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Categoria.EditaCategoria",
+                url: "admin/categorias/editacategorias/{id}",
+                defaults: new { controller = "Categoria", action = "EditaCategoria" },
                 namespaces: namespaces
             );
         }

@@ -10,7 +10,7 @@ namespace NGT.Models.Entities
     public class Local
     {
         public int Id { get; set; }
-        [Required, MaxLength(250), Index(IsUnique = true)]
+        [Required, MaxLength(250)]
         public string Nome { get; set; }
         [Required]
         public int BlocoId { get; set; }

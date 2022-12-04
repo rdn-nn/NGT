@@ -15,7 +15,7 @@ namespace NGT.Areas.Admin.Controllers
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()
         {
-            ViewBag.locais = db.Locais.Include(b => b.Bloco).ToList().OrderByDescending(b => b.StatusId);
+            ViewBag.locais = db.Locais.Include(b => b.Bloco).ToList().OrderBy(l=>l.Nome).OrderByDescending(b => b.StatusId);
             ViewBag.itens = db.Itens.Include(x => x.Local).ToList();
             return View("ListaLocal");
         }

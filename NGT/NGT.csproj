@@ -4867,9 +4867,9 @@
     <Compile Include="Migrations\202212031916144_BDComplement-9.designer.cs">
       <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202212031934259_BDComplement-10.cs" />
-    <Compile Include="Migrations\202212031934259_BDComplement-10.designer.cs">
-      <DependentUpon>202212031934259_BDComplement-10.cs</DependentUpon>
+    <Compile Include="Migrations\202212040028027_BDComplement-10.cs" />
+    <Compile Include="Migrations\202212040028027_BDComplement-10.designer.cs">
+      <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
@@ -5067,6 +5067,9 @@
     <Content Include="Areas\Admin\Views\Local\ListaLocal.cshtml" />
     <Content Include="Areas\Admin\Views\Local\NovoLocal.cshtml" />
     <Content Include="Areas\Admin\Views\Local\EditLocal.cshtml" />
+    <Content Include="Areas\Admin\Views\Categoria\ListaCat.cshtml" />
+    <Content Include="Areas\Admin\Views\Categoria\NovaCateg.cshtml" />
+    <Content Include="Areas\Admin\Views\Categoria\EditaCategoria.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5087,7 +5090,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Js\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Categoria\" />
     <Folder Include="Areas\Admin\Views\Item\" />
     <Folder Include="Areas\Admin\Views\Motivo\" />
   </ItemGroup>
@@ -5122,8 +5124,8 @@
     <EmbeddedResource Include="Migrations\202212031916144_BDComplement-9.resx">
       <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212031934259_BDComplement-10.resx">
-      <DependentUpon>202212031934259_BDComplement-10.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202212040028027_BDComplement-10.resx">
+      <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="pl-4 pr-4">
-                        <ul class="list-group list-group-unbordered mb-3">
+                        <ul class="list-group list-group-unbordered mb-5">
                             <li class="list-group-item fornec">
                                 <b>Ramo Ativ.: </b> <a class="float-right">@item.RamoAtiv</a>
                             </li>
@@ -101,30 +101,29 @@
                                 </a>
                             </li>
                         </ul>
+
+                        <div class="text-right opt forn pb-2">
+
+                            <button rel="@item.Id" class="btn btn-info btn-sm EditFornec">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                                Editar
+                            </button>
+
+                            <button rel="@item.Id" class="btn btn-primary btn-sm ShowFornec">
+                                <i class="fas fa-folder"></i>
+                                Ver Mais
+                            </button>
+
+                        </div>
                     </div>
 
-                    <div class="text-right pr-3 pb-2">
 
-                        <button rel="@item.Id" class="btn btn-info btn-sm EditFornec">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Editar
-                        </button>
-
-                        <button rel="@item.Id" class="btn btn-primary btn-sm ShowFornec">
-                            <i class="fas fa-folder"></i>
-                            Ver Mais
-                        </button>
 
                     </div>
-
-
 
 
                 </div>
-
-
-            </div>
         }
     </div>
 </div>

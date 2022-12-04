@@ -103,15 +103,20 @@ form{
         background: #d8d8d8;
         box-shadow: 1px 1px 3px #00204a71 inset;
     }
-
+.widget-user .widget-user-image {
+    top: auto !important;
+    margin-left: -37.5px !important;
+    bottom:32.5% !important;
+    z-index:10;
+}
 span#imgBloco {
     color: #00204A;
     background-color: #F4F6F9;
-    height: 100px;
-    width: 100px;
-    padding:25px;
-    padding-left:30px;
-    font-size: 50px;
+    height: 70px;
+    width: 70px;
+    padding: 15px;
+    padding-left: 20px;
+    font-size: 40px;
     border-radius: 50%;
     box-shadow: 2px 2px 1px #808080ff;
 }
@@ -151,16 +156,22 @@ div.editLoc {
     top: 10px;
 }
 
-.card-fornec,
-.card-profile,
-.card-widget.widget-user {
+.card-fornec, .card-bloco,
+.card-profile, .card-category {
     min-height: 100% !important;
 }
+
+
+
 .opt {
     position: absolute;
     bottom: 10px;
     right: 15px;
-
+}
+.opt.forn {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
 }
     /*Configurações do CARD defs Chamados > Tela Inicial*/
     #cardChamado:hover {
@@ -207,12 +218,12 @@ div.editLoc {
     color: #00204A;
 }
 
-
-.widget-user-header.locais{
-    height:auto !important;
+.widget-user-header{
+    height:100% !important;
 }
-.widget-user .card-footer.locais {
-    padding-top: 0px !important;
+.widget-user.card-locais .card-footer,
+.widget-user.card-category .card-footer {
+    padding-top: 10px !important;
 }
 
 .bg-cardsAdmin {

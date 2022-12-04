@@ -1,7 +1,7 @@
-﻿@model NGT.Models.Entities.Local
+﻿@model NGT.Models.Entities.Categoria
 @{
-    ViewBag.Title = "Locais";
-    ViewBag.MenuLinkLocais = true;
+    ViewBag.Title = "Categorias";
+    ViewBag.MenuLinkCategoria = true;
 }
 
 <section class="content-header pt-2">
@@ -20,9 +20,9 @@
     <div class="row">
         <div class="col-sm-6 mb-3">
 
-            <form action="@Url.RouteUrl("Admin.Local.Filtrar")" method="get" role="search" class="d-inline">
+            <form action="@Url.RouteUrl("Admin.Categoria.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar Local">
+                    <input class="form-control" type="text" name="termo" placeholder="Buscar Categoria">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -33,8 +33,8 @@
 
         </div>
         <div class="col-sm-6 mb-3">
-            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoLocal">
-                Novo Local
+            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novaCateg">
+                Nova Categoria
             </a>
         </div>
     </div>
@@ -43,7 +43,7 @@
 <div class="pl-3 pr-3 pb-3">
 
     <div class="row d-flex justify-content-center align-items-center">
-        @foreach (var item in @ViewBag.locais)
+        @foreach (var item in @ViewBag.categorias)
         {
             var totItens = 0;
             bool status;
@@ -56,56 +56,39 @@
                 status = false;
             }
 
-            foreach (var l in ViewBag.locais)
-            {
-                if (item.Id == l.BlocoId)
-                {
-                    foreach (var i in ViewBag.itens)
-                    {
-                        if (i.LocalId == l.Id)
-                        {
-                            totItens = totItens + 1;
-                        }
-                    }
 
+            foreach (var i in ViewBag.itens)
+            {
+                if (i.CategoriaId == item.Id)
+                {
+                    totItens = totItens + 1;
                 }
             }
 
-
             <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3">
 
-                <div class="card card-widget widget-user card-locais">
-
-                    <div class="widget-user-header bg-gradient-primary">
+                <div class="card card-widget widget-user card-category">
+                    <div class="widget-user-header bg-gradient-info">
 
                         <div class="editLoc">
-                            <button ref="@item.Id" class="btn btn-tool editaLocal">
+                            <button ref="@item.Id" class="btn btn-tool editaCateg">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
 
 
                         <div class="removeLoc">
-                            <button ref="@item.Id" class="btn btn-tool removeLocal">
+                            <button ref="@item.Id" class="btn btn-tool removeCateg">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
 
                         <h3 class="widget-user-username">@item.Nome</h3>
-                        <h5 class="widget-user-desc">@item.Bloco.Nome</h5>
                     </div>
 
-                    <div class="card-footer locais">
+                    <div class="card-footer categorias">
                         <div class="row">
-                            @*<div class="col-sm-3 border-right">
-                                <div class="description-block">
-                                    <h5 class="description-header">@item.Id</h5>
-                                    <span class="description-text">ID</span>
-                                </div>
-
-                            </div>*@
-
-                            <div class="col-sm-6 border-right">
+                            <div class="col-6 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header">
                                         @Html.CheckBox("chk", status, new { @class = "status", @rel = @item.Id })
@@ -116,7 +99,7 @@
 
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-6">
                                 <div class="description-block">
                                     <h5 class="description-header">
                                         @totItens
@@ -127,6 +110,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
 
@@ -136,61 +120,63 @@
 
 </div>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoLocal" aria-hidden="true"></div>
-<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditLocal" aria-hidden="true"></div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovaCateg" aria-hidden="true"></div>
+<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaCateg" aria-hidden="true"></div>
 
 @section ScriptPage {
-    <script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    @*<script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>*@
 
     <script>
             $(function () {
-                $('#novoLocal').click(function () {
-                    $("#modal").load("@Url.RouteUrl("Admin.Local.Novo")", function () {
+                $('#novaCateg').click(function () {
+                    $("#modal").load("@Url.RouteUrl("Admin.Categoria.Novo")", function () {
                         $("#modal").modal();
                     });
                 });
             });
     </script>
-    <script>$(function () {
-    $('.editaLocal').click(function () {
+    <script>
+        $(function () {
+            $('.editaCateg').click(function () {
                 var id = $(this).attr("ref");
-                $("#modalE").load("/admin/locais/editalocais/" + id, function () {
+                $("#modalE").load("/admin/categorias/editacategorias/" + id, function () {
                     $("#modalE").modal();
                 });
             });
-        });</script>
+        });
+    </script>
     <script>
         $(".status").click(function () {
             var id = $(this).attr("rel");
             $.ajax({
                 dataType: "json",
                 type: "POST",
-                url: "/admin/locais/trocarstatus",
+                url: "/admin/categorias/trocarstatus",
                 data: { id },
                 success: function (retorno) {
 
                     if (retorno == "t") {
-                        $("#status_" + id).removeClass("font-weight-bold text-danger");
-                        $("#status_" + id).addClass("font-weight-bold text-success");
+                        $("#status_" + id).removeClass("text-danger");
+                        $("#status_" + id).addClass("text-success");
                         $("#status_" + id).text("Ativado");
                     }
                     else if (retorno == "f") {
-                        $("#status_" + id).removeClass("font-weight-bold text-success");
-                        $("#status_" + id).addClass("font-weight-bold text-danger");
+                        $("#status_" + id).removeClass("text-success");
+                        $("#status_" + id).addClass("text-danger");
                         $("#status_" + id).text("Desativado");
 
                     } else if (retorno == "n") {
-                        window.location.replace("/admin/locais");
+                        window.location.replace("/admin/categorias");
                     }
                 }
             });
         });</script>
     <script>
-        $(".removeLocal").click(function () {
+        $(".removeCateg").click(function () {
             var id = $(this).attr("ref");
 
             Swal.fire({
-                title: 'Deseja confirmar a exclusão deste Local?',
+                title: 'Deseja confirmar a exclusão desta Categoria?',
                 text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -204,18 +190,18 @@
                     $.ajax({
                         dataType: "json",
                         type: "POST",
-                        url: "/admin/locais/remove-local",
+                        url: "/admin/categorias/remove-categoria",
                         data: { id },
                         success: function (retorno) {
 
                             if (retorno == "t") {
 
-                                window.location.replace("/admin/locais");
+                                window.location.replace("/admin/categorias");
 
                             }
                             else if (retorno == "f") {
 
-                                window.location.replace("/admin/locais");
+                                window.location.replace("/admin/categorias");
                             }
                         }
                     });
