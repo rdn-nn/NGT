@@ -1,4 +1,5 @@
-﻿using NGT.Data;
+﻿using NGT.Application;
+using NGT.Data;
 using NGT.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace NGT.Areas.Admin.Controllers
 {
-    public class MotivoController : Controller
+    public class MotivoController : AdminController
     {
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()

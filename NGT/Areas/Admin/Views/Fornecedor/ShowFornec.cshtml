@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title txtBlack" id="ShowFornec">Dados do Fornecedor</h5>
@@ -37,10 +37,10 @@
 
             @if (ViewBag.Fornecedor.Obs != null)
             {
-                <div class="d-flex justify-content-center align-items-center flex-nowrap">
+                <div class="pl-4 pr-4 d-flex align-items-center flex-nowrap">
                     <h3 class="profile-username tel text-muted">
-                        <h3 class="profile-username fornec">Observações: </h3>
-                        @ViewBag.Fornecedor.Obs
+                        <span class="profile-username fornec txtBlack">Observações:&nbsp;</span>
+                        <span class="text-muted">@ViewBag.Fornecedor.Obs</span>
                     </h3>
                 </div>
             }

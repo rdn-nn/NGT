@@ -49,16 +49,16 @@ namespace NGT.Data
             else
                 return false;
         }
-        public static bool ExcluirArquivo(string arq)
-        {
-            if (File.Exists(arq))
-            {
-                File.Delete(arq);
-                return true;
-            }
-            else
-                return false;
-        }
+        //public static bool ExcluirArquivo(string arq)
+        //{
+        //    if (File.Exists(arq))
+        //    {
+        //        File.Delete(arq);
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //}
 
         [Obsolete]
         public static string UploadArquivo(HttpPostedFileBase flpUpload, string nome, int id)

@@ -6,10 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using NGT.Data;
 using NGT.Models.Entities;
+using NGT.Application;
 
 namespace NGT.Areas.Admin.Controllers
 {
-    public class CategoriaController : Controller
+    public class CategoriaController : AdminController
     {
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()

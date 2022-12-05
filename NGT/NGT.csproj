@@ -5073,6 +5073,10 @@
     <Content Include="Areas\Admin\Views\Motivo\ListaMot.cshtml" />
     <Content Include="Areas\Admin\Views\Motivo\NovoMot.cshtml" />
     <Content Include="Areas\Admin\Views\Motivo\EditaMot.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\ListaItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\NovoItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\EditaItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\ShowItem.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5093,7 +5097,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Js\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Item\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202211051723216_InicialBD.resx">

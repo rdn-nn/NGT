@@ -1,7 +1,7 @@
-﻿@model NGT.Models.Entities.Motivo
+﻿@model NGT.Models.Entities.Item
 @{
-    ViewBag.Title = "Motivos";
-    ViewBag.MenuLinkMotivo = true;
+    ViewBag.Title = "Itens";
+    ViewBag.MenuLinkItem = true;
 }
 
 <section class="content-header pt-2">
@@ -20,9 +20,9 @@
     <div class="row">
         <div class="col-sm-6 mb-3">
 
-            <form action="@Url.RouteUrl("Admin.Motivo.Filtrar")" method="get" role="search" class="d-inline">
+            <form action="@Url.RouteUrl("Admin.Item.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar Motivos">
+                    <input class="form-control" type="text" name="termo" placeholder="Buscar Itens">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -35,13 +35,13 @@
         <div class="col-sm-6 mb-3">
             @if (@TempData["LP"] != null)
             {
-                <a class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3" id="novaCateg">
+                <a href="/admin/itens" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
                     Limpar
                 </a>
             }
 
-            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoMot">
-                Novo Motivo
+            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoItem">
+                Novo Item
             </a>
         </div>
     </div>
@@ -50,7 +50,7 @@
 <div class="pl-3 pr-3 pb-3">
 
     <div class="row d-flex justify-content-center align-items-center">
-        @foreach (var item in @ViewBag.motivos)
+        @foreach (var item in @ViewBag.itens)
         {
             var totItens = 0;
             bool status;
@@ -66,7 +66,7 @@
 
             foreach (var i in ViewBag.ocorrencias)
             {
-                if (i.MotivoId == item.Id)
+                if (i.ItemId == item.Id)
                 {
                     totItens = totItens + 1;
                 }
@@ -75,16 +75,16 @@
             <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-6">
 
                 <div class="card card-widget widget-user card-category">
-                    <div class="widget-user-header bg-gradient-info">
+                    <div class="widget-user-header bg-gradient-primary">
 
                         <div class="editLoc">
-                            <button ref="@item.Id" class="btn btn-tool editaMotiv">
+                            <button ref="@item.Id" class="btn btn-tool editaItem">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
 
                         <div class="removeLoc">
-                            <button ref="@item.Id" class="btn btn-tool removeMotiv">
+                            <button ref="@item.Id" class="btn btn-tool removeItem">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -92,8 +92,8 @@
                         <h3 class="widget-user-username">@item.Nome</h3>
                     </div>
 
-                    <div class="card-footer categorias">
-                        <div class="row">
+                    <div class="card-footer">
+                        <div class="row mb-5">
                             <div class="col-6 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header">
@@ -114,10 +114,15 @@
                                 </div>
 
                             </div>
-
                         </div>
-
                     </div>
+                    <div class="opt">
+                        <button rel="@item.Id" class="btn btn-primary btn-sm DetailsItem">
+                            <i class="fas fa-folder"></i>
+                            Ver Mais
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
@@ -126,37 +131,49 @@
 
 </div>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoMot" aria-hidden="true"></div>
-<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaMot" aria-hidden="true"></div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoItem" aria-hidden="true"></div>
+<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaItem" aria-hidden="true"></div>
+<div id="modalS" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ShowItem" aria-hidden="true"></div>
 
 @section ScriptPage {
     @*<script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>*@
 
     <script>
-                $(function () {
-                    $('#novoMot').click(function () {
-                        $("#modal").load("@Url.RouteUrl("Admin.Motivo.Novo")", function () {
-                            $("#modal").modal();
-                        });
-                    });
+        $(function () {
+            $('#novoItem').click(function () {
+                $("#modal").load("@Url.RouteUrl("Admin.Item.Novo")", function () {
+                    $("#modal").modal();
                 });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.DetailsItem').click(function () {
+                var id = $(this).attr("rel");
+                $("#modalS").load("/admin/itens/exibeitens/" + id, function () {
+                    $("#modalS").modal();
+                });
+            });
+        });
     </script>
     <script>
     $(function () {
-            $('.editaMotiv').click(function () {
+            $('.editaItem').click(function () {
                 var id = $(this).attr("ref");
-                $("#modalE").load("/admin/motivos/editamotivos/" + id, function () {
+                $("#modalE").load("/admin/itens/editaitens/" + id, function () {
                     $("#modalE").modal();
                 });
             });
-        });</script>
+        });
+    </script>
     <script>
         $(".status").click(function () {
             var id = $(this).attr("rel");
             $.ajax({
                 dataType: "json",
                 type: "POST",
-                url: "/admin/motivos/trocarstatus",
+                url: "/admin/itens/trocarstatus",
                 data: { id },
                 success: function (retorno) {
 
@@ -171,16 +188,16 @@
                         $("#status_" + id).text("Desativado");
 
                     } else if (retorno == "n") {
-                        window.location.replace("/admin/motivos");
+                        window.location.replace("/admin/itens");
                     }
                 }
             });
         });</script>
     <script>
-        $(".removeMotiv").click(function () {
+        $(".removeItem").click(function () {
             var id = $(this).attr("ref");
             Swal.fire({
-                title: 'Deseja confirmar a exclusão deste Motivo?',
+                title: 'Deseja confirmar a exclusão deste Item?',
                 text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -194,18 +211,18 @@
                     $.ajax({
                         dataType: "json",
                         type: "POST",
-                        url: "/admin/motivos/remove-motivo",
+                        url: "/admin/itens/remove-item",
                         data: { id },
                         success: function (retorno) {
 
                             if (retorno == "t") {
 
-                                window.location.replace("/admin/motivos");
+                                window.location.replace("/admin/itens");
 
                             }
                             else if (retorno == "f") {
 
-                                window.location.replace("/admin/motivos");
+                                window.location.replace("/admin/itens");
                             }
                         }
                     });

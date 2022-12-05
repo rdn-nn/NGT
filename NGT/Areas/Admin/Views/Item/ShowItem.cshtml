@@ -1,0 +1,102 @@
+﻿@model NGT.Models.Entities.Item
+@{
+    Layout = null;
+
+    string statusHasPlaca = "Não";
+    string statusIsPatInterno = "Não";
+
+    if (@ViewBag.Itens.HasPlaca)
+    {
+        statusHasPlaca = "Sim";
+    }
+
+    if (@ViewBag.Itens.IsPatInterno)
+    {
+        statusIsPatInterno = "Sim";
+    }
+}
+
+<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title txtBlack" id="ShowItem">Dados do Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="overflow-hidden">
+
+            <div class="pl-4 pr-4 pb-2">
+                <h3 class="profile-username text-center mb-0 pt-2">@ViewBag.Itens.Nome</h3>
+            </div>
+
+            <div class="pl-4 pr-4">
+                <h3 class="profile-username itens">NumSerie: <span>@ViewBag.Itens.NumSerie</span></h3>
+                <h3 class="profile-username itens">Patrimonio: <span>@ViewBag.Itens.Patrimonio</span></h3>
+                <h3 class="profile-username itens">Possui Placa? <span>@statusHasPlaca</span></h3>
+                <h3 class="profile-username itens">É Patrimônio Interno? <span>@statusIsPatInterno</span></h3>
+            </div>
+
+        </div>
+        <div class="pl-4 pr-4">
+            <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item fornec">
+                    <b>Local: </b> <a class="float-right">@ViewBag.Itens.Local.Nome</a>
+                    <div>
+                        <b>Categoria: </b> <a class="float-right">@ViewBag.Itens.Categoria.Nome</a>
+                    </div>
+                    <div>
+                        <b> Status: </b><a class="float-right">@ViewBag.Itens.Status.Nome</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        @*<div class="overflow-hidden">
+                <div class="pl-4 pr-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="text-primary">@ViewBag.Itens.Nome</h3>
+                            <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                            <br>
+                            <div class="text-muted">
+                                <p class="text-sm">
+                                    Client Company
+                                    <b class="d-block">Deveint Inc</b>
+                                </p>
+                                <p class="text-sm">
+                                    Project Leader
+                                    <b class="d-block">Tony Chicken</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="mt-5 text-muted">Project files</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
+                                </li>
+                            </ul>
+                            <div class="text-center mt-5 mb-3">
+                                <a href="#" class="btn btn-sm btn-primary">Add files</a>
+                                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>

@@ -288,36 +288,42 @@ namespace NGT.Areas.Admin
                defaults: new { controller = "Item", action = "Listar" },
                namespaces: namespaces
            );
-            // context.MapRoute(
-            //     name: "Admin.Item.TrocarStatus",
-            //     url: "admin/itens/trocarstatus",
-            //     defaults: new { controller = "Item", action = "TrocarStatus" },
-            //     namespaces: namespaces
-            // );
-            // context.MapRoute(
-            //    name: "Admin.Item.Novo",
-            //    url: "admin/itens/novo-item",
-            //    defaults: new { controller = "Item", action = "Novo" },
-            //    namespaces: namespaces
-            //);
-            // context.MapRoute(
-            //    name: "Admin.Item.Remover",
-            //    url: "admin/itens/remove-item",
-            //    defaults: new { controller = "CategoItemria", action = "Remover" },
-            //    namespaces: namespaces
-            //);
-            // context.MapRoute(
-            //    name: "Admin.Item.Filtrar",
-            //    url: "admin/itens/filtrar",
-            //    defaults: new { controller = "Item", action = "ListarFiltrado" },
-            //    namespaces: namespaces
-            //);
-            // context.MapRoute(
-            //     name: "Admin.Item.EditaCategoria",
-            //     url: "admin/itens/editaitens/{id}",
-            //     defaults: new { controller = "Item", action = "EditaCategoria" },
-            //     namespaces: namespaces
-            // );
+            context.MapRoute(
+                name: "Admin.Item.TrocarStatus",
+                url: "admin/itens/trocarstatus",
+                defaults: new { controller = "Item", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Item.Novo",
+               url: "admin/itens/novo-item",
+               defaults: new { controller = "Item", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Item.Remover",
+               url: "admin/itens/remove-item",
+               defaults: new { controller = "Item", action = "Remover" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.Item.Filtrar",
+               url: "admin/itens/filtrar",
+               defaults: new { controller = "Item", action = "ListarFiltrado" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Item.EditaCategoria",
+                url: "admin/itens/editaitens/{id}",
+                defaults: new { controller = "Item", action = "EditaItem" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+                name: "Admin.Item.ExibeItem",
+                url: "admin/itens/exibeitens/{id}",
+                defaults: new { controller = "Item", action = "ExibeItem" },
+                namespaces: namespaces
+            );
 
 
             //MOTIVOS
