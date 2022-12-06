@@ -19,7 +19,7 @@
 <div class="pl-3 pr-3 pb-3">
 
 
-    @using (Html.BeginForm("Criar", "Ocorrencia"))
+    @using (Html.BeginForm("Criar", "Ocorrencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="card card-default collapsed-card">
             <div class="card-header">
@@ -71,6 +71,15 @@
                     @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                     <div class="col-md-12 pl-3 pr-3">
                         @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divImg">
+                    @Html.LabelFor(model => model.FotoOcorrencia, "Deseja carregar uma imagem da ocorrência?: ", htmlAttributes: new { @class = "control-label  pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        <div class="input-group">
+                            <input type="file" class="form-control-file" name="FotoOcorrencia">
+                        </div>
                     </div>
                 </div>
 
@@ -157,10 +166,10 @@
                             <th>@Html.DisplayNameFor(model => model.Item)</th>
                             <th>@Html.DisplayNameFor(model => model.Motivo)</th>
                             <th>@Html.DisplayNameFor(model => model.Obs)</th>
+                            <th>Foto</th>
                             <th>Criado</th>
                             <th>Atualização</th>
                             <th>Status</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="tbodybg">
@@ -174,23 +183,29 @@
                                 <td>@item.Item.Nome</td>
                                 <td>@item.Motivo.Nome</td>
                                 <td>@item.Obs</td>
+                                <td>
+                                    @if (item.FotoOcorrencia != null)
+                                    {
+                                        <a href="@item.FotoOcorrencia" data-toggle="lightbox" data-title="OCORRÊNCIA - @item.NumTicket" data-category="2, 4">
+                                            Clique Aqui
+                                        </a>
+                                    }
+                                </td>
                                 <td>@item.DataCriacao.ToShortDateString()</td>
                                 <td>
                                     @if (item.DataAtualizacao != null)
                                     {
-                                        item.DataAtualizacao.ToShortDateString();
+                                        @item.DataAtualizacao.ToShortDateString();
                                     }
                                     else
                                     {
                                         @item.DataAtualizacao;
                                     }
                                 </td>
-                                @*<td>
-                                    <select class="form-control col-11 col-md-12" id="BlocoId" name="BlocoId">
-                                        <option value="@item.StatusTicketId">@item.StatusTicket.Nome</option>
-                                        <option value="1">Bloco A</option>
-                                    </select>
-                                </td>*@
+                                <td>
+                                    @item.StatusTicket.Nome
+                                    <div class="float-right editaOco" rel="@item.Id"><i class="fas fa-pencil-alt"></i></div>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -199,15 +214,14 @@
 
         }
     </div>
-
-
 </div>
-
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaOcorrencia" aria-hidden="true"></div>
 
 @section CssPage{
     <link href="~/Areas/Admin/Content/Libs/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/Libs/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/Libs/datatables-buttons/css/buttons.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/ekko-lightbox/ekko-lightbox.css" rel="stylesheet" />
 }
 
 
@@ -225,9 +239,9 @@
     @*<script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.flash.min.js"></script>*@
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.print.js"></script>
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/ekko-lightbox/ekko-lightbox.js"></script>
 
     <script>
-
         $(function () {
             $("#ocorrenciasTable").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -235,6 +249,33 @@
             }).buttons().container().appendTo('#ocorrenciasTable_wrapper .col-md-6:eq(0)');
         });
     </script>
+
+    <script>
+        $(function () {
+            $('.editaOco').click(function () {
+                var id = $(this).attr("rel");
+                $("#modal").load("/admin/ocorrencias/alterastatus/" + id, function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>
+
+    @*<script>
+            $("#tktId").change(function () {
+                var id = $(this).attr("rel");
+                var status = $('#tktId').val();
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: "/admin/ocorrencias/alterastatus",
+                    data: { idOco: id, idStatus: status },
+                    success: function (retorno) {
+                        window.location.replace("/admin/ocorrencias");
+                    }
+                });
+            });
+        </script>*@
     <script>
         $('#idAndamento').click(function () {
             $("#tabSearch").val("Andamento").trigger('keyup');
@@ -251,10 +292,7 @@
         $('#idCancelado').click(function () {
             $("#tabSearch").val("Cancelado").trigger('keyup');
         });
-
     </script>
-
-
     <script>
         $(document).ready(function () {
             $('#BlocoId').change(function () {
@@ -298,6 +336,7 @@
                             $('#ItemId').html(options);
                             $('#divItens').removeClass('d-none');
                             $('#divMotivos').removeClass('d-none');
+                            $('#divImg').removeClass('d-none');
                             $('#divObs').removeClass('d-none');
                         }
                     });
@@ -338,6 +377,14 @@
         });
 
     </script>
-
-
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        });
+    </script>
 }

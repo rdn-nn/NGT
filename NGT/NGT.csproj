@@ -159,6 +159,9 @@
     <Content Include="Areas\Admin\Content\Libs\datatables\jquery.dataTables.min.js" />
     <Content Include="Areas\Admin\Content\Libs\daterangepicker\daterangepicker.css" />
     <Content Include="Areas\Admin\Content\Libs\daterangepicker\daterangepicker.js" />
+    <Content Include="Areas\Admin\Content\Libs\ekko-lightbox\ekko-lightbox.css" />
+    <Content Include="Areas\Admin\Content\Libs\ekko-lightbox\ekko-lightbox.js" />
+    <Content Include="Areas\Admin\Content\Libs\ekko-lightbox\ekko-lightbox.min.js" />
     <Content Include="Areas\Admin\Content\Libs\fontawesome-free\attribution.js" />
     <Content Include="Areas\Admin\Content\Libs\fontawesome-free\css\all.css" />
     <Content Include="Areas\Admin\Content\Libs\fontawesome-free\css\all.min.css" />
@@ -2602,6 +2605,10 @@
     <Content Include="Content\Libs\bootstrap4\js\bootstrap.bundle.min.js" />
     <Content Include="Content\Libs\bootstrap4\js\bootstrap.js" />
     <Content Include="Content\Libs\bootstrap4\js\bootstrap.min.js" />
+    <Content Include="Content\Libs\bs-stepper\css\bs-stepper.css" />
+    <Content Include="Content\Libs\bs-stepper\css\bs-stepper.min.css" />
+    <Content Include="Content\Libs\bs-stepper\js\bs-stepper.js" />
+    <Content Include="Content\Libs\bs-stepper\js\bs-stepper.min.js" />
     <Content Include="Content\Libs\fontawesome-free\attribution.js" />
     <Content Include="Content\Libs\fontawesome-free\css\all.css" />
     <Content Include="Content\Libs\fontawesome-free\css\all.min.css" />
@@ -4871,7 +4878,16 @@
     <Compile Include="Migrations\202212040028027_BDComplement-10.designer.cs">
       <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212052333590_BDComplement-11.cs" />
+    <Compile Include="Migrations\202212052333590_BDComplement-11.designer.cs">
+      <DependentUpon>202212052333590_BDComplement-11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212060348238_BDComplement-12.cs" />
+    <Compile Include="Migrations\202212060348238_BDComplement-12.designer.cs">
+      <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
     <Compile Include="Models\Entities\Categoria.cs" />
     <Compile Include="Models\Entities\Fornecedor.cs" />
@@ -5077,6 +5093,14 @@
     <Content Include="Areas\Admin\Views\Item\NovoItem.cshtml" />
     <Content Include="Areas\Admin\Views\Item\EditaItem.cshtml" />
     <Content Include="Areas\Admin\Views\Item\ShowItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Ocorrencia\EditaOcorrencia.cshtml" />
+    <Content Include="Areas\Admin\Views\Ocorrencia\ShowImg.cshtml" />
+    <Content Include="Areas\Admin\Content\Libs\ekko-lightbox\ekko-lightbox.js.map" />
+    <Content Include="Areas\Admin\Content\Libs\ekko-lightbox\ekko-lightbox.min.js.map" />
+    <Content Include="Content\Libs\bs-stepper\css\bs-stepper.css.map" />
+    <Content Include="Content\Libs\bs-stepper\css\bs-stepper.min.css.map" />
+    <Content Include="Content\Libs\bs-stepper\js\bs-stepper.js.map" />
+    <Content Include="Content\Libs\bs-stepper\js\bs-stepper.min.js.map" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5086,6 +5110,8 @@
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Ocorrencias\NovaOcorrencia.cshtml" />
+    <Content Include="Views\Ocorrencias\ConsultaChamado.cshtml" />
+    <Content Include="Views\Ocorrencias\_CarregaChamado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5131,6 +5157,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212040028027_BDComplement-10.resx">
       <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212052333590_BDComplement-11.resx">
+      <DependentUpon>202212052333590_BDComplement-11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212060348238_BDComplement-12.resx">
+      <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

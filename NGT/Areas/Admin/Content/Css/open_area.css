@@ -10,7 +10,7 @@
 
 body {
     background: #EFEFEF !important;
-    color: #F4F6F9;
+    color: #00204A;
 }
 
 .bodyimg {
@@ -27,7 +27,7 @@ body {
 
 .txtBlack,
 form label {
-    color: #00204A;
+    color: #00204A !important;
 }
 
 .brand {
@@ -226,7 +226,9 @@ div.editLoc {
     background: #d8d8d8 !important;
 }
 
-
+.editaOco {
+    cursor: pointer;
+}
 
 .btnLogout, .otherLink {
     font-size: 20px;

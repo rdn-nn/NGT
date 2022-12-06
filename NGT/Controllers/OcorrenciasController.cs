@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using NGT.Models.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace NGT.Controllers
 {
@@ -21,12 +22,14 @@ namespace NGT.Controllers
             ViewBag.MotivoId = new SelectList(db.Motivos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
             return View("NovaOcorrencia");
         }
-       
+
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Criar(Ocorrencia Oco)
+        [Obsolete]
+        public ActionResult Criar(Ocorrencia Oco, HttpPostedFileBase FotoOcorrencia)
         {
             if (ModelState.IsValid)
             {
+                string valor = "";
                 var nomeBloco = db.Blocos.Where(x => x.Id == Oco.BlocoId).FirstOrDefault().Nome;
                 var letraBloco = nomeBloco.Substring(nomeBloco.Length - 1, 1);
                 var idoco = 0;
@@ -34,13 +37,15 @@ namespace NGT.Controllers
                 {
                     idoco = db.Ocorrencias.OrderByDescending(x => x.Id).FirstOrDefault().Id;
                     idoco++;
-                } 
+                }
 
                 var ticket = letraBloco + idoco + DateTime.Now.Day + DateTime.Now.Second;
 
                 Ocorrencia ocorrencia = new Ocorrencia();
                 ocorrencia.Obs = Oco.Obs;
                 ocorrencia.NumTicket = ticket;
+                ocorrencia.FotoOcorrencia = Oco.FotoOcorrencia;
+                ocorrencia.Email = Oco.Email;
                 ocorrencia.BlocoId = Oco.BlocoId;
                 ocorrencia.LocalId = Oco.LocalId;
                 ocorrencia.CategoriaId = Oco.CategoriaId;
@@ -50,8 +55,31 @@ namespace NGT.Controllers
 
                 db.Ocorrencias.Add(ocorrencia);
                 db.SaveChanges();
-                TempData["MSG"] = "success|Seu chamado foi registrado com sucesso!|" + ticket ;
-                return RedirectToAction("Index","Home");
+
+                if (FotoOcorrencia != null)
+                {
+                    Funcoes.CriarDiretorio(ocorrencia.NumTicket);
+                    string nomearq = "FotoOcorrencia" + ocorrencia.NumTicket + ".png";
+                    valor = Funcoes.UploadArquivo(FotoOcorrencia, nomearq, ocorrencia.NumTicket);
+                    if (valor == "sucesso")
+                    {
+                        ocorrencia.FotoOcorrencia = "\\Areas\\Admin\\Content\\Images\\" + ocorrencia.NumTicket + "\\" + nomearq;
+                        db.Entry(ocorrencia).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["MSG"] = "success|Seu chamado foi registrado com sucesso!|" + ticket;
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+
+                TempData["MSG"] = "success|Seu chamado foi registrado com sucesso!|" + ticket;
+                if (Oco.Email != null)
+                {
+                    string msg = "<h3>Sistema NewGen Tech</h3>";
+                    msg += "<p>Seu chamado foi registrado com sucesso! Para consultar o seu chamado, utilize o código abaixo:</p><p> Chamado registrado - " + ticket + " </p>";
+                    Funcoes.EnviarEmail(Oco.Email, "Registro de Chamano no sistema da Fatec", msg);
+                }
+
+                return RedirectToAction("Index", "Home");
             }
             TempData["MSG"] = "warning|Preencha todos os campos|x";
             return RedirectToAction("Index", "Home");
@@ -83,6 +111,24 @@ namespace NGT.Controllers
                              nome = i.Nome
                          }).ToArray();
             return Json(itens);
+        }
+
+        public ActionResult ConsultaChamado()
+        {
+            return View("ConsultaChamado");
+        }
+        [HttpPost]
+        
+        public ActionResult ConsultaChamado(string termo)
+        {
+            if(termo == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.oco = db.Ocorrencias.Where(x => x.NumTicket == termo).ToList().FirstOrDefault();
+            TempData["LP"] = "x";
+            return View("ConsultaChamado");
         }
     }
 }

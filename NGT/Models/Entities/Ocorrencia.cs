@@ -15,6 +15,9 @@ namespace NGT.Models.Entities
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
         public string NumTicket { get; set; }
+        public string FotoOcorrencia { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
         [Required]
         public int BlocoId { get; set; }
         [Required]

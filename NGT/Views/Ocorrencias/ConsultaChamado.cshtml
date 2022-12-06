@@ -1,0 +1,129 @@
+﻿@model NGT.Models.Entities.Ocorrencia
+
+<div class="modal-dialog modal-lg modal-dialog-centered min-vh-100" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title txtBlack" id="EditaMot">Busca de Chamados</h5>
+            <button class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="overflow-hidden">
+
+            <section class="pl-3 pr-3 pt-3 mb-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form action="@Url.RouteUrl("Home.ConsultaChamado")" method="post" role="search" class="d-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" name="termo" placeholder="Buscar Motivos">
+                                <div class="input-group-append">
+                                    <button class="btn input-group-text" type="submit">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*<div class="col-sm-6">
+                            @if (@TempData["LP"] != null)
+                            {
+                                <a class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3" id="novaCateg">
+                                    Limpar
+                                </a>
+                            }
+                        </div>*@
+                </div>
+            </section>
+
+
+            @if (ViewBag.oco != null)
+            {
+                string Pendente = "";
+                string Andamento = "";
+                string Concluido = "";
+                string Cancelado = "";
+
+                if (ViewBag.oco.StatusTicket.Nome == "Pendente")
+                {
+                    Pendente = "active";
+                }
+                else if (ViewBag.oco.StatusTicket.Nome == "Em Andamento")
+                {
+                    Andamento = "active";
+                }
+                else if (ViewBag.oco.StatusTicket.Nome == "Concluído")
+                {
+                    Concluido = "active";
+                }
+                else
+                {
+                    Cancelado = "active";
+                }
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <div class="step @Pendente" data-target="#pendente-part">
+                                            <button type="button" class="step-trigger">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Pendente</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step @Andamento" data-target="#andamento-part">
+                                            <button type="button" class="step-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Em Andamento</span>
+                                            </button>
+                                        </div>
+                                        @if (ViewBag.oco.StatusTicket.Nome != "Cancelado")
+                                        {
+                                            <div class="line"></div>
+                                            <div class="step @Concluido" data-target="#Concluído-part">
+                                                <button type="button" class="step-trigger">
+                                                    <span class="bs-stepper-circle">3</span>
+                                                    <span class="bs-stepper-label">Concluído</span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="line"></div>
+                                            <div class="step @Cancelado" data-target="#cancelado-part">
+                                                <button type="button" class="step-trigger">
+                                                    <span class="bs-stepper-circle">3</span>
+                                                    <span class="bs-stepper-label">Cancelado</span>
+                                                </button>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="bs-stepper-content">
+
+                                        @Html.Partial("_CarregaChamado")
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section ScriptPage {
+    <script>
+    $(".close").click(function () {
+        window.location.replace("@Url.RouteUrl("Home.Index")");
+    });
+    </script>
+    }

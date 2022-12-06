@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-lg-6">
-                    <div id="cardConsuta" class="info-box shadow" data-toggle="modal" data-target="#modalOcorrencia">
+                    <div id="cardConsuta" class="info-box shadow">
                         <span class="info-box-icon bg-warning">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
@@ -100,6 +100,7 @@
 </div>
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovaOcorrencia" aria-hidden="true" />
+<div id="modalC" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaMot" aria-hidden="true"></div>
 
 @section CssPage{
 
@@ -110,6 +111,15 @@
         $(function () {
             $('#cardChamado').click(function () {
                 $("#modal").load("@Url.RouteUrl("Home.Ocorrencia")", function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#cardConsuta').click(function () {
+                $("#modal").load("/ocorrencias/consultachamado", function () {
                     $("#modal").modal();
                 });
             });

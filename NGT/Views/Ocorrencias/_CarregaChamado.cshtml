@@ -1,0 +1,28 @@
+﻿@if (ViewBag.oco != null)
+{
+    <div class="row-fluid">
+        <div class="txtBlack">
+
+                <div class="pl-4 pr-4 pb-2">
+                    <h3 class="profile-username text-center mb-3 pt-2">Chamado: @ViewBag.oco.NumTicket <span> - @ViewBag.oco.StatusTicket.Nome</span></h3>
+                    @if (ViewBag.oco.Email != null)
+                    {
+                        <h3 class="profile-username mb-0 pt-2 border-bottom">Criado por: <span class="float-right"> @ViewBag.oco.Email</span></h3>
+                    }
+                    <h3 class="profile-username mb-0 pt-2 border-bottom">Criado em: <span class="float-right"> @ViewBag.oco.DataCriacao.ToShortDateString()</span></h3>
+                    @if (ViewBag.oco.DataAtualizacao != null)
+                    {
+                        <h3 class="profile-username mb-0 pt-2 border-bottom">Última atualização: <span class="float-right"> @ViewBag.oco.DataAtualizacao.ToShortDateString()</span></h3>
+                    }
+                </div>
+
+                <div class="pl-4 pr-4">
+                    <h3 class="profile-username itens border-bottom">Bloco: <span class="float-right">@ViewBag.oco.Bloco.Nome</span></h3>
+                    <h3 class="profile-username itens border-bottom">Local: <span class="float-right">@ViewBag.oco.Local.Nome</span></h3>
+                    <h3 class="profile-username itens border-bottom">Categoria: <span class="float-right">@ViewBag.oco.Categoria.Nome</span></h3>
+                    <h3 class="profile-username itens border-bottom">Item: <span class="float-right">@ViewBag.oco.Item.Nome</span></h3>
+                </div>
+
+        </div>
+    </div>
+}

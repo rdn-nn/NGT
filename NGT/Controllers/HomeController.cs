@@ -56,5 +56,30 @@ namespace NGT.Controllers
             }
             return View();
         }
+
+        public ActionResult AtivaUser(string hash)
+        {
+            try
+            {
+                DateTime dt = Convert.ToDateTime(Funcoes.Decodifica(hash));
+                if (dt > DateTime.Now)
+                {
+                    Usuario usu = db.Usuarios.Where(u => u.Hash == hash).ToList().FirstOrDefault();
+                    usu.StatusId = db.Status.Where(s => s.Nome == "Ativado").FirstOrDefault().Id;
+                    usu.Hash = "";
+                    db.Entry(usu).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["MSG"] = "success|Usuário ativado com sucesso!!!|x";
+                    return RedirectToAction("Index");
+                }
+                TempData["MSG"] = "warning|Esse link já expirou!|x";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["MSG"] = "error|Hash inválida!|x";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

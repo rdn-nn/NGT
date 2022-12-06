@@ -90,12 +90,12 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "Ocorrencia", action = "CarregaItem" },
                 namespaces: namespaces
             );
-            //context.MapRoute(
-            //    name: "Admin.Ocorrencia.AlteraStatus",
-            //    url: "admin/ocorrencias/AlteraStatus/{ticket}",
-            //    defaults: new { controller = "Ocorrencia", action = "AlteraStatus" },
-            //    namespaces: namespaces
-            //);
+            context.MapRoute(
+                name: "admin.Ocorrencia.TrocarStatus",
+                url: "admin/ocorrencias/alterastatus/{id}",
+                defaults: new { controller = "Ocorrencia", action = "TrocarStatus" },
+                namespaces: namespaces
+            );
 
 
 

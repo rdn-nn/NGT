@@ -22,8 +22,10 @@ namespace NGT.Areas.Admin.Controllers
             ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
             ViewBag.MotivoId = new SelectList(db.Motivos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
 
+            ViewBag.StatusTicketsId = db.StatusTickets.ToList();
+
             ViewBag.Pendente = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Pendente").Count();
-            ViewBag.Andamento = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Andamento").Count();
+            ViewBag.Andamento = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Em Andamento").Count();
             ViewBag.Concluido = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Concluído").Count();
             ViewBag.Cancelado = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Cancelado").Count();
 
@@ -31,10 +33,12 @@ namespace NGT.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Criar(Ocorrencia Oco)
+        [Obsolete]
+        public ActionResult Criar(Ocorrencia Oco, HttpPostedFileBase FotoOcorrencia)
         {
             if (ModelState.IsValid)
             {
+                string valor = "";
                 var nomeBloco = db.Blocos.Where(x => x.Id == Oco.BlocoId).FirstOrDefault().Nome;
                 var letraBloco = nomeBloco.Substring(nomeBloco.Length - 1, 1);
                 var idoco = 0;
@@ -50,7 +54,8 @@ namespace NGT.Areas.Admin.Controllers
                 {
                     Obs = Oco.Obs,
                     NumTicket = ticket,
-                    BlocoId = Oco.BlocoId,
+                    FotoOcorrencia = Oco.FotoOcorrencia,
+                BlocoId = Oco.BlocoId,
                     LocalId = Oco.LocalId,
                     CategoriaId = Oco.CategoriaId,
                     ItemId = Oco.ItemId,
@@ -60,6 +65,22 @@ namespace NGT.Areas.Admin.Controllers
 
                 db.Ocorrencias.Add(ocorrencia);
                 db.SaveChanges();
+
+                if (FotoOcorrencia != null)
+                {
+                    Funcoes.CriarDiretorio(ocorrencia.NumTicket);
+                    string nomearq = "FotoOcorrencia" + ocorrencia.NumTicket + ".png";
+                    valor = Funcoes.UploadArquivo(FotoOcorrencia, nomearq, ocorrencia.NumTicket);
+                    if (valor == "sucesso")
+                    {
+                        ocorrencia.FotoOcorrencia = "\\Areas\\Admin\\Content\\Images\\" + ocorrencia.NumTicket + "\\" + nomearq;
+                        db.Entry(ocorrencia).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["MSG"] = "success|Seu chamado foi registrado com sucesso!|" + ticket;
+                        return RedirectToAction("Index", "Ocorrencia");
+                    }
+                }
+
                 TempData["MSG"] = "success|Seu chamado foi registrado com sucesso!|" + ticket;
                 return RedirectToAction("Index", "Ocorrencia");
             }
@@ -94,5 +115,52 @@ namespace NGT.Areas.Admin.Controllers
                          }).ToArray();
             return Json(itens);
         }
+
+        public ActionResult TrocarStatus(string id)
+        {
+            Ocorrencia oco = db.Ocorrencias.Find(Convert.ToInt32(id));
+            if (oco != null)
+            {
+                ViewBag.ocorencia = oco;
+                ViewBag.StatusTicketId = new SelectList(db.StatusTickets.OrderByDescending(s => s.Id), "Id", "Nome", oco.StatusTicketId);
+
+            }
+            return View("EditaOcorrencia");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult TrocarStatus(int Id, int StatusTicketId)
+        {
+            try
+            {
+                Ocorrencia oco = db.Ocorrencias.Find(Convert.ToInt32(Id));
+                if(oco.StatusTicketId != StatusTicketId)
+                {
+                    if (oco != null)
+                    {
+                        oco.StatusTicketId = Convert.ToInt32(StatusTicketId);
+                        oco.DataAtualizacao = DateTime.Now;
+
+                        db.Entry(oco).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        TempData["MSG"] = "success|Status alterado com sucesso!|x";
+                        return Index();
+                    }
+                    TempData["MSG"] = "warning|Preencha todos os campos!|x";
+                    return Index();
+                } else
+                {
+                    TempData["MSG"] = "info|Nenhuma alteração de status foi realizada!|x";
+                    return Index();
+                }
+            }
+            catch (Exception)
+            {
+                @TempData["MSG"] = "error|Não foi possível alterar o status. Tente novammente!|x";
+                return Index();
+            }
+        }
+
     }
 }

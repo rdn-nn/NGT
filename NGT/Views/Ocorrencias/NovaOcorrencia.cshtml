@@ -13,7 +13,7 @@
         </div>
 
         <div class="overflow-hidden">
-            @using (Html.BeginForm("Criar", "Ocorrencias"))
+            @using (Html.BeginForm("Criar", "Ocorrencias", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -50,6 +50,23 @@
                     @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                     <div class="col-md-12 pl-3 pr-3">
                         @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group d-none" id="divImg">
+                    @Html.LabelFor(model => model.FotoOcorrencia, "Deseja carregar uma imagem da ocorrência? ", htmlAttributes: new { @class = "control-label  pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        <div class="input-group">
+                            <input type="file" class="form-control-file txtBlack" name="FotoOcorrencia">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, "Deseja receber atualizações de status por email? ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-11 col-md-12", @placeholder = "E-mail..." } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger text-sm" })
                     </div>
                 </div>
 
@@ -120,6 +137,7 @@
                         $('#ItemId').html(options);
                         $('#divItens').removeClass('d-none');
                         $('#divMotivos').removeClass('d-none');
+                        $('#divImg').removeClass('d-none');
                         $('#divObs').removeClass('d-none');
                     }
                 });

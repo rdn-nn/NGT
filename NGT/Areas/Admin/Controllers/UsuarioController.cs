@@ -100,6 +100,12 @@ namespace NGT.Areas.Admin.Controllers
                 db.Usuarios.Add(user);
                 db.SaveChanges();
 
+                user.Hash = Funcoes.Codifica(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss.ffff"));
+                string msg = "<h3>Sistema NewGen Tech</h3>";
+                msg += "<p>Você está recebendo sua senha de acesso para entrar no sistema de gestão da Fatec. Acesse o site <a href='https://localhost:44367/ativarusuario/" + user.Hash + "' target='_blank'>clicando aqui</a> para ativar seu usuário e entrar com sua senha e usuário cadastrados, indicados abaixo:</p><p>Usuario: " + user.Email + "</p><p> Senha: " + novasenha + " </p>";
+                Funcoes.EnviarEmail(user.Email, "Senha de Acesso", msg);
+
+
                 if (FotoPerfil != null)
                 {
                     Funcoes.CriarDiretorio(user.Id);
@@ -250,7 +256,7 @@ namespace NGT.Areas.Admin.Controllers
                 u.Nome = usu.Nome;
                 u.Email = usu.Email;
                 //u.Senha = usu.Senha,
-                u.FotoPerfil = usu.FotoPerfil;
+                //u.FotoPerfil = usu.FotoPerfil;
                 u.PerfilId = usu.PerfilId;
                 u.StatusId = usu.StatusId;
 
@@ -270,15 +276,9 @@ namespace NGT.Areas.Admin.Controllers
                         TempData["MSG"] = "success|Usuário atualizado com sucesso";
                         return RedirectToAction("Listar", "Usuario");
                     }
-                    else
-                    {
-                        u.FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg";
-                        db.Entry(u).State = EntityState.Modified;
-                        db.SaveChanges();
-                        TempData["MSG"] = "warning|Problema no Upload da foto: " + valor;
-                        return RedirectToAction("Listar", "Usuario");
-                    }
                 }
+                TempData["MSG"] = "success|Usuário atualizado com sucesso";
+                return RedirectToAction("Listar", "Usuario");
             }
             TempData["MSG"] = "warning|Preencha todos os campos|x";
             return Listar();

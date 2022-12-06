@@ -19,6 +19,8 @@ namespace NGT.Data.Mapping
             Property(x => x.DataCriacao).HasColumnName("oco_datacriacao");
             Property(x => x.DataAtualizacao).HasColumnName("oco_dataatualizacao");
             Property(x => x.NumTicket).HasColumnName("oco_numticket");
+            Property(x => x.FotoOcorrencia).HasColumnName("oco_imgocorrencia");
+            Property(x => x.Email).HasColumnName("oco_emailcriador");
             Property(x => x.BlocoId).HasColumnName("blo_codigo");
             Property(x => x.LocalId).HasColumnName("loc_codigo");
             Property(x => x.CategoriaId).HasColumnName("cat_codigo");
