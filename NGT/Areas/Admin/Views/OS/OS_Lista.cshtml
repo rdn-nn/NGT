@@ -19,7 +19,195 @@
 
 
 
-    @using (Html.BeginForm("Index", "OS"))
+    @*@using (Html.BeginForm("Index", "OS"))
+        {
+              <div class="card card-default collapsed-card">
+                  <div class="card-header">
+                      <h3 class="card-title">Nova Ordem de Serviço</h3>
+                      <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                              <i class="fas fa-plus"></i>
+                          </button>
+                      </div>
+
+                  </div>
+                  <div class="card-body overflow-hidden">
+
+                      <div class="form-group">
+                          <div class="custom-control custom-radio">
+                              <input class="custom-control-input customRadio1" type="radio" id="customRadio1" name="customRadio">
+                              <label for="customRadio1" class="custom-control-label">Custom Radio</label>
+                          </div>
+                          <div class="custom-control custom-radio">
+                              <input class="custom-control-input customRadio2" type="radio" id="customRadio2" name="customRadio">
+                              <label for="customRadio2" class="custom-control-label">Custom Radio checked</label>
+                          </div>
+                      </div>
+
+                      @Html.AntiForgeryToken()
+
+                      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                      <div class="form-group">
+                          <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input customSwitch1" id="customSwitch1">
+                              <label class="custom-control-label" for="customSwitch1">Toggle this custom switch element</label>
+                          </div>
+                      </div>
+
+                      <div id="addChamados" class="d-none">
+                          <div class="form-group">
+                              @Html.LabelFor(model => model.OcorrenciaId, "Vincular Chamado?", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                              <div class="col-md-12 pl-3 pr-3">
+                                  @Html.DropDownList("OcorrenciaId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12 select2", multiple = "multiple", style = "width: 100%;" })
+                              </div>
+                          </div>
+
+                          <div class="form-group" id="">
+                              @Html.LabelFor(model => model.Patrimonio, "Patrimônio: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                              <div class="col-md-12 pl-3 pr-3">
+                                  @Html.DropDownList("Patrim", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12 select2", multiple = "multiple", style = "width: 100%;" })
+                              </div>
+                          </div>
+                      </div>
+
+
+
+                      <div class="form-group">
+                          <label>Bloco</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">Bloco A</option>
+                              <option>Bloco B</option>
+                          </select>
+
+                      </div>
+
+
+                      <div class="form-group">
+                          <label>Local</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Categoria</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Item</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">Projetor</option>
+                              <option>000000</option>
+
+                          </select>
+
+                      </div>
+
+                      <div class="form-group">
+                          <label>Descr.Problema</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Observação</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Fornecedor</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">000000</option>
+                              <option>000000</option>
+
+                          </select>
+
+                      </div>
+
+                      <div class="form-group">
+                          <label>NF</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Valor</label>
+                          <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">BD</option>
+                              <option>BD</option>
+                              <option>BD</option>
+
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Data Previsão de Entrega</label>
+
+                          <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                          </div>
+                      </div>-->
+            <!-- Date -->
+            <!--
+
+            <div class="form-group">
+                <label>Data Atualização</label>
+                <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">BD</option>
+                    <option>BD</option>
+                    <option>BD</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">BD</option>
+                    <option>BD</option>
+                    <option>BD</option>
+
+                </select>
+            </div>-->
+
+
+
+            <!--<div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
+                            <button type="submit" class="btn btn-default ">Gravar</button>
+                        </div>
+                    </div>
+                </div>
+
+            }*@
+
+
+    @using (Html.BeginForm("Criar", "OS", FormMethod.Post))
     {
         <div class="card card-default collapsed-card">
             <div class="card-header">
@@ -38,270 +226,332 @@
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.OcorrenciaId, "Vincular Chamado?", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("OcorrenciaId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12 select2", multiple = "multiple", style = "width: 100%;" })
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BlocoId, "Bloco: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("BlocoId", null, "Selecione o bloco", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12  pl-3 pr-3">
+                                @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Patrimonio, "Nº Patrimonio: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.EditorFor(model => model.Patrimonio, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                                @Html.ValidationMessageFor(model => model.Patrimonio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FornecedorId, "Fornecedor: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("FornecedorId", null, "Selecione o Fornecedor", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NotaF, "Nota Fiscal: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.EditorFor(model => model.NotaF, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                                @Html.ValidationMessageFor(model => model.NotaF, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CentroCusto, "Centro de Custo: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.EditorFor(model => model.CentroCusto, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                                @Html.ValidationMessageFor(model => model.CentroCusto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Valor, "Valor do Serviço: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Desconto, "Valor do desconto (R$): ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.EditorFor(model => model.Desconto, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                                @Html.ValidationMessageFor(model => model.Desconto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label pl-3 pt-3">Data Previsão de Entrega</label>
+                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                <input type="text" class="form-control col-11 col-md-12 datetimepicker-input" data-target="#reservationdate" name="DataEntregaPrevis" />
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <div class="form-group" id="">
-                    @Html.LabelFor(model => model.Patrimonio, "Patrimônio: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("Patrim", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12 select2", multiple = "multiple", style = "width: 100%;" })
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label>Bloco</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Bloco A</option>
-                        <option>Bloco B</option>
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-                    <label>Local</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Categoria</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Item</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Projetor</option>
-                        <option>000000</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-                    <label>Descr.Problema</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Observação</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Fornecedor</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">000000</option>
-                        <option>000000</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-                    <label>NF</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Valor</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">BD</option>
-                        <option>BD</option>
-                        <option>BD</option>
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Data Previsão de Entrega</label>
-
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>  
-                    </div>
-                    </div>
-                    <!-- Date -->
-                    <!--
-
+                <div>
                     <div class="form-group">
-                        <label>Data Atualização</label>
-                        <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">BD</option>
-                            <option>BD</option>
-                            <option>BD</option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">BD</option>
-                            <option>BD</option>
-                            <option>BD</option>
-
-                        </select>
-                    </div>-->
-
-
-
-                    <div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
-                        <button type="submit" class="btn btn-default ">Gravar</button>
+                        @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
+                        </div>
                     </div>
                 </div>
             </div>
-
-            }
-            <div class="row">
-                <div id="idPendente" class="col-lg-3 col-6">
-                    <div class="small-box bg-cardsAdmin">
-                        <div class="inner">
-                            <h3>9</h3>
-                            <p>Pendentes</p>
-                        </div>
-
-                        <div class="icon text-info">
-                            <i class="fas fa-solid fa-circle-pause"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div id="idAndamento" class="col-lg-3 col-6">
-                    <!-- small card -->
-                    <div class="small-box bg-cardsAdmin">
-                        <div class="inner">
-                            <h3>10</h3>
-                            <p>Andamento</p>
-                        </div>
-                        <div class="icon text-warning">
-                            <i class="fas fa-solid fa-arrow-rotate-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div id="idConcluido" class="col-lg-3 col-6">
-                    <!-- small card -->
-                    <div class="small-box bg-cardsAdmin">
-                        <div class="inner">
-                            <h3>26</h3>
-                            <p>Concluídos</p>
-                        </div>
-                        <div class="icon text-success">
-                            <i class="fas fa-solid fa-circle-check"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div id="idCancelado" class="col-lg-3 col-6">
-                    <!-- small card -->
-                    <div class="small-box bg-cardsAdmin">
-                        <div class="inner">
-                            <h3>33</h3>
-                            <p>Cancelados</p>
-                        </div>
-                        <div class="icon text-danger">
-                            <i class="fas fa-times-circle"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
+            <div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
+                <button type="submit" class="btn btn-default ">Gravar</button>
             </div>
-
         </div>
 
-        @section CssPage{
-            <link href="~/Areas/Admin/Content/Libs/select2/css/select2.min.css" rel="stylesheet" />
-            <link href="~/Areas/Admin/Content/Libs/daterangepicker/daterangepicker.css" rel="stylesheet" />
-            <link href="~/Areas/Admin/Content/Libs/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-        }
+    }
 
 
-        @section ScriptPage{
+    <div class="row">
+        <div id="idPendente" class="col-lg-3 col-6">
+            <div class="small-box bg-cardsAdmin">
+                <div class="inner">
+                    <h3>9</h3>
+                    <p>Pendentes</p>
+                </div>
 
-            <script src="~/Areas/Admin/Content/Libs/daterangepicker/daterangepicker.js"></script>
-            <script src="~/Areas/Admin/Content/Libs/select2/js/select2.full.min.js"></script>
-            <script src="~/Areas/Admin/Content/Libs/moment/moment.min.js"></script>
-            <script src="~/Areas/Admin/Content/Libs/inputmask/jquery.inputmask.min.js"></script>
-            <script src="~/Areas/Admin/Content/Libs/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script>
-                $(function () {
-                    //Initialize Select2 Elements
-                    $('.select2').select2()
+                <div class="icon text-info">
+                    <i class="fas fa-solid fa-circle-pause"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idAndamento" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-cardsAdmin">
+                <div class="inner">
+                    <h3>10</h3>
+                    <p>Andamento</p>
+                </div>
+                <div class="icon text-warning">
+                    <i class="fas fa-solid fa-arrow-rotate-right"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idConcluido" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-cardsAdmin">
+                <div class="inner">
+                    <h3>26</h3>
+                    <p>Concluídos</p>
+                </div>
+                <div class="icon text-success">
+                    <i class="fas fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div id="idCancelado" class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-cardsAdmin">
+                <div class="inner">
+                    <h3>33</h3>
+                    <p>Cancelados</p>
+                </div>
+                <div class="icon text-danger">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
 
-                    //Date picker
-                    $('#reservationdate').datetimepicker({
-                        format: 'DD/MM/yyyy'
-                    });
+</div>
 
-                })
+@section CssPage{
+    <link href="~/Areas/Admin/Content/Libs/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+}
 
-            </script>
 
-            <script>
-                $(document).ready(function () {
-                    $('#OcorrenciaId').change(function () {
+@section ScriptPage{
 
-                        var select = document.getElementById("OcorrenciaId");
-                        var items = [];
-                        for (let i = 0; i < select.options.length; i++) {
-                            if (select.options[i].selected) {
-                                items.push(select.options[i].value);
-                            }
-                        }
-                        data = { OcoId: items };
-                        console.log(data);
+    <script src="~/Areas/Admin/Content/Libs/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/select2/js/select2.full.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/moment/moment.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/inputmask/jquery.inputmask.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
-                        $.ajax({
-                            url: '/admin/os/carregapatrimonio',
-                            type: 'POST',
-                            //cache: false,
-                            data: data,
-                            datatype: 'json',
-                            success: function (data) {
-                                var options = '';
-                                //options += '<option value>Selecione o Local</option>';
-                                $.each(data, function () {
-                                    options += '<option value="' + this.id + '" selected >' + this.patrimonio + '</option>';
-                                });
-                                $('#Patrim').html(options);
-                                //        $('#divLocais').removeClass('d-none');
-                                //        $('#divCategs').removeClass('d-none');
-                            },
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'DD/MM/yyyy'
+            });
+
+        })
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#BlocoId').change(function () {
+                $.ajax({
+                    url: '/admin/os/carregaLocal',
+                    type: 'POST',
+                    data: { blocoId: $(this).val() },
+                    datatype: 'json',
+                    success: function (data) {
+                        var options = '';
+                        options += '<option value>Selecione o Local</option>';
+                        $.each(data, function () {
+                            options += '<option value="' + this.id + '">' + this.nome + '</option>';
                         });
+                        $('#LocalId').html(options);
+
+                    },
+                });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('#CategoriaId').change(function () {
+                if ($('#CategoriaId').val() || $('#LocalId').val() !== "") {
+                    $.ajax({
+                        url: '/admin/os/carregaitem',
+                        type: 'POST',
+                        data: {
+                            localId: $('#LocalId').val(),
+                            categId: $('#CategoriaId').val()
+                        },
+                        datatype: 'json',
+                        success: function (data) {
+                            var options = '';
+                            options += '<option>Selecione o Item</option>';
+                            $.each(data, function () {
+                                options += '<option value="' + this.id + '">' + this.nome + '</option>';
+                            });
+                            $('#ItemId').html(options);
+                        }
+                    });
+                }
+            });
+
+            $('#LocalId').change(function () {
+                if ($('#CategoriaId').val() || $('#LocalId').val() !== "") {
+                    $.ajax({
+                        url: '/admin/os/carregaitem',
+                        type: 'POST',
+                        data: {
+                            localId: $('#LocalId').val(),
+                            categId: $('#CategoriaId').val()
+                        },
+                        datatype: 'json',
+                        success: function (data) {
+                            var options = '';
+                            options += '<option>Selecione o Item</option>';
+                            $.each(data, function () {
+                                options += '<option value="' + this.id + '">' + this.nome + '</option>';
+                            });
+                            $('#ItemId').html(options);
+                        }
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+
+    @*<script>
+            $(document).ready(function () {
+                $('#OcorrenciaId').change(function () {
+
+                    var select = document.getElementById("OcorrenciaId");
+                    var items = [];
+                    for (let i = 0; i < select.options.length; i++) {
+                        if (select.options[i].selected) {
+                            items.push(select.options[i].value);
+                        }
+                    }
+                    data = { OcoId: items };
+                    console.log(data);
+
+                    $.ajax({
+                        url: '/admin/os/carregapatrimonio',
+                        type: 'POST',
+                        //cache: false,
+                        data: data,
+                        datatype: 'json',
+                        success: function (data) {
+                            var options = '';
+                            //options += '<option value>Selecione o Local</option>';
+                            $.each(data, function () {
+                                options += '<option value="' + this.id + '" selected >' + this.patrimonio + '</option>';
+                            });
+                            $('#Patrim').html(options);
+                            //        $('#divLocais').removeClass('d-none');
+                            //        $('#divCategs').removeClass('d-none');
+                        },
                     });
                 });
-            </script>
-        }
+            });
+        </script>
+
+        <script>
+            $(".customRadio1").click(function () {
+                var teste = $(this);
+                teste.setAttribute('checked', 'true');
+                    $("#addChamados").removeClass("d-none");
+            });
+
+
+        </script>
+        <script>
+            $(".customRadio2").click(function () {
+
+                check.removeAttribute('checked');
+                $("#addChamados").addClass("d-none");
+
+
+
+            });
+        </script>*@
+}

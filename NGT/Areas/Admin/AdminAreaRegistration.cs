@@ -135,12 +135,29 @@ namespace NGT.Areas.Admin
                 namespaces: namespaces
             );
             context.MapRoute(
+               name: "Admin.OS.NovaOs",
+               url: "admin/nova-os",
+               defaults: new { controller = "OS", action = "Criar" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
                 name: "Admin.OS.CarregarPatrimonio",
                 url: "admin/os/carregapatrimonio",
                 defaults: new { controller = "OS", action = "CarregaPatrimonio" },
                 namespaces: namespaces
             );
-
+            context.MapRoute(
+              name: "Admin.OS.CarregaLocal",
+              url: "admin/os/carregaLocal",
+              defaults: new { controller = "OS", action = "CarregaLocal" },
+              namespaces: namespaces
+          );
+            context.MapRoute(
+                name: "Admin.OS.CarregaItem",
+                url: "admin/os/carregaitem",
+                defaults: new { controller = "OS", action = "CarregaItem" },
+                namespaces: namespaces
+            );
 
 
 

@@ -28,7 +28,7 @@ namespace NGT.Data
             string caracSenha = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@$?_-~!@#$%^&*()";
             char[] chars = new char[18];
             Random rd = new Random();
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i < 13; i++)
             {
                 chars[i] = caracSenha[rd.Next(0, caracSenha.Length)];
             }

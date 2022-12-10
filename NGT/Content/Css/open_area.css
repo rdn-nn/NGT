@@ -92,12 +92,14 @@ form{
     border-radius: 10px;
     box-shadow: 3px 3px 5px #00204a71 !important;
 }
+.acesso > .btnlight,
 .card .btnlight {
     color: #00204A;
     background: #d8d8d8;
     box-shadow: 2px 2px 1px #808080ff;
     font-weight: bold;
 }
+    .acesso > .btnlight:hover,
     .card .btnlight:hover {
         color: #00204A;
         background: #d8d8d8;
@@ -107,20 +109,39 @@ form{
 
 
 /*Configurações do CARD defs Chamados > Tela Inicial*/
-#cardChamado:hover, #cardConsuta:hover {
+#cardChamado:hover, #cardConsuta:hover, #cardLogin:hover {
     background: #d5e5fcff;
     cursor: pointer;
 }
 #cardConsuta .bg-warning,
+#cardLogin .bg-warning,
 #cardChamado .bg-warning {
     background: #d5e5fcff !important;
+    min-height: 150px;
 }
 #cardConsuta:hover .bg-warning,
+#cardLogin:hover .bg-warning,
 #cardChamado:hover .bg-warning {
     background: #d8d8d8 !important;
 }
-
-
+.info-box-content .info-box-number{
+    font-size: 25px;
+}
+.txtInicial {
+    font-size: 25px !important;
+}
+#cardInicial {
+    width: 70%;
+}
+.cardChild  {
+   margin:10px 0 10px 0;
+}
+.cardChild .info-box {
+    min-height: 100%;
+}
+    .info-box-text small {
+    font-size: 15px;
+}
 
 .btnLogout, .otherLink {
     font-size: 20px;
@@ -174,5 +195,11 @@ form{
     }
     .imgNavbar {
         /*right: 75px;*/
+    }
+}
+@media (max-width:1666px) {
+  
+    #cardInicial {
+        width: 90%;
     }
 }

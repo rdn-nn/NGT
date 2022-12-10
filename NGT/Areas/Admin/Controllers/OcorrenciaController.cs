@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NGT.Models.Entities;
+using System.Net.Sockets;
 
 namespace NGT.Areas.Admin.Controllers
 {
@@ -55,7 +56,7 @@ namespace NGT.Areas.Admin.Controllers
                     Obs = Oco.Obs,
                     NumTicket = ticket,
                     FotoOcorrencia = Oco.FotoOcorrencia,
-                BlocoId = Oco.BlocoId,
+                    BlocoId = Oco.BlocoId,
                     LocalId = Oco.LocalId,
                     CategoriaId = Oco.CategoriaId,
                     ItemId = Oco.ItemId,
@@ -145,6 +146,13 @@ namespace NGT.Areas.Admin.Controllers
                         db.SaveChanges();
 
                         TempData["MSG"] = "success|Status alterado com sucesso!|x";
+                        if (oco.Email != null)
+                        {
+                            string msg = "<h3>Sistema NewGen Tech</h3>";
+                            msg += "<p>Seu chamado " + oco.NumTicket + " teve uma atualização. </p><p>Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + oco.NumTicket + " </p>";
+                            Funcoes.EnviarEmail(oco.Email, "Alteração no seu chamado!", msg);
+                        }
+
                         return Index();
                     }
                     TempData["MSG"] = "warning|Preencha todos os campos!|x";

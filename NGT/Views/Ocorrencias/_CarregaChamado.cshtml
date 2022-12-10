@@ -21,6 +21,11 @@
                     <h3 class="profile-username itens border-bottom">Local: <span class="float-right">@ViewBag.oco.Local.Nome</span></h3>
                     <h3 class="profile-username itens border-bottom">Categoria: <span class="float-right">@ViewBag.oco.Categoria.Nome</span></h3>
                     <h3 class="profile-username itens border-bottom">Item: <span class="float-right">@ViewBag.oco.Item.Nome</span></h3>
+                    @if (ViewBag.oco.Obs != null)
+                    {
+                        <h3 class="profile-username itens border-bottom">Item: <span>@ViewBag.oco.Obs</span></h3>
+                    }
+                    
                 </div>
 
         </div>

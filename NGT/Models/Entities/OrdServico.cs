@@ -33,11 +33,11 @@ namespace NGT.Models.Entities
         public double Valor { get; set; }
         public double Desconto { get; set; }
         public DateTime DataEntregaPrevis { get; set; }
-        public DateTime DataEntregaReal { get; set; }
+        public DateTime? DataEntregaReal { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
-        [Required]
         public string NumTicketOS { get; set; }
+        [Required]
         public int StatusTicketId { get; set; }
 
         public OrdServico()

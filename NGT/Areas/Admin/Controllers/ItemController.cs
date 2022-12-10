@@ -1,4 +1,5 @@
 ﻿using ImageResizer.Configuration.Xml;
+using ImageResizer.Util;
 using NGT.Application;
 using NGT.Data;
 using NGT.Models.Entities;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -35,7 +37,29 @@ namespace NGT.Areas.Admin.Controllers
         }
         public ActionResult Novo()
         {
-            ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+            ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome" );
+
+            //var itens = (from i in db.Itens.Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
+            //             where i.Local.Id == localId && i.Categoria.Id == categId && i.Status.Nome == "Ativado"
+            //             select new
+            //             {
+            //                 id = i.Id,
+            //                 nome = i.Nome
+            //             }).ToArray();
+            //return Json(itens);
+
+            //ViewBag.LocalId = (from i in db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado") select new
+            //{
+            //    Id = i.Id,
+            //    Nome =  i.Nome + " - " + i.Bloco.Nome
+            //}).ToList();
+            
+            //var locais = new AccountBusiness()
+            //.GetList<Account>(Util.AuxiliaryMethods.BMPerRequestInstance)
+            //                .Select(x => new { Value = x.AccountId, Text = string.Format("{0} - {1}", x.AccountNumber, x.Description})
+            //                .ToList();
+            //ViewBag.Account = new SelectList(selectAccounts, "Value", "Text"));
+
             ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
 
             return View("NovoItem");

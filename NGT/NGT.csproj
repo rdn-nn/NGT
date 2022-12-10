@@ -131,6 +131,12 @@
     <Content Include="Areas\Admin\Content\Libs\bootstrap4\js\bootstrap.min.js" />
     <Content Include="Areas\Admin\Content\Libs\bs-custom-file-input\bs-custom-file-input.js" />
     <Content Include="Areas\Admin\Content\Libs\bs-custom-file-input\bs-custom-file-input.min.js" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.bundle.js" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.bundle.min.js" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.css" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.js" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.min.css" />
+    <Content Include="Areas\Admin\Content\Libs\chart.js\Chart.min.js" />
     <Content Include="Areas\Admin\Content\Libs\datatables-bs4\css\dataTables.bootstrap4.css" />
     <Content Include="Areas\Admin\Content\Libs\datatables-bs4\css\dataTables.bootstrap4.min.css" />
     <Content Include="Areas\Admin\Content\Libs\datatables-bs4\js\dataTables.bootstrap4.js" />
@@ -2495,6 +2501,9 @@
     <Content Include="Areas\Admin\Content\Libs\moment\moment-with-locales.js" />
     <Content Include="Areas\Admin\Content\Libs\moment\moment-with-locales.min.js" />
     <Content Include="Areas\Admin\Content\Libs\moment\moment.min.js" />
+    <Content Include="Areas\Admin\Content\Libs\dashboards\dashboard.js" />
+    <Content Include="Areas\Admin\Content\Libs\dashboards\dashboard2.js" />
+    <Content Include="Areas\Admin\Content\Libs\dashboards\dashboard3.js" />
     <Content Include="Areas\Admin\Content\Libs\pdfmake\pdfmake.js" />
     <Content Include="Areas\Admin\Content\Libs\pdfmake\pdfmake.min.js" />
     <Content Include="Areas\Admin\Content\Libs\pdfmake\vfs_fonts.js" />
@@ -4886,6 +4895,14 @@
     <Compile Include="Migrations\202212060348238_BDComplement-12.designer.cs">
       <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212062138577_BDComplement121.cs" />
+    <Compile Include="Migrations\202212062138577_BDComplement121.designer.cs">
+      <DependentUpon>202212062138577_BDComplement121.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212062150355_BDComplement13.cs" />
+    <Compile Include="Migrations\202212062150355_BDComplement13.designer.cs">
+      <DependentUpon>202212062150355_BDComplement13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Entities\Bloco.cs" />
@@ -5112,6 +5129,7 @@
     <Content Include="Views\Ocorrencias\NovaOcorrencia.cshtml" />
     <Content Include="Views\Ocorrencias\ConsultaChamado.cshtml" />
     <Content Include="Views\Ocorrencias\_CarregaChamado.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5163,6 +5181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212060348238_BDComplement-12.resx">
       <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212062138577_BDComplement121.resx">
+      <DependentUpon>202212062138577_BDComplement121.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212062150355_BDComplement13.resx">
+      <DependentUpon>202212062150355_BDComplement13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

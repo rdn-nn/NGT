@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace NGT.Controllers
 {
@@ -22,6 +23,12 @@ namespace NGT.Controllers
             }
             return View();
         }
+
+        public ActionResult Acesso()
+        {
+            return View("Login");
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Acesso(Logon log)
         {
@@ -32,14 +39,14 @@ namespace NGT.Controllers
                 var usu = db.Usuarios.Include(u => u.Perfil).Include(u=>u.Status).Where(u => u.Email == log.Email && u.Senha == senhacrip).ToList().FirstOrDefault();
                 if (usu == null)
                 {
-                    ModelState.AddModelError("", "Usuário/senha inválidos!");
+                    TempData["MSG"] = "error|Usuário/senha inválidos! Tente novamente.|x";
                     return View("Index");
                 }
                 else
                 {
                     if (usu.Status.Nome == "Desativado")
                     {
-                        ModelState.AddModelError("", "Usuário ainda não foi ativado!");
+                        TempData["MSG"] = "error|Usuário ainda não foi ativado!|x";
                         return View("Index");
                     }
                     string permissoes = usu.Perfil.Nome;
@@ -54,7 +61,8 @@ namespace NGT.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            TempData["MSG"] = "error|Usuário/senha inválidos! Tente novamente.|x";
+            return RedirectToAction("Index");
         }
 
         public ActionResult AtivaUser(string hash)

@@ -75,7 +75,7 @@ namespace NGT.Controllers
                 if (Oco.Email != null)
                 {
                     string msg = "<h3>Sistema NewGen Tech</h3>";
-                    msg += "<p>Seu chamado foi registrado com sucesso! Para consultar o seu chamado, utilize o código abaixo:</p><p> Chamado registrado - " + ticket + " </p>";
+                    msg += "<p>Seu chamado foi registrado com sucesso! Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + ticket + " </p>";
                     Funcoes.EnviarEmail(Oco.Email, "Registro de Chamano no sistema da Fatec", msg);
                 }
 

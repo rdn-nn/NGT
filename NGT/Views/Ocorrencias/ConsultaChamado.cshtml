@@ -12,10 +12,10 @@
 
             <section class="pl-3 pr-3 pt-3 mb-3">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <form action="@Url.RouteUrl("Home.ConsultaChamado")" method="post" role="search" class="d-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" name="termo" placeholder="Buscar Motivos">
+                                <input class="form-control" type="text" name="termo" placeholder="Consultar status de chamados">
                                 <div class="input-group-append">
                                     <button class="btn input-group-text" type="submit">
                                         <i class="fas fa-search fa-fw"></i>
@@ -38,6 +38,10 @@
 
             @if (ViewBag.oco != null)
             {
+                string statusP = "";
+                string statusA = "";
+                string statusC = "";
+                string statusCan = "";
                 string Pendente = "";
                 string Andamento = "";
                 string Concluido = "";
@@ -45,19 +49,35 @@
 
                 if (ViewBag.oco.StatusTicket.Nome == "Pendente")
                 {
-                    Pendente = "active";
+                    statusP = "active";
+                    Pendente = "aria-selected=\"true\"";
+                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
                 }
                 else if (ViewBag.oco.StatusTicket.Nome == "Em Andamento")
                 {
-                    Andamento = "active";
+                    statusA = "active";
+                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Andamento = "aria-selected=\"true\"";
+                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
                 }
                 else if (ViewBag.oco.StatusTicket.Nome == "Concluído")
                 {
-                    Concluido = "active";
+                    statusC = "active";
+                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Concluido = "aria-selected=\"true\"";
+                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
                 }
                 else
                 {
-                    Cancelado = "active";
+                    statusCan = "active";
+                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+                    Cancelado = "aria-selected=\"true\"";
                 }
 
 
@@ -68,15 +88,15 @@
                             <div class="card-body p-0">
                                 <div class="bs-stepper">
                                     <div class="bs-stepper-header" role="tablist">
-                                        <div class="step @Pendente" data-target="#pendente-part">
-                                            <button type="button" class="step-trigger">
+                                        <div class="step @statusP" data-target="#pendente-part">
+                                            <button type="button" @Pendente class="step-trigger">
                                                 <span class="bs-stepper-circle">1</span>
                                                 <span class="bs-stepper-label">Pendente</span>
                                             </button>
                                         </div>
                                         <div class="line"></div>
-                                        <div class="step @Andamento" data-target="#andamento-part">
-                                            <button type="button" class="step-trigger">
+                                        <div class="step @statusA" data-target="#andamento-part">
+                                            <button type="button" @Andamento class="step-trigger">
                                                 <span class="bs-stepper-circle">2</span>
                                                 <span class="bs-stepper-label">Em Andamento</span>
                                             </button>
@@ -84,8 +104,8 @@
                                         @if (ViewBag.oco.StatusTicket.Nome != "Cancelado")
                                         {
                                             <div class="line"></div>
-                                            <div class="step @Concluido" data-target="#Concluído-part">
-                                                <button type="button" class="step-trigger">
+                                            <div class="step @statusC" data-target="#Concluído-part">
+                                                <button type="button" @Concluido class="step-trigger">
                                                     <span class="bs-stepper-circle">3</span>
                                                     <span class="bs-stepper-label">Concluído</span>
                                                 </button>
@@ -94,8 +114,8 @@
                                         else
                                         {
                                             <div class="line"></div>
-                                            <div class="step @Cancelado" data-target="#cancelado-part">
-                                                <button type="button" class="step-trigger">
+                                            <div class="step @statusCan" data-target="#cancelado-part">
+                                                <button type="button" @Cancelado class="step-trigger">
                                                     <span class="bs-stepper-circle">3</span>
                                                     <span class="bs-stepper-label">Cancelado</span>
                                                 </button>
