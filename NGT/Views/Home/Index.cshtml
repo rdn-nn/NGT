@@ -3,7 +3,7 @@
 }
 <div class="content contentView bodyimg mb-5">
 
-    <div class="p-5 d-flex justify-content-center align-content-center">
+    <div class="p-5 d-flex justify-content-center align-content-center mt-5">
         <img src="~/Content/images/NewGenTechDark.png" class="imgLogo" />
     </div>
 
@@ -73,9 +73,9 @@
 
 </div>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovaOcorrencia" aria-hidden="true" />
-<div id="modalC" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaMot" aria-hidden="true"></div>
-<div id="modalL" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true"></div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovaOcorrencia"></div>
+<div id="modalC" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ConsultaC" @*aria-hidden="true" data-backdrop="static" data-keyboard="false"*@></div>
+<div id="modalL" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Login"></div>
 
 @section CssPage{
 
@@ -94,8 +94,8 @@
     <script>
         $(function () {
             $('#cardConsuta').click(function () {
-                $("#modal").load("/ocorrencias/consultachamado", function () {
-                    $("#modal").modal();
+                $("#modalC").load("/ocorrencias/consultachamado", function () {
+                    $("#modalC").modal();
                 });
             });
         });
@@ -103,8 +103,8 @@
     <script>
         $(function () {
             $('#cardLogin').click(function () {
-                $("#modal").load("@Url.RouteUrl("Home.Acesso")", function () {
-                    $("#modal").modal();
+                $("#modalL").load("@Url.RouteUrl("Home.Acesso")", function () {
+                    $("#modalL").modal();
                 });
             });
         });

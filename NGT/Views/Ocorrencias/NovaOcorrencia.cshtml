@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-dialog modal-dialog-centered" role="document" id="novaOco">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title txtBlack" id="NovaOcorrencia">Cadastro de chamados</h5>
@@ -18,66 +18,75 @@
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BlocoId, "Bloco: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("BlocoId", null, "Selecione o bloco", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
 
-                <div class="form-group d-none" id="divLocais">
-                    @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
+            <div class="row">
 
-                <div class="form-group d-none" id="divCategs">
-                    @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12  pl-3 pr-3">
-                        @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
+                <div class="col-lg-6 col-12">
 
-                <div class="form-group d-none" id="divItens">
-                    @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divMotivos">
-                    @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divImg">
-                    @Html.LabelFor(model => model.FotoOcorrencia, "Deseja carregar uma imagem da ocorrência? ", htmlAttributes: new { @class = "control-label  pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        <div class="input-group">
-                            <input type="file" class="form-control-file txtBlack" name="FotoOcorrencia">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BlocoId, "Bloco: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("BlocoId", null, "Selecione o bloco", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, "Deseja receber atualizações de status por email? ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-11 col-md-12", @placeholder = "E-mail..." } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger text-sm" })
+                    <div class="form-group d-none" id="divLocais">
+                        @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group d-none" id="divObs">
-                    @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
+                    <div class="form-group d-none" id="divCategs">
+                        @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12  pl-3 pr-3">
+                            @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
                     </div>
+
                 </div>
+                <div class="col-lg-6 col-12">
 
+                    <div class="form-group d-none" id="divItens">
+                        @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
+                    </div>
 
+                    <div class="form-group d-none" id="divMotivos">
+                        @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                        </div>
+                    </div>
+
+                    <div class="form-group d-none" id="divImg">
+                        @Html.LabelFor(model => model.FotoOcorrencia, "Deseja carregar uma imagem da ocorrência? ", htmlAttributes: new { @class = "control-label  pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            <div class="input-group">
+                                <input type="file" class="form-control-file txtBlack" name="FotoOcorrencia">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                    <div class="form-group d-none" id="divObs">
+                        @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, "Deseja receber atualizações de status por email? ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-11 col-md-12", @placeholder = "E-mail..." } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger text-sm" })
+                        </div>
+                    </div>
+                
                 //COLOCAR O CAMPO DE INCLUSAO DE FOTO
 
 
@@ -92,7 +101,7 @@
 </div>
 
 @section ScriptPage{
-    
+
 }
 <script>
     $(document).ready(function () {
@@ -135,6 +144,7 @@
                             options += '<option value="' + this.id + '">' + this.nome + '</option>';
                         });
                         $('#ItemId').html(options);
+                        $('#novaOco').addClass("modal-xl");
                         $('#divItens').removeClass('d-none');
                         $('#divMotivos').removeClass('d-none');
                         $('#divImg').removeClass('d-none');

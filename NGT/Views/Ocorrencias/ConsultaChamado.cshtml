@@ -1,9 +1,13 @@
 ﻿@model NGT.Models.Entities.Ocorrencia
 
+@{
+    Layout = null;
+}
+
 <div class="modal-dialog modal-lg modal-dialog-centered min-vh-100" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title txtBlack" id="EditaMot">Busca de Chamados</h5>
+            <h5 class="modal-title txtBlack" id="ConsultaC">Busca de Chamados</h5>
             <button class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -12,138 +16,59 @@
 
             <section class="pl-3 pr-3 pt-3 mb-3">
                 <div class="row">
+
                     <div class="col-sm-12">
-                        <form action="@Url.RouteUrl("Home.ConsultaChamado")" method="post" role="search" class="d-inline">
+
+                        <form method="get" class="d-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" name="termo" placeholder="Consultar status de chamados">
+                                <input class="form-control" type="text" id="termo" name="termo" placeholder="Consultar status de chamados">
                                 <div class="input-group-append">
-                                    <button class="btn input-group-text" type="submit">
+                                    <button class="btn input-group-text" id="busca" type="button">
                                         <i class="fas fa-search fa-fw"></i>
                                     </button>
                                 </div>
                             </div>
                         </form>
+
                     </div>
+
                     @*<div class="col-sm-6">
                             @if (@TempData["LP"] != null)
                             {
                                 <a class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3" id="novaCateg">
                                     Limpar
                                 </a>
-                            }
                         </div>*@
                 </div>
+
+
             </section>
-
-
-            @if (ViewBag.oco != null)
-            {
-                string statusP = "";
-                string statusA = "";
-                string statusC = "";
-                string statusCan = "";
-                string Pendente = "";
-                string Andamento = "";
-                string Concluido = "";
-                string Cancelado = "";
-
-                if (ViewBag.oco.StatusTicket.Nome == "Pendente")
-                {
-                    statusP = "active";
-                    Pendente = "aria-selected=\"true\"";
-                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
-                }
-                else if (ViewBag.oco.StatusTicket.Nome == "Em Andamento")
-                {
-                    statusA = "active";
-                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Andamento = "aria-selected=\"true\"";
-                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
-                }
-                else if (ViewBag.oco.StatusTicket.Nome == "Concluído")
-                {
-                    statusC = "active";
-                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Concluido = "aria-selected=\"true\"";
-                    Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
-                }
-                else
-                {
-                    statusCan = "active";
-                    Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
-                    Cancelado = "aria-selected=\"true\"";
-                }
-
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-default">
-                            <div class="card-body p-0">
-                                <div class="bs-stepper">
-                                    <div class="bs-stepper-header" role="tablist">
-                                        <div class="step @statusP" data-target="#pendente-part">
-                                            <button type="button" @Pendente class="step-trigger">
-                                                <span class="bs-stepper-circle">1</span>
-                                                <span class="bs-stepper-label">Pendente</span>
-                                            </button>
-                                        </div>
-                                        <div class="line"></div>
-                                        <div class="step @statusA" data-target="#andamento-part">
-                                            <button type="button" @Andamento class="step-trigger">
-                                                <span class="bs-stepper-circle">2</span>
-                                                <span class="bs-stepper-label">Em Andamento</span>
-                                            </button>
-                                        </div>
-                                        @if (ViewBag.oco.StatusTicket.Nome != "Cancelado")
-                                        {
-                                            <div class="line"></div>
-                                            <div class="step @statusC" data-target="#Concluído-part">
-                                                <button type="button" @Concluido class="step-trigger">
-                                                    <span class="bs-stepper-circle">3</span>
-                                                    <span class="bs-stepper-label">Concluído</span>
-                                                </button>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="line"></div>
-                                            <div class="step @statusCan" data-target="#cancelado-part">
-                                                <button type="button" @Cancelado class="step-trigger">
-                                                    <span class="bs-stepper-circle">3</span>
-                                                    <span class="bs-stepper-label">Cancelado</span>
-                                                </button>
-                                            </div>
-                                        }
-
-                                    </div>
-                                    <div class="bs-stepper-content">
-
-                                        @Html.Partial("_CarregaChamado")
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            }
+            <div id="result" class="txtBlack d-flex justify-content-center ml-3 mr-3"></div>
         </div>
     </div>
 </div>
+<script>
+        $(function () {
+            $('#busca').click(function () {
+                $('#result').html('<div class="c-loader m-4"></div>');
 
-@section ScriptPage {
-    <script>
+                setTimeout(function () {
+                    var termo = $('#termo').val();
+                $.get('@Url.Action("ConsultaChamado","Ocorrencias")', { termo: termo }, function (resultado) {
+                    $('#result').removeClass("d-flex justify-content-center");
+                    $('#result').html(resultado);
+                });
+                }, 1500)
+
+
+            });
+        });
+
+</script>
+<script>
     $(".close").click(function () {
-        window.location.replace("@Url.RouteUrl("Home.Index")");
+        $('#result').html("");
+        @*window.location.replace("@Url.RouteUrl("Home.Index")");*@
+        
     });
-    </script>
-    }
+</script>

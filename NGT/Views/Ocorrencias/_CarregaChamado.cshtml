@@ -1,32 +1,132 @@
-﻿@if (ViewBag.oco != null)
+﻿@if (Model != null)
 {
-    <div class="row-fluid">
-        <div class="txtBlack">
+    string statusP = "";
+    string statusA = "";
+    string statusC = "";
+    string statusCan = "";
+    string Pendente = "";
+    string Andamento = "";
+    string Concluido = "";
+    string Cancelado = "";
 
-                <div class="pl-4 pr-4 pb-2">
-                    <h3 class="profile-username text-center mb-3 pt-2">Chamado: @ViewBag.oco.NumTicket <span> - @ViewBag.oco.StatusTicket.Nome</span></h3>
-                    @if (ViewBag.oco.Email != null)
-                    {
-                        <h3 class="profile-username mb-0 pt-2 border-bottom">Criado por: <span class="float-right"> @ViewBag.oco.Email</span></h3>
-                    }
-                    <h3 class="profile-username mb-0 pt-2 border-bottom">Criado em: <span class="float-right"> @ViewBag.oco.DataCriacao.ToShortDateString()</span></h3>
-                    @if (ViewBag.oco.DataAtualizacao != null)
-                    {
-                        <h3 class="profile-username mb-0 pt-2 border-bottom">Última atualização: <span class="float-right"> @ViewBag.oco.DataAtualizacao.ToShortDateString()</span></h3>
-                    }
+    if (Model.StatusTicket.Nome == "Pendente")
+    {
+        statusP = "active";
+        Pendente = "aria-selected=\"true\"";
+        Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+        Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+        Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
+    }
+    else if (Model.StatusTicket.Nome == "Em Andamento")
+    {
+        statusA = "active";
+        Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+        Andamento = "aria-selected=\"true\"";
+        Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+        Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
+    }
+    else if (Model.StatusTicket.Nome == "Concluído")
+    {
+        statusC = "active";
+        Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+        Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+        Concluido = "aria-selected=\"true\"";
+        Cancelado = "disabled=\"disabled\" aria-selected=\"false\"";
+    }
+    else
+    {
+        statusCan = "active";
+        Pendente = "disabled=\"disabled\" aria-selected=\"false\"";
+        Andamento = "disabled=\"disabled\" aria-selected=\"false\"";
+        Concluido = "disabled=\"disabled\" aria-selected=\"false\"";
+        Cancelado = "aria-selected=\"true\"";
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-default">
+                <div class="card-body p-0">
+                    <div class="bs-stepper">
+                        <div class="bs-stepper-header" role="tablist">
+                            <div class="step @statusP" data-target="#pendente-part">
+                                <button type="button" @Pendente class="step-trigger">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Pendente</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step @statusA" data-target="#andamento-part">
+                                <button type="button" @Andamento class="step-trigger">
+                                    <span class="bs-stepper-circle">2</span>
+                                    <span class="bs-stepper-label">Em Andamento</span>
+                                </button>
+                            </div>
+                            @if (Model.StatusTicket.Nome != "Cancelado")
+                            {
+                                <div class="line"></div>
+                                <div class="step @statusC" data-target="#Concluído-part">
+                                    <button type="button" @Concluido class="step-trigger">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label">Concluído</span>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="line"></div>
+                                <div class="step @statusCan" data-target="#cancelado-part">
+                                    <button type="button" @Cancelado class="step-trigger">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label">Cancelado</span>
+                                    </button>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="bs-stepper-content">
+
+                            <div class="row-fluid">
+                                <div class="txtBlack">
+
+                                    <div class="pl-4 pr-4 pb-2">
+                                        <h3 class="profile-username text-center mb-3 pt-2">Chamado: @Model.NumTicket <span> - @Model.StatusTicket.Nome</span></h3>
+                                        @if (Model.Email != null)
+                                        {
+                                            <h3 class="profile-username mb-0 pt-2 border-bottom">Criado por: <span class="float-right small text-muted"> @Model.Email</span></h3>
+                                        }
+                                        else
+                                        {
+                                            <h3 class="profile-username mb-0 pt-2 border-bottom">Criado por: <span class="float-right small text-muted"> Anônimo</span></h3>
+                                        }
+                                        <h3 class="profile-username mb-0 pt-2 border-bottom">Criado em: <span class="float-right small text-muted"> @Model.DataCriacao.ToShortDateString()</span></h3>
+                                        @if (Model.DataAtualizacao != null)
+                                        {
+                                            <h3 class="profile-username mb-0 pt-2 border-bottom">Última atualização: <span class="float-right small text-muted"> @Model.DataAtualizacao.ToShortDateString()</span></h3>
+                                        }
+                                    </div>
+
+                                    <div class="pl-4 pr-4">
+                                        <h3 class="profile-username itens border-bottom">Bloco: <span class="float-right small text-muted">@Model.Bloco.Nome</span></h3>
+                                        <h3 class="profile-username itens border-bottom">Local: <span class="float-right small text-muted">@Model.Local.Nome</span></h3>
+                                        <h3 class="profile-username itens border-bottom">Categoria: <span class="float-right small text-muted">@Model.Categoria.Nome</span></h3>
+                                        <h3 class="profile-username itens border-bottom">Item: <span class="float-right small text-muted">@Model.Item.Nome</span></h3>
+                                        @if (Model.Obs != null)
+                                        {
+                                            <h3 class="profile-username itens">
+                                                Observações: <span class="small text-muted"> @Model.Obs</span>
+                                            </h3>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
-                <div class="pl-4 pr-4">
-                    <h3 class="profile-username itens border-bottom">Bloco: <span class="float-right">@ViewBag.oco.Bloco.Nome</span></h3>
-                    <h3 class="profile-username itens border-bottom">Local: <span class="float-right">@ViewBag.oco.Local.Nome</span></h3>
-                    <h3 class="profile-username itens border-bottom">Categoria: <span class="float-right">@ViewBag.oco.Categoria.Nome</span></h3>
-                    <h3 class="profile-username itens border-bottom">Item: <span class="float-right">@ViewBag.oco.Item.Nome</span></h3>
-                    @if (ViewBag.oco.Obs != null)
-                    {
-                        <h3 class="profile-username itens border-bottom">Item: <span>@ViewBag.oco.Obs</span></h3>
-                    }
-                    
-                </div>
+            </div>
 
         </div>
     </div>

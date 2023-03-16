@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using NGT.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using System.Web.UI.HtmlControls;
+using System.Text;
 
 namespace NGT.Controllers
 {
@@ -113,22 +115,21 @@ namespace NGT.Controllers
             return Json(itens);
         }
 
-        public ActionResult ConsultaChamado()
-        {
-            return View("ConsultaChamado");
-        }
-        [HttpPost]
-        
+        [HttpGet]
         public ActionResult ConsultaChamado(string termo)
         {
-            if(termo == "")
+            if (termo == null)
             {
-                return RedirectToAction("Index", "Home");
+                return View("ConsultaChamado");
+            } 
+            else
+            {
+                var encontrado = db.Ocorrencias.Where(x => x.NumTicket == termo).ToList().FirstOrDefault();
+                //TempData["LP"] = "x";
+                return PartialView("_CarregaChamado", encontrado);
             }
 
-            ViewBag.oco = db.Ocorrencias.Where(x => x.NumTicket == termo).ToList().FirstOrDefault();
-            TempData["LP"] = "x";
-            return View("ConsultaChamado");
         }
+        
     }
 }

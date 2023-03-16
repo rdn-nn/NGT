@@ -176,10 +176,20 @@ namespace NGT.Areas.Admin.Controllers
                             return Json("f");
                         }
                     }
+
+                    
                     int tamPath = u.FotoPerfil.Length;
                     int tamImg = u.FotoPerfil.Split('\\').Last().Length;
                     string path = u.FotoPerfil.Substring(0, tamPath - tamImg - 1);
+                    if (u.FotoPerfil.Split('\\').Last() != "anonimo.jpg")
+                    {
+                        path = HttpRuntime.AppDomainAppPath + path;
+                        if (Directory.Exists(path))
+                        {
+                            Directory.Delete(path, true);
+                        }
 
+                    }
                     //if you want to get virtual application path, you could try the code below.
                     //HttpContext.Current.Request.ApplicationPath;
                     //Or the code
@@ -188,21 +198,10 @@ namespace NGT.Areas.Admin.Controllers
                     //        HttpRuntime.AppDomainAppPath
                     //        Or convert the virtual path to physical path
                     //HttpContext.Current.Request.MapPath(HttpContext.Current.Request.ApplicationPath)
-
-                    path = HttpRuntime.AppDomainAppPath + path;
-                    if (Directory.Exists(path))
-                    {
-                        Directory.Delete(path, true);
-                    }
-
                     db.Usuarios.Remove(u);
                     db.SaveChanges();
                     @TempData["MSG"] = "success|Usuário removido com sucesso!|x";
-
-
-
                     return Json(u != null ? "t" : "f");
-
                 }
                 else
                 {
