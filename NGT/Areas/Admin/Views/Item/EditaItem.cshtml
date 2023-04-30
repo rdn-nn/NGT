@@ -2,12 +2,12 @@
 @{
     Layout = null;
 
-    bool statusHasPlaca = ViewBag.Itens.HasPlaca;
-    bool statusIsPatInterno = ViewBag.Itens.IsPatInterno;
+    //bool statusHasPlaca = ViewBag.Itens.HasPlaca;
+    //bool statusIsPatInterno = ViewBag.Itens.IsPatInterno;
 
 }
 
-<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title txtBlack" id="EditaItem">Edição de Item</h5>
@@ -35,8 +35,8 @@
                     </a>
                 </div>
 
-                <div class="row">
-                    <div class="col-6">
+                @*<div class="row">
+                    <div class="col-6">*@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                             <div class="col-md-12 pl-3 pr-3">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        @*<div class="form-group">
                             @Html.LabelFor(model => model.NumSerie, "Nº Série: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                             <div class="col-md-12 pl-3 pr-3">
                                 <input type="text" name="NumSerie" class="form-control col-11 col-md-12" value="@ViewBag.Itens.NumSerie">
@@ -90,7 +90,7 @@
                                 @Html.CheckBox("IsPatInterno", statusIsPatInterno, new { @class = "form-check-input" })
                                 @Html.LabelFor(model => model.IsPatInterno, "É patrimônio interno? ", htmlAttributes: new { @class = "form-check-label" })
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="form-group m-0">
                             @Html.LabelFor(model => model.StatusId, "Status: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
@@ -99,8 +99,8 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                    @*</div>
+                </div>*@
                 <div class="modal-footer col-11 col-md-12">
                     <button type="submit" class="btn btn-default float-right">
                         <i class="fas fa-solid fa-floppy-disk"></i>

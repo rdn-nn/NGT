@@ -22,7 +22,7 @@
 
             <form action="@Url.RouteUrl("Admin.Categoria.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar Categoria">
+                    <input class="form-control" type="text" name="termo" placeholder="Digite o nome de uma categoria">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -33,6 +33,12 @@
 
         </div>
         <div class="col-sm-6 mb-3">
+            @if (@TempData["LP"] != null)
+            {
+                <a href="/admin/categorias" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
+                    Limpar
+                </a>
+            }
             <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novaCateg">
                 Nova Categoria
             </a>
@@ -65,7 +71,7 @@
                 }
             }
 
-            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3">
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-2">
 
                 <div class="card card-widget widget-user card-category">
                     <div class="widget-user-header bg-gradient-info">

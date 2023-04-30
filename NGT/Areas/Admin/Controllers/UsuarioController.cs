@@ -23,7 +23,7 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Listar()
         {
 
-            ViewBag.usuarios = db.Usuarios.ToList().OrderBy(u => u.Nome);
+            ViewBag.usuarios = db.Usuarios.Include(x=>x.Perfil).ToList().OrderBy(u => u.Nome);
             return View("ListaUser");
         }
 
@@ -35,6 +35,7 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
             ViewBag.usuarios = db.Usuarios.Where(u => u.Nome.ToUpper().Contains(termo.ToUpper())).ToList().OrderBy(u => u.Nome);
+            @TempData["LP"] = "x";
             return View("ListaUser");
         }
 
@@ -177,7 +178,7 @@ namespace NGT.Areas.Admin.Controllers
                         }
                     }
 
-                    
+
                     int tamPath = u.FotoPerfil.Length;
                     int tamImg = u.FotoPerfil.Split('\\').Last().Length;
                     string path = u.FotoPerfil.Substring(0, tamPath - tamImg - 1);
@@ -282,5 +283,55 @@ namespace NGT.Areas.Admin.Controllers
             TempData["MSG"] = "warning|Preencha todos os campos|x";
             return Listar();
         }
+
+        public ActionResult AlteraSenha(string id)
+        {
+
+            if (id == null)
+            {
+                return View("ConsultaChamado");
+            }
+            else
+            {
+                Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
+
+                if (u != null)
+                {
+                    return PartialView("_CarregaChamado", u);
+                }
+
+                return View("ConsultaChamado");
+            }
+            //    var encontrado = db.Ocorrencias.Where(x => x.NumTicket == termo).ToList().FirstOrDefault();
+            //    //TempData["LP"] = "x";
+            //    return PartialView("_CarregaChamado", encontrado);
+            //}
+
+            //    Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
+            //if (u != null)
+            //{
+            //    ViewBag.Usuario = u;
+            //    if (u.Status.Nome == "Ativado")
+            //    {
+
+            //        ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome");
+            //    }
+            //    else
+            //    {
+            //        ViewBag.StatusId = new SelectList(db.Status.OrderBy(s => s.Id), "Id", "Nome");
+            //    }
+
+            //    if (u.Perfil.Nome == "Administrador")
+            //    {
+            //        ViewBag.PerfilId = new SelectList(db.Perfis.OrderBy(s => s.Id), "Id", "Nome");
+            //    }
+            //    else
+            //    {
+            //        ViewBag.PerfilId = new SelectList(db.Perfis.OrderByDescending(s => s.Id), "Id", "Nome");
+            //    }
+            //}
+            //return View("EditUser");
+        }
+
     }
 }

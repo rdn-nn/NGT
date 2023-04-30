@@ -15,8 +15,8 @@ namespace NGT.Areas.Admin.Controllers
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()
         {
-            ViewBag.locais = db.Locais.Include(b => b.Bloco).ToList().OrderBy(l=>l.Nome).OrderByDescending(b => b.StatusId);
-            ViewBag.itens = db.Itens.Include(x => x.Local).ToList();
+            ViewBag.locais = db.Locais.ToList().OrderBy(l=>l.Nome).OrderByDescending(b => b.StatusId);
+            ViewBag.itens = db.ItemDescs.Include(x => x.Local).ToList();
             return View("ListaLocal");
         }
 
@@ -28,7 +28,8 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
             ViewBag.locais = db.Locais.Include(b => b.Bloco).Where(u => u.Nome.ToUpper().Contains(termo.ToUpper()) || u.Bloco.Nome.ToUpper().Contains(termo.ToUpper())).ToList().OrderBy(u => u.Nome);
-            ViewBag.itens = db.Itens.Include(x => x.Local).ToList();
+            ViewBag.itens = db.ItemDescs.Include(x => x.Local).ToList();
+            @TempData["LP"] = "x";
             return View("ListaLocal");
         }
 

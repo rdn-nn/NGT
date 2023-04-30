@@ -15,41 +15,72 @@
         </div>
     </div>
 </section>
-<div class="pl-3 pr-3 pb-3">
 
-    @using (Html.BeginForm("Criar", "Bloco"))
-    {
-        <div class="card card-default collapsed-card">
-            <div class="card-header">
-                <h3 class="card-title">Novo Bloco</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
+<section class="pl-3 pr-3">
+    <div class="row">
+        <div class="col-sm-6 mb-3">
 
-            </div>
-            <div class="card-body overflow-hidden">
-
-                @Html.AntiForgeryToken()
-
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
-                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            <form action="@Url.RouteUrl("Admin.Bloco.Filtrar")" method="get" role="search" class="d-inline">
+                <div class="input-group input-group-sm">
+                    <input class="form-control" type="text" name="termo" placeholder="Digite o nome de um bloco">
+                    <div class="input-group-append">
+                        <button class="btn input-group-text" type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
                     </div>
                 </div>
+            </form>
 
-            </div>
-            <div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
-                <button type="submit" class="btn btn-default ">Gravar</button>
-            </div>
         </div>
+        <div class="col-sm-6 mb-3">
+            @if (@TempData["LP"] != null)
+            {
+                <a href="/admin/blocos" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
+                    Limpar
+                </a>
+            }
+            <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoBloco">
+                Novo Bloco
+            </a>
+        </div>
+    </div>
+</section>
 
-    }
+<div class="pl-3 pr-3 pb-3">
+
+    @*@using (Html.BeginForm("Criar", "Bloco"))
+        {
+            <div class="card card-default collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Novo Bloco</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="card-body overflow-hidden">
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        <div class="col-md-12 pl-3 pr-3">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer justify-content-end col-11 col-md-12" id="divSubmit">
+                    <button type="submit" class="btn btn-default ">Gravar</button>
+                </div>
+            </div>
+
+        }*@
 
     <div class="row d-flex justify-content-center align-items-center">
         @foreach (var item in @ViewBag.blocos)
@@ -67,7 +98,7 @@
 
             foreach (var l in ViewBag.locais)
             {
-                if(item.Id == l.BlocoId)
+                if (item.Id == l.BlocoId)
                 {
                     foreach (var i in ViewBag.itens)
                     {
@@ -81,7 +112,7 @@
             }
 
 
-            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-3">
+            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-2">
 
                 <div class="card card-widget widget-user card-bloco">
                     <div class="widget-user-header bg-gradient-info">
@@ -134,7 +165,32 @@
         }
     </div>
 </div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoBloco" aria-hidden="true"></div>
+<div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaBloco" aria-hidden="true"></div>
+
 @section ScriptPage {
+    <script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#novoBloco').click(function () {
+                $("#modal").load("@Url.RouteUrl("Admin.Bloco")", function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.editBloco').click(function () {
+                var id = $(this).attr("ref");
+                $("#modalE").load("/admin/blocos/editablocos/" + id, function () {
+                    $("#modalE").modal();
+                });
+            });
+        });
+    </script>
     <script>
         $(".status").click(function () {
             var id = $(this).attr("rel");
@@ -162,25 +218,42 @@
     <script>
         $(".removeBloco").click(function () {
             var id = $(this).attr("ref");
-           /* alert(id);*/
-             $.ajax({
-                dataType: "json",
-                type: "POST",
-                url: "/admin/blocos/remove-bloco",
-                data: { id },
-                success: function (retorno) {
+            Swal.fire({
+                title: 'Deseja confirmar a exclusão deste bloco?',
+                text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-                    if (retorno == "t") {
-                       
-                        window.location.replace("/admin/blocos");
+                    $.ajax({
+                        dataType: "json",
+                        type: "POST",
+                        url: "/admin/blocos/remove-bloco",
+                        data: { id },
+                        success: function (retorno) {
 
-                    }
-                    else if (retorno == "f") {
-                       
-                        window.location.replace("/admin/blocos");
-                    }
+                            if (retorno == "t") {
+
+                                window.location.replace("/admin/blocos");
+
+                            }
+                            else if (retorno == "f") {
+
+                                window.location.replace("/admin/blocos");
+                            }
+                        }
+                    });
                 }
-            });
+            })
+
+
         });
+
     </script>
+
 }

@@ -62,7 +62,12 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "Usuario", action = "EditaUser" },
                 namespaces: namespaces
             );
-
+            context.MapRoute(
+                name: "Admin.Usuario.AlteraSenha",
+                url: "admin/usuarios/alterasenha/{id}",
+                defaults: new { controller = "Usuario", action = "AlteraSenha" },
+                namespaces: namespaces
+            );
 
 
 
@@ -123,6 +128,18 @@ namespace NGT.Areas.Admin
                name: "Admin.Bloco.Remover",
                url: "admin/blocos/remove-bloco",
                defaults: new { controller = "Bloco", action = "Remover" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.Bloco.EditaBloco",
+                url: "admin/blocos/editablocos/{id}",
+                defaults: new { controller = "Bloco", action = "Edita" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.Bloco.Filtrar",
+               url: "admin/blocos/filtrar",
+               defaults: new { controller = "Bloco", action = "ListarFiltrado" },
                namespaces: namespaces
            );
 
@@ -380,6 +397,29 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "Motivo", action = "EditaMotivos" },
                 namespaces: namespaces
             );
+
+
+
+            //ItemDesc
+            context.MapRoute(
+               name: "Admin.ItemDesc.Novo",
+               url: "admin/itensdesc/novo-item/{id}",
+               defaults: new { controller = "ItemDesc", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+               name: "Admin.ItemDesc.Edita",
+               url: "admin/itensdesc/edita-item/{id}",
+               defaults: new { controller = "ItemDesc", action = "Edita" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+              name: "Admin.ItemDesc.Exclui",
+              url: "admin/itensdesc/exclui-item",
+              defaults: new { controller = "ItemDesc", action = "Remover" },
+              namespaces: namespaces
+          );
+
         }
     }
 }

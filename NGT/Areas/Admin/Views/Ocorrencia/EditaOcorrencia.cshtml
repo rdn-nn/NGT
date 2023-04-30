@@ -22,7 +22,7 @@
                 <div class="modal-footer col-11 col-md-12 m-0 pb-0 justify-content-between">
                     <div>
                         <label class="control-label text-muted">ID de registro:</label>
-                        <input disabled name="Id" value="@ViewBag.ocorencia.Id" />
+                        @ViewBag.ocorencia.Id
                     </div>
                 </div>
 
@@ -33,18 +33,26 @@
                     </div>
                 </div>
 
+                <div class="form-group m-0">
+                    @Html.LabelFor(model => model.InfoAtualizacao, "Comentários: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        <textarea name="InfoAtualizacao" class="form-control col-11 col-md-12" rows="4.5" style="resize: none;"></textarea>
+                        @*<input type="text" name="Obs" class="form-control col-11 col-md-12" value="@ViewBag.Fornecedor.Obs">*@
+                        @Html.ValidationMessageFor(model => model.InfoAtualizacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 @*<div class="form-group">
-                    <select class="form-control tktId" id="StatusTicketId" name="StatusTicketId">
-                        <option value="@item.StatusTicketId">@item.StatusTicket.Nome</option>
-                        @foreach (var status in @ViewBag.StatusTicketsId)
+                <select class="form-control tktId" id="StatusTicketId" name="StatusTicketId">
+                    <option value="@item.StatusTicketId">@item.StatusTicket.Nome</option>
+                    @foreach (var status in @ViewBag.StatusTicketsId)
+                    {
+                        if (status.Nome != item.StatusTicket.Nome)
                         {
-                            if (status.Nome != item.StatusTicket.Nome)
-                            {
-                                <option value="@status.Id">@status.Nome</option>
-                            }
+                            <option value="@status.Id">@status.Nome</option>
                         }
-                    </select>
-                </div>*@
+                    }
+                </select>
+            </div>*@
 
                 <div class="modal-footer col-11 col-md-12">
                     <button type="submit" class="btn btn-default float-right">

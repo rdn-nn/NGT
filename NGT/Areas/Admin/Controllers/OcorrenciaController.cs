@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using NGT.Models.Entities;
 using System.Net.Sockets;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace NGT.Areas.Admin.Controllers
 {
@@ -19,10 +20,6 @@ namespace NGT.Areas.Admin.Controllers
         {
             ViewBag.Ocorrencias = db.Ocorrencias.Include(x => x.Bloco).Include(x => x.Categoria).Include(x => x.Item).Include(x => x.Local).Include(x => x.Motivo).Include(x => x.StatusTicket).ToList();
 
-            ViewBag.BlocoId = new SelectList(db.Blocos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
-            ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
-            ViewBag.MotivoId = new SelectList(db.Motivos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
-
             ViewBag.StatusTicketsId = db.StatusTickets.ToList();
 
             ViewBag.Pendente = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Pendente").Count();
@@ -31,6 +28,14 @@ namespace NGT.Areas.Admin.Controllers
             ViewBag.Cancelado = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Cancelado").Count();
 
             return View("Ocorrencia");
+        }
+
+        public ActionResult Criar()
+        {
+            ViewBag.BlocoId = new SelectList(db.Blocos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+            ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+            ViewBag.MotivoId = new SelectList(db.Motivos.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+            return View("NovaOcorrencia");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -105,16 +110,15 @@ namespace NGT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CarregaItem(int localId, int categId)
         {
-            // Filter the states by country. For example:
-
-            var itens = (from i in db.Itens.Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
-                         where i.Local.Id == localId && i.Categoria.Id == categId && i.Status.Nome == "Ativado"
+            var itens = (from i in db.ItemDescs.Include(x => x.Item).Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
+                         where i.Local.Id == localId && i.CategoriaId == categId && i.Status.Nome == "Ativado"
                          select new
                          {
-                             id = i.Id,
-                             nome = i.Nome
-                         }).ToArray();
+                             id = i.Item.Id,
+                             nome = i.Item.Nome,
+                         }).Distinct().ToArray();
             return Json(itens);
+            //ViewBag.ItemId = new SelectList(db.ItemDescs.Include(x => x.Item).Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Item.Nome");
         }
 
         public ActionResult TrocarStatus(string id)
@@ -130,18 +134,28 @@ namespace NGT.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult TrocarStatus(int Id, int StatusTicketId)
+        public ActionResult TrocarStatus(int Id, int StatusTicketId, string InfoAtualizacao)
         {
             try
             {
                 Ocorrencia oco = db.Ocorrencias.Find(Convert.ToInt32(Id));
-                if(oco.StatusTicketId != StatusTicketId)
+                if (oco != null)
                 {
-                    if (oco != null)
+                    if (oco.StatusTicketId != StatusTicketId || InfoAtualizacao != "")
                     {
-                        oco.StatusTicketId = Convert.ToInt32(StatusTicketId);
+                        oco.StatusTicketId = StatusTicketId;
                         oco.DataAtualizacao = DateTime.Now;
-
+                        if (InfoAtualizacao != "")
+                        {
+                            if (oco.InfoAtualizacao != null)
+                            {
+oco.InfoAtualizacao = InfoAtualizacao + " Data: " + oco.DataAtualizacao + "   |   " + oco.InfoAtualizacao;
+                            } else
+                            {
+                                oco.InfoAtualizacao = InfoAtualizacao + " Data: " + oco.DataAtualizacao;
+                            }
+                            
+                        }
                         db.Entry(oco).State = EntityState.Modified;
                         db.SaveChanges();
 
@@ -149,19 +163,26 @@ namespace NGT.Areas.Admin.Controllers
                         if (oco.Email != null)
                         {
                             string msg = "<h3>Sistema NewGen Tech</h3>";
-                            msg += "<p>Seu chamado " + oco.NumTicket + " teve uma atualização. </p><p>Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + oco.NumTicket + " </p>";
+                            msg += "<p>Seu chamado " + oco.NumTicket + " teve uma atualização. </p>";
+                            if (InfoAtualizacao != "")
+                            {
+                                msg += "<p>Comentário adicionado: " + oco.InfoAtualizacao + "</p>";
+                            }
+                                msg += "<p>Status Atualizado: " + oco.StatusTicket.Nome + "</p>";
+                            msg +="<p>Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + oco.NumTicket + " </p>";
                             Funcoes.EnviarEmail(oco.Email, "Alteração no seu chamado!", msg);
                         }
-
                         return Index();
                     }
-                    TempData["MSG"] = "warning|Preencha todos os campos!|x";
-                    return Index();
-                } else
-                {
-                    TempData["MSG"] = "info|Nenhuma alteração de status foi realizada!|x";
-                    return Index();
+                    else
+                    {
+                        TempData["MSG"] = "info|Nenhuma alteração de status foi realizada!|x";
+                        return Index();
+                    }
+
                 }
+                TempData["MSG"] = "warning|Preencha todos os campos!|x";
+                return Index();
             }
             catch (Exception)
             {

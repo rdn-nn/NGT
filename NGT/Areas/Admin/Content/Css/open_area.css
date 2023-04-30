@@ -117,7 +117,12 @@ form {
         background: #d8d8d8;
         box-shadow: 1px 1px 3px #00204a71 inset;
     }
-
+.widget-user-username {
+    font-size: 130% !important;
+}
+.widget-user-desc {
+    font-size: 90% !important;
+}
 .widget-user .widget-user-image {
     top: auto !important;
     margin-left: -37.5px !important;
@@ -149,6 +154,8 @@ span#imgForn {
 
 h3.tel {
     font-size: 13px;
+    display:block;
+    width:85%;
 }
 
 .showdesc {
@@ -226,8 +233,15 @@ div.editLoc {
     background: #d8d8d8 !important;
 }
 
-.editaOco {
+.editaOco, .editaItd, .excluiItd {
     cursor: pointer;
+}
+
+    .editaItd:hover {
+        color: forestgreen;
+    }
+.excluiItd:hover {
+    color: red;
 }
 
 .btnLogout, .otherLink {
@@ -305,6 +319,17 @@ div.editLoc {
     background: #00204A !important;
     border-color: #4E79B7 !important;
     box-shadow: 1px 1px 0px #808080ff;
+}
+
+@media(max-width:1533px){
+    .widget-user .widget-user-image {
+        bottom: 37.5% !important;
+    }
+}
+@media(max-width:1200px) {
+    .widget-user .widget-user-image {
+        bottom: 32.5% !important;
+    }
 }
 
 @media (max-width:720px) {

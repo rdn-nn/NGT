@@ -2,6 +2,7 @@
 
 namespace NGT.Migrations
 {
+    using NGT.Models;
     using NGT.Models.Entities;
     using System;
     using System.Data.Entity;
@@ -44,10 +45,10 @@ namespace NGT.Migrations
             ////////Abc123
             cont.Usuarios.AddOrUpdate(
             u => u.Email,
-                 new Usuario { Id = 1, Nome = "Nice Montarroyos", Email = "nice.montarroyos@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 },
-                 new Usuario { Id = 2, Nome = "Jessica Aquiles", Email = "jessica.lucio@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 },
-                 new Usuario { Id = 3, Nome = "Rudson Nunes", Email = "rudson.nunes@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 2, PerfilId = 1 },
-                 new Usuario { Id = 3, Nome = "Wanderson dos Santos", Email = "wanderson.santos6@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 }
+                 new Usuario { Id = 1, Nome = "Nice Montarroyos", Email = "nice.montarroyos@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 , FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 2, Nome = "Jessica Aquiles", Email = "jessica.lucio@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 3, Nome = "Rudson Nunes", Email = "rudson.nunes@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 2, PerfilId = 1, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 3, Nome = "Wanderson dos Santos", Email = "wanderson.santos6@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" }
             );
 
             cont.Blocos.AddOrUpdate(
@@ -77,9 +78,16 @@ namespace NGT.Migrations
 
             cont.Itens.AddOrUpdate(
             i => i.Nome,
-                new Item { Id = 1, Nome = "Cadeira", LocalId = 1, CategoriaId = 1, StatusId = 2 },
-                new Item { Id = 2, Nome = "Mesa", LocalId = 1, CategoriaId = 1, StatusId = 2 },
-                new Item { Id = 3, Nome = "Janela", LocalId = 2, CategoriaId = 2, StatusId = 2 }
+                new Item { Id = 1, Nome = "Cadeira", StatusId = 2 },
+                new Item { Id = 2, Nome = "Mesa", StatusId = 2 },
+                new Item { Id = 3, Nome = "Janela", StatusId = 2 }
+            );
+
+            cont.ItemDescs.AddOrUpdate(
+            it => it.Id,
+                new ItemDesc { Id = 1, ItemId = 1, LocalId = 1, CategoriaId = 1, StatusId = 2 },
+                new ItemDesc { Id = 2, ItemId = 2, LocalId = 1, CategoriaId = 1, StatusId = 2 },
+                new ItemDesc { Id = 3, ItemId = 3, LocalId = 2, CategoriaId = 2, StatusId = 2 }
             );
 
 

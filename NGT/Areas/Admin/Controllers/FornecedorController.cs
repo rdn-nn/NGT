@@ -15,7 +15,7 @@ namespace NGT.Areas.Admin.Controllers
         private NgtContexto db = new NgtContexto();
         public ActionResult Listar()
         {
-            ViewBag.fornecedores = db.Fornecedores.ToList().OrderBy(f => f.NomeFantasia);
+            ViewBag.fornecedores = db.Fornecedores.Include(x=>x.Status).ToList().OrderBy(f => f.NomeFantasia);
             return View("Lista");
         }
 
@@ -27,6 +27,7 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
             ViewBag.fornecedores = db.Fornecedores.Where(u => u.NomeFantasia.ToUpper().Contains(termo.ToUpper())).ToList().OrderBy(u => u.NomeFantasia);
+            @TempData["LP"] = "x";
             return View("Lista");
         }
 

@@ -11,6 +11,7 @@ namespace NGT.Models.Entities
         public int Id { get; set; }
         [MaxLength(250)]
         public string Obs { get; set; }
+        public string InfoAtualizacao { get; set; }
         public string Imagem { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }

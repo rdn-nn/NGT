@@ -19,7 +19,7 @@ namespace NGT.Models.Entities
 
         public virtual Bloco Bloco { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<Item> Item { get; set; }
+        public virtual ICollection<ItemDesc> ItemDescs { get; set; }
         public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
         public virtual ICollection<OrdServico> OrdServico { get; set; }
     }

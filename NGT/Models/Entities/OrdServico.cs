@@ -19,7 +19,7 @@ namespace NGT.Models.Entities
         [Required]
         public int CategoriaId { get; set; }
         [Required]
-        public int ItemId { get; set; }
+        public int ItemDescId { get; set; }
         [Required]
         public int MotivoId { get; set; }
         [MaxLength(250)]
@@ -49,7 +49,7 @@ namespace NGT.Models.Entities
         public virtual Bloco Bloco { get; set; }
         public virtual Local Local { get; set; }
         public virtual Categoria Categoria { get; set; }
-        public virtual Item Item { get; set; }
+        public virtual ItemDesc ItemDescs { get; set; }
         public virtual Motivo Motivo { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual StatusTicket StatusTicket { get; set; }

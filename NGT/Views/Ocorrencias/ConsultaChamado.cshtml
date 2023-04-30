@@ -50,15 +50,15 @@
 <script>
         $(function () {
             $('#busca').click(function () {
-                $('#result').html('<div class="c-loader m-4"></div>');
+                $('#result').html('<div class="d-flex justify-content-center"><div class="c-loader m-4"></div></div>');
 
                 setTimeout(function () {
                     var termo = $('#termo').val();
-                $.get('@Url.Action("ConsultaChamado","Ocorrencias")', { termo: termo }, function (resultado) {
-                    $('#result').removeClass("d-flex justify-content-center");
-                    $('#result').html(resultado);
-                });
-                }, 1500)
+                    $.get('@Url.Action("ConsultaChamado","Ocorrencias")', { termo: termo }, function (resultado) {
+                        $('#result').removeClass("d-flex justify-content-center");
+                        $('#result').html(resultado);
+                    });
+                }, 1500);
 
 
             });

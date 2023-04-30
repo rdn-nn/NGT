@@ -22,7 +22,7 @@
 
             <form action="@Url.RouteUrl("Admin.Fornecedor.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar Fornecedor">
+                    <input class="form-control" type="text" name="termo" placeholder="Digite o nome de um fornecedor">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -33,6 +33,12 @@
 
         </div>
         <div class="col-sm-6 mb-3">
+            @if (@TempData["LP"] != null)
+            {
+                <a href="/admin/fornecedores" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
+                    Limpar
+                </a>
+            }
             <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoFornec">
                 Novo Fornecedor
             </a>
@@ -56,7 +62,7 @@
             {
                 status = false;
             }
-            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-4 col-12 mb-3">
+            <div class="col-12 col-xl-3 col-lg-4 col-md-4 col-sm-6 mb-3">
 
                 <div class="card card-info card-outline card-fornec">
 
@@ -81,8 +87,8 @@
                             <h3 class="profile-username fornec">Contato: @item.NomeResp</h3>
                             <h3 class="profile-username fornec">Função: @item.CargoResp</h3>
                             <h3 class="profile-username tel text-muted">
-                                Tel.: @item.Telefone
-                                / Email: @item.Email
+                                Tel.: @item.Telefone <br />
+                                Email: @item.Email
                             </h3>
                         </div>
                     </div>
@@ -120,10 +126,9 @@
 
 
 
-                    </div>
-
-
                 </div>
+
+            </div>
         }
     </div>
 </div>

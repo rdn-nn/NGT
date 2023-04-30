@@ -22,7 +22,7 @@
 
             <form action="@Url.RouteUrl("Admin.Item.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar Itens">
+                    <input class="form-control" type="text" name="termo" placeholder="Digite o nome de um item">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -50,7 +50,7 @@
 <div class="pl-3 pr-3 pb-3">
 
     <div class="row d-flex justify-content-center align-items-center">
-        @foreach (var item in @ViewBag.itens)
+        @foreach (var item in ViewBag.itens)
         {
             var totItens = 0;
             bool status;
@@ -64,15 +64,32 @@
             }
 
 
-            foreach (var i in ViewBag.ocorrencias)
+            //foreach (var o in ViewBag.ocorrencias)
+            //{
+            //    if (o.Id == l.BlocoId)
+            //    {
+            //        foreach (var i in ViewBag.itens)
+            //        {
+            //            if (i.LocalId == l.Id)
+            //            {
+            //                totItens = totItens + 1;
+            //            }
+            //        }
+
+            //    }
+            //}
+            foreach (var i in ViewBag.itensdesc)
             {
-                if (i.ItemId == item.Id)
+                if (item.Id == i.ItemId)
                 {
+
                     totItens = totItens + 1;
+
                 }
             }
 
-            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-6">
+
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-2 col-6">
 
                 <div class="card card-widget widget-user card-category">
                     <div class="widget-user-header bg-gradient-primary">
@@ -110,16 +127,16 @@
                                     <h5 class="description-header">
                                         @totItens
                                     </h5>
-                                    <span class="description-text">Ocorrências</span>
+                                    <span class="description-text">Registros</span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+
                     <div class="opt">
-                        <button rel="@item.Id" class="btn btn-primary btn-sm DetailsItem">
-                            <i class="fas fa-folder"></i>
-                            Ver Mais
+                        <button rel="@item.Id" class="btn btn-primary ItemDesc">
+                            <i class="fa-solid fa-plus"></i>
+                            Criar
                         </button>
                     </div>
 
@@ -128,15 +145,168 @@
             </div>
         }
     </div>
+    <div>
+        @if (ViewBag.itensdesc.Count >= 1)
+        {
 
+            <div>
+                <table id="itensdescTable" class="table table-bordered table-striped table-hover table-sm">
+                    <thead class="theadbg">
+                        <tr>
+                            @*<th>ID</th>*@
+                            <th>Item</th>
+                            <th>Num. Série</th>
+                            <th>Patrimônio</th>
+                            <th>Placa?</th>
+                            <th>Pat. Interno?</th>
+                            <th>Local</th>
+                            <th>Categoria</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodybg">
+                        @foreach (var itd in ViewBag.itensdesc)
+                        {
+                            <tr>
+                                @*<th>@itd.Id</th>*@
+                                <td>@itd.Item.Nome</td>
+                                <th>
+                                    @if (itd.NumSerie == null)
+                                    {
+                                        <span>Sem nº registrado</span>
+                                    }
+                                    else
+                                    {
+                                        @itd.NumSerie
+                                    }
+                                </th>
+                                <th>
+                                    @if (itd.Patrimonio == null)
+                                    {
+                                        <span>Sem nº registrado</span>
+                                    }
+                                    else
+                                    {
+                                        @itd.Patrimonio
+                                    }
+                                </th>
+                                <th>
+                                    @if (itd.HasPlaca != false)
+                                    {
+                                        <span>S</span>
+                                    }
+                                    else
+                                    {
+                                        <span>N</span>
+                                    }
+                                </th>
+                                <th>
+                                    @if (itd.IsPatInterno != false)
+                                    {
+                                        <span>S</span>
+                                    }
+                                    else
+                                    {
+                                        <span>N</span>
+                                    }
+                                </th>
+                                <td>@itd.Local.Nome</td>
+                                <td>@itd.Categoria.Nome</td>
+                                <td>@itd.Status.Nome</td>
+                                <td>
+                                    <div class="row justify-content-around pl-2 pr-2">
+                                        <div class="editaItd" rel="@itd.Id"><i class="fas fa-pencil-alt"></i></div>
+                                        <span>|</span>
+                                        <div class="excluiItd" rel="@itd.Id"><i class="fa-solid fa-trash-can"></i></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        }
+    </div>
 </div>
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoItem" aria-hidden="true"></div>
 <div id="modalE" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaItem" aria-hidden="true"></div>
-<div id="modalS" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ShowItem" aria-hidden="true"></div>
+@**@
+
+<div id="modalItD" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="NovoItemDesc" aria-hidden="true"></div>
+<div id="modalItDEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditaItemDesc" aria-hidden="true"></div>
+
+@section CssPage{
+    <link href="~/Areas/Admin/Content/Libs/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Libs/datatables-buttons/css/buttons.bootstrap4.css" rel="stylesheet" />
+}
+
+
 
 @section ScriptPage {
-    @*<script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>*@
+
+    <script>
+        $(function () {
+            $('.ItemDesc').click(function () {
+                var id = $(this).attr("rel");
+                $("#modalItD").load("/admin/itensdesc/novo-item/" + id, function () {
+                    $("#modalItD").modal();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.editaItd').click(function () {
+                var id = $(this).attr("rel");
+                $("#modalItDEdit").load("/admin/itensdesc/edita-item/" + id, function () {
+                    $("#modalItDEdit").modal();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(".excluiItd").click(function () {
+            var id = $(this).attr("rel");
+            Swal.fire({
+                title: 'Deseja confirmar a exclusão deste Item?',
+                text: "Todos os dados serão apagados. Esta ação não pode ser desfeita!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        dataType: "json",
+                        type: "POST",
+                        url: "/admin/itensdesc/exclui-item",
+                        data: { id },
+                        success: function (retorno) {
+
+                            if (retorno == "t") {
+
+                                window.location.replace("/admin/itens");
+
+                            }
+                            else if (retorno == "f") {
+
+                                window.location.replace("/admin/itens");
+                            }
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+
+
 
     <script>
         $(function () {
@@ -149,16 +319,6 @@
     </script>
     <script>
         $(function () {
-            $('.DetailsItem').click(function () {
-                var id = $(this).attr("rel");
-                $("#modalS").load("/admin/itens/exibeitens/" + id, function () {
-                    $("#modalS").modal();
-                });
-            });
-        });
-    </script>
-    <script>
-    $(function () {
             $('.editaItem').click(function () {
                 var id = $(this).attr("ref");
                 $("#modalE").load("/admin/itens/editaitens/" + id, function () {
@@ -230,4 +390,31 @@
             })
         });
     </script>
+
+
+
+    @*<script src="~/Areas/Admin/Content/Libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/Libs/datatables/jquery.dataTables.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/jszip/jszip.min.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.html5.js"></script>
+    @*<script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.flash.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.print.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.colVis.js"></script>
+
+    <script>
+        $(function () {
+            $("#itensdescTable").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#itensdescTable_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
 }

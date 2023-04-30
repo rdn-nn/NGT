@@ -20,7 +20,7 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Listar()
         {
             ViewBag.itens = db.Itens.ToList().OrderBy(c => c.Nome).OrderByDescending(c => c.StatusId);
-            ViewBag.ocorrencias = db.Ocorrencias.Include(x => x.Item).ToList();
+            ViewBag.itensdesc = db.ItemDescs.Include(i => i.Item).Include(x => x.Local).Include(x => x.Categoria).ToList();
             return View("ListaItem");
         }
         public ActionResult ListarFiltrado(string termo)
@@ -31,13 +31,13 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
             ViewBag.itens = db.Itens.Where(u => u.Nome.ToUpper().Contains(termo.ToUpper())).ToList().OrderBy(u => u.Nome);
-            ViewBag.ocorrencias = db.Ocorrencias.Include(x => x.Item).ToList();
+            ViewBag.itensdesc = db.ItemDescs.Include(i => i.Item).Include(x => x.Local).Include(x => x.Categoria).Where(i => i.Item.Nome.ToUpper().Contains(termo.ToUpper())).ToList();
             @TempData["LP"] = "x";
             return View("ListaItem");
         }
         public ActionResult Novo()
         {
-            ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome" );
+             //ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
 
             //var itens = (from i in db.Itens.Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
             //             where i.Local.Id == localId && i.Categoria.Id == categId && i.Status.Nome == "Ativado"
@@ -53,14 +53,14 @@ namespace NGT.Areas.Admin.Controllers
             //    Id = i.Id,
             //    Nome =  i.Nome + " - " + i.Bloco.Nome
             //}).ToList();
-            
+
             //var locais = new AccountBusiness()
             //.GetList<Account>(Util.AuxiliaryMethods.BMPerRequestInstance)
             //                .Select(x => new { Value = x.AccountId, Text = string.Format("{0} - {1}", x.AccountNumber, x.Description})
             //                .ToList();
             //ViewBag.Account = new SelectList(selectAccounts, "Value", "Text"));
 
-            ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
+            //ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome");
 
             return View("NovoItem");
         }
@@ -74,12 +74,12 @@ namespace NGT.Areas.Admin.Controllers
                     Item ite = new Item
                     {
                         Nome = item.Nome,
-                        NumSerie = item.NumSerie,
-                        Patrimonio = item.Patrimonio,
-                        HasPlaca = item.HasPlaca,
-                        IsPatInterno = item.IsPatInterno,
-                        LocalId = item.LocalId,
-                        CategoriaId = item.CategoriaId,
+                        //NumSerie = item.NumSerie,
+                        //Patrimonio = item.Patrimonio,
+                        //HasPlaca = item.HasPlaca,
+                        //IsPatInterno = item.IsPatInterno,
+                        //LocalId = item.LocalId,
+                        //CategoriaId = item.CategoriaId,
                         StatusId = db.Status.Where(x => x.Nome == "Desativado").FirstOrDefault().Id
                     };
 
@@ -179,8 +179,8 @@ namespace NGT.Areas.Admin.Controllers
             if (i != null)
             {
                 ViewBag.Itens = i;
-                ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.LocalId);
-                ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.CategoriaId);
+                //ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.LocalId);
+                //ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.CategoriaId);
                 ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome", i.StatusId);
 
             }
@@ -197,12 +197,12 @@ namespace NGT.Areas.Admin.Controllers
                     Item ite = db.Itens.Find(item.Id);
 
                     ite.Nome = item.Nome;
-                    ite.NumSerie = item.NumSerie;
-                    ite.Patrimonio = item.Patrimonio;
-                    ite.HasPlaca = item.HasPlaca;
-                    ite.IsPatInterno = item.IsPatInterno;
-                    ite.LocalId = item.LocalId;
-                    ite.CategoriaId = item.CategoriaId;
+                    //ite.NumSerie = item.NumSerie;
+                    //ite.Patrimonio = item.Patrimonio;
+                    //ite.HasPlaca = item.HasPlaca;
+                    //ite.IsPatInterno = item.IsPatInterno;
+                    //ite.LocalId = item.LocalId;
+                    //ite.CategoriaId = item.CategoriaId;
                     ite.StatusId = item.StatusId;
 
                     db.Entry(ite).State = EntityState.Modified;
@@ -220,18 +220,21 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
         }
-        public ActionResult ExibeItem(string id)
-        {
-            Item i = db.Itens.Find(Convert.ToInt32(id));
-            if (i != null)
-            {
-                ViewBag.Itens = i;
-                //ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.LocalId);
-                //ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.CategoriaId);
-                //ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome", i.StatusId);
+        //public ActionResult ExibeItem(string id)
+        //{
+        //    Item i = db.Itens.Find(Convert.ToInt32(id)); 
+          
+        //
+        //
+        // if (i != null)
+        //    {
+        //        ViewBag.Itens = i;
+        //        //ViewBag.LocalId = new SelectList(db.Locais.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.LocalId);
+        //        //ViewBag.CategoriaId = new SelectList(db.Categorias.Include(x => x.Status).Where(x => x.Status.Nome == "Ativado"), "Id", "Nome", i.CategoriaId);
+        //        //ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome", i.StatusId);
 
-            }
-            return View("ShowItem");
-        }
+        //    }
+        //    return View("ShowItem");
+        //}
     }
 }

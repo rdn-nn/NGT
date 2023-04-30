@@ -16,7 +16,7 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Listar()
         {
             ViewBag.categorias = db.Categorias.ToList().OrderBy(c => c.Nome).OrderByDescending(c => c.StatusId);
-            ViewBag.itens = db.Itens.Include(x => x.Categoria).ToList();
+            ViewBag.itens = db.ItemDescs.Include(x => x.Categoria).ToList();
             return View("ListaCat");
         }
         public ActionResult ListarFiltrado(string termo)
@@ -27,7 +27,8 @@ namespace NGT.Areas.Admin.Controllers
                 return Listar();
             }
             ViewBag.categorias = db.Categorias.Where(u => u.Nome.ToUpper().Contains(termo.ToUpper())).ToList().OrderBy(u => u.Nome);
-            ViewBag.itens = db.Itens.Include(x => x.Categoria).ToList();
+            ViewBag.itens = db.ItemDescs.Include(x => x.Categoria).ToList();
+            @TempData["LP"] = "x";
             return View("ListaCat");
         }
         public ActionResult Novo()

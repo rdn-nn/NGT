@@ -110,12 +110,39 @@
                                         <h3 class="profile-username itens border-bottom">Local: <span class="float-right small text-muted">@Model.Local.Nome</span></h3>
                                         <h3 class="profile-username itens border-bottom">Categoria: <span class="float-right small text-muted">@Model.Categoria.Nome</span></h3>
                                         <h3 class="profile-username itens border-bottom">Item: <span class="float-right small text-muted">@Model.Item.Nome</span></h3>
-                                        @if (Model.Obs != null)
-                                        {
-                                            <h3 class="profile-username itens">
-                                                Observações: <span class="small text-muted"> @Model.Obs</span>
-                                            </h3>
-                                        }
+                                        <div class="row g-0 justify-content-center">
+                                            <div class="col-sm-6 col-md-8">
+                                                @if (Model.Obs != null)
+                                                {
+                                                    <div>
+
+                                                        <h3 class="profile-username itens border-bottom">
+                                                            Observações: <span class="small text-muted"> @Model.Obs</span>
+                                                        </h3>
+
+                                                    </div>
+                                                }
+                                                @if (Model.InfoAtualizacao != null)
+                                                {
+                                                    <div>
+
+                                                        <h3 class="profile-username itens border-bottom">
+                                                            Comentários:<br/> <span class="small text-muted"> @Html.Raw(Model.InfoAtualizacao.Replace("|", "<br/><br/>"))</span>
+                                                        </h3>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                            
+
+                                            <div class="col-6 col-md-4">
+                                                <img id="fotoChamado" src="@Model.FotoOcorrencia" alt="@Model.NumTicket" class="img-fluid">
+                                            </div>
+                                        </div>
+
+                                        @*<div>
+                                        <img class="img-thumbnail" src="@Model.FotoOcorrencia" />
+                                                                    </div>*@
 
                                     </div>
 
@@ -129,5 +156,51 @@
             </div>
 
         </div>
+        @if (Model.FotoOcorrencia != "\\Areas\\Admin\\Content\\Images\\imgNoFound.png")
+        {
+            <div id="ImgChamado" class="modalImgChamado">
+                <span class="closeImgChamado">&times;</span>
+                <img class="modalImgChamado-content" id="img01">
+                <div id="caption"></div>
+            </div>
+        }
     </div>
-}
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default p-3 text-center txtBlack profile-username">
+
+                    Não encontramos nenhum chamado com este código!
+                    <span>
+                        Por favor, confira se o código está correto e tente novamente.
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    }
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('ImgChamado');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('fotoChamado');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("closeImgChamado")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>

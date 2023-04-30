@@ -20,7 +20,7 @@ namespace NGT.Data.Mapping
             Property(x => x.BlocoId).HasColumnName("blo_codigo");
             Property(x => x.LocalId).HasColumnName("loc_codigo");
             Property(x => x.CategoriaId).HasColumnName("cat_codigo");
-            Property(x => x.ItemId).HasColumnName("ite_codigo");
+            Property(x => x.ItemDescId).HasColumnName("itd_codigo");
             Property(x => x.MotivoId).HasColumnName("mot_codigo");
             Property(x => x.Obs).HasColumnName("ods_obs");
             Property(x => x.FornecedorId).HasColumnName("for_codigo");

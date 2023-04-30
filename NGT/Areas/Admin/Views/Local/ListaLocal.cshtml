@@ -33,6 +33,12 @@
 
         </div>
         <div class="col-sm-6 mb-3">
+            @if (@TempData["LP"] != null)
+            {
+                <a href="/admin/locais" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
+                    Limpar
+                </a>
+            }
             <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoLocal">
                 Novo Local
             </a>
@@ -56,23 +62,18 @@
                 status = false;
             }
 
-            foreach (var l in ViewBag.locais)
-            {
-                if (item.Id == l.BlocoId)
-                {
-                    foreach (var i in ViewBag.itens)
-                    {
-                        if (i.LocalId == l.Id)
-                        {
-                            totItens = totItens + 1;
-                        }
-                    }
 
+
+            foreach (var i in ViewBag.itens)
+            {
+                if (i.LocalId == item.Id)
+                {
+                    totItens = totItens + 1;
                 }
             }
 
 
-            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3">
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-2">
 
                 <div class="card card-widget widget-user card-locais">
 
@@ -97,13 +98,6 @@
 
                     <div class="card-footer locais">
                         <div class="row">
-                            @*<div class="col-sm-3 border-right">
-                                <div class="description-block">
-                                    <h5 class="description-header">@item.Id</h5>
-                                    <span class="description-text">ID</span>
-                                </div>
-
-                            </div>*@
 
                             <div class="col-sm-6 border-right">
                                 <div class="description-block">
@@ -151,8 +145,9 @@
                 });
             });
     </script>
-    <script>$(function () {
-    $('.editaLocal').click(function () {
+    <script>
+    $(function () {
+            $('.editaLocal').click(function () {
                 var id = $(this).attr("ref");
                 $("#modalE").load("/admin/locais/editalocais/" + id, function () {
                     $("#modalE").modal();

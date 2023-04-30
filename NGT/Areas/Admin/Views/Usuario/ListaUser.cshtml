@@ -15,13 +15,14 @@
         </div>
     </div>
 </section>
+
 <section class="pl-3 pr-3">
     <div class="row">
         <div class="col-sm-6 mb-3">
 
             <form action="@Url.RouteUrl("Admin.Usuario.Filtrar")" method="get" role="search" class="d-inline">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" name="termo" placeholder="Buscar usuários">
+                    <input class="form-control" type="text" name="termo" placeholder="Digite o nome de um usuário">
                     <div class="input-group-append">
                         <button class="btn input-group-text" type="submit">
                             <i class="fas fa-search fa-fw"></i>
@@ -32,6 +33,12 @@
 
         </div>
         <div class="col-sm-6 mb-3">
+            @if (@TempData["LP"] != null)
+            {
+                <a href="/admin/usuarios" class="btn btn-default btn-sm float-lg-left float-md-left float-sm-left float-left mr-3">
+                    Limpar
+                </a>
+            }
             <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoUser">
                 Novo Usuário
             </a>
@@ -97,16 +104,7 @@
                                 </i>
                                 Editar
                             </button>
-                            @*
-                                    <button rel="@item.Id" class="btn btn-primary btn-sm DetailsUser">
-                                    <i class="fas fa-folder"></i>
-                                    Ver Mais
-                                </button>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Excluir
-                                </a>*@
+
                         </div>
                     </div>
 

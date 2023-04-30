@@ -78,7 +78,7 @@ namespace NGT.Data
         {
             try
             {
-                double permitido = 1800;
+                double permitido = 5120;
                 if (flpUpload != null)
                 {
                     
@@ -92,7 +92,7 @@ namespace NGT.Data
                         return "Extensão inválida, só são permitidas .png e .jpg!";
                     else
                     {
-
+                        CriarDiretorio(id);
                         ImageResizer.ImageJob img = new ImageResizer.ImageJob(flpUpload, diretorio, new ImageResizer.ResizeSettings("width=500;height=500;format=jpg;mode=pad"));
                         img.Build();
                         //diretorio = img.FinalPath;
@@ -112,7 +112,7 @@ namespace NGT.Data
         {
             try
             {
-                double permitido = 2700;
+                double permitido = 5120;
                 if (flpUpload != null)
                 {
 
@@ -126,7 +126,7 @@ namespace NGT.Data
                         return "Extensão inválida, só são permitidas .png e .jpg!";
                     else
                     {
-
+                        CriarDiretorio(id);
                         //ImageResizer.ImageJob img = new ImageResizer.ImageJob(flpUpload, diretorio, new ImageResizer.ResizeSettings("width=500;height=500;format=jpg;mode=pad"));
                         //img.Build();
                         //diretorio = img.FinalPath;

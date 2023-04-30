@@ -4818,6 +4818,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ItemDescController.cs" />
     <Compile Include="Areas\Admin\Controllers\LocalController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotivoController.cs" />
     <Compile Include="Areas\Admin\Controllers\OcorrenciaController.cs" />
@@ -4829,6 +4830,7 @@
     <Compile Include="Data\Mapping\BlocoMap.cs" />
     <Compile Include="Data\Mapping\CategoriaMap.cs" />
     <Compile Include="Data\Mapping\FornecedorMap.cs" />
+    <Compile Include="Data\Mapping\ItemDescMap.cs" />
     <Compile Include="Data\Mapping\ItemMap.cs" />
     <Compile Include="Data\Mapping\LocalMap.cs" />
     <Compile Include="Data\Mapping\MotivoMap.cs" />
@@ -4842,66 +4844,6 @@
     <Compile Include="Data\NgtContexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051723216_InicialBD.cs" />
-    <Compile Include="Migrations\202211051723216_InicialBD.designer.cs">
-      <DependentUpon>202211051723216_InicialBD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051732083_BDComplement.cs" />
-    <Compile Include="Migrations\202211051732083_BDComplement.designer.cs">
-      <DependentUpon>202211051732083_BDComplement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051737246_BDComplement-2.cs" />
-    <Compile Include="Migrations\202211051737246_BDComplement-2.designer.cs">
-      <DependentUpon>202211051737246_BDComplement-2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051741455_BDComplement-3.cs" />
-    <Compile Include="Migrations\202211051741455_BDComplement-3.designer.cs">
-      <DependentUpon>202211051741455_BDComplement-3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051748401_BDComplement-4.cs" />
-    <Compile Include="Migrations\202211051748401_BDComplement-4.designer.cs">
-      <DependentUpon>202211051748401_BDComplement-4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051755390_BDComplement-5.cs" />
-    <Compile Include="Migrations\202211051755390_BDComplement-5.designer.cs">
-      <DependentUpon>202211051755390_BDComplement-5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211051803371_BDComplement-6.cs" />
-    <Compile Include="Migrations\202211051803371_BDComplement-6.designer.cs">
-      <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202211172338068_BDComplement-7.cs" />
-    <Compile Include="Migrations\202211172338068_BDComplement-7.designer.cs">
-      <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212022218092_BDCOmplement-8.cs" />
-    <Compile Include="Migrations\202212022218092_BDCOmplement-8.designer.cs">
-      <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212031916144_BDComplement-9.cs" />
-    <Compile Include="Migrations\202212031916144_BDComplement-9.designer.cs">
-      <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212040028027_BDComplement-10.cs" />
-    <Compile Include="Migrations\202212040028027_BDComplement-10.designer.cs">
-      <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212052333590_BDComplement-11.cs" />
-    <Compile Include="Migrations\202212052333590_BDComplement-11.designer.cs">
-      <DependentUpon>202212052333590_BDComplement-11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212060348238_BDComplement-12.cs" />
-    <Compile Include="Migrations\202212060348238_BDComplement-12.designer.cs">
-      <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212062138577_BDComplement121.cs" />
-    <Compile Include="Migrations\202212062138577_BDComplement121.designer.cs">
-      <DependentUpon>202212062138577_BDComplement121.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202212062150355_BDComplement13.cs" />
-    <Compile Include="Migrations\202212062150355_BDComplement13.designer.cs">
-      <DependentUpon>202212062150355_BDComplement13.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Email.cs" />
@@ -4918,6 +4860,7 @@
     <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\Entities\StatusTicket.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
+    <Compile Include="Models\Entities\ItemDesc.cs" />
     <Compile Include="Models\Logon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -5118,6 +5061,11 @@
     <Content Include="Content\Libs\bs-stepper\css\bs-stepper.min.css.map" />
     <Content Include="Content\Libs\bs-stepper\js\bs-stepper.js.map" />
     <Content Include="Content\Libs\bs-stepper\js\bs-stepper.min.js.map" />
+    <Content Include="Areas\Admin\Views\Bloco\EditaBloco.cshtml" />
+    <Content Include="Areas\Admin\Views\Bloco\NovoBloco.cshtml" />
+    <Content Include="Areas\Admin\Views\ItemDesc\Novo.cshtml" />
+    <Content Include="Areas\Admin\Views\ItemDesc\EditaItemDesc.cshtml" />
+    <Content Include="Areas\Admin\Views\Ocorrencia\NovaOcorrencia.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5141,53 +5089,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Js\" />
     <Folder Include="Areas\Admin\Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202211051723216_InicialBD.resx">
-      <DependentUpon>202211051723216_InicialBD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051732083_BDComplement.resx">
-      <DependentUpon>202211051732083_BDComplement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051737246_BDComplement-2.resx">
-      <DependentUpon>202211051737246_BDComplement-2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051741455_BDComplement-3.resx">
-      <DependentUpon>202211051741455_BDComplement-3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051748401_BDComplement-4.resx">
-      <DependentUpon>202211051748401_BDComplement-4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051755390_BDComplement-5.resx">
-      <DependentUpon>202211051755390_BDComplement-5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211051803371_BDComplement-6.resx">
-      <DependentUpon>202211051803371_BDComplement-6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202211172338068_BDComplement-7.resx">
-      <DependentUpon>202211172338068_BDComplement-7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212022218092_BDCOmplement-8.resx">
-      <DependentUpon>202212022218092_BDCOmplement-8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212031916144_BDComplement-9.resx">
-      <DependentUpon>202212031916144_BDComplement-9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212040028027_BDComplement-10.resx">
-      <DependentUpon>202212040028027_BDComplement-10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212052333590_BDComplement-11.resx">
-      <DependentUpon>202212052333590_BDComplement-11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212060348238_BDComplement-12.resx">
-      <DependentUpon>202212060348238_BDComplement-12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212062138577_BDComplement121.resx">
-      <DependentUpon>202212062138577_BDComplement121.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202212062150355_BDComplement13.resx">
-      <DependentUpon>202212062150355_BDComplement13.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

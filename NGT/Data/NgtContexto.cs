@@ -1,4 +1,5 @@
 ﻿using NGT.Data.Mapping;
+using NGT.Models;
 using NGT.Models.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -19,6 +20,7 @@ namespace NGT.Data
         public DbSet<Motivo> Motivos { get; set; }
         public DbSet<Local> Locais { get; set; }
         public DbSet<Item> Itens { get; set; }
+        public DbSet<ItemDesc> ItemDescs { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
         public DbSet<OrdServico> OrdServicos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
@@ -36,6 +38,7 @@ namespace NGT.Data
             mb.Configurations.Add(new MotivoMap());
             mb.Configurations.Add(new LocalMap());
             mb.Configurations.Add(new ItemMap());
+            mb.Configurations.Add(new ItemDescMap());
             mb.Configurations.Add(new OcorrenciaMap());
             mb.Configurations.Add(new OrdServicoMap());
             mb.Configurations.Add(new FornecedorMap());

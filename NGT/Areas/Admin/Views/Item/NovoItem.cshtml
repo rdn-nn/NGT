@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title txtBlack" id="NovoItem">Cadastro de Novos Itens</h5>
@@ -19,62 +19,62 @@
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
-                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.NumSerie, "Nº Série: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.EditorFor(model => model.NumSerie, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
-                            @Html.ValidationMessageFor(model => model.NumSerie, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Patrimonio, "Nº Patrimônio: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.EditorFor(model => model.Patrimonio, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
-                            @Html.ValidationMessageFor(model => model.Patrimonio, "", new { @class = "text-danger" })
-                        </div>
+                @*<div class="row">
+            <div class="col-6">*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, "Nome: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                        </div>
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.NumSerie, "Nº Série: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.EditorFor(model => model.NumSerie, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                        @Html.ValidationMessageFor(model => model.NumSerie, "", new { @class = "text-danger" })
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CategoriaId, "Categoria: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Patrimonio, "Nº Patrimônio: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.EditorFor(model => model.Patrimonio, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                        @Html.ValidationMessageFor(model => model.Patrimonio, "", new { @class = "text-danger" })
                     </div>
-
-                    <div class="form-check">
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.CheckBox("HasPlaca", false, htmlAttributes: new { @class = "form-check-input", @name = "HasPlaca" })
-                            @Html.LabelFor(model => model.HasPlaca, "Possui placa? ", htmlAttributes: new { @class = "form-check-label" })
-                        </div>
-                    </div>
-
-                    <div class="form-check">
-                        <div class="col-md-12 pl-3 pr-3">
-                            @Html.CheckBox("IsPatInterno", false, htmlAttributes: new { @class = "form-check-input", @name = "IsPatInterno" })
-                            @Html.LabelFor(model => model.IsPatInterno, "É patrimônio interno? ", htmlAttributes: new { @class = "form-check-label" })
-                        </div>
-                    </div>
-
                 </div>
             </div>
-                
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("LocalId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoriaId, "Categoria: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.CheckBox("HasPlaca", false, htmlAttributes: new { @class = "form-check-input", @name = "HasPlaca" })
+                        @Html.LabelFor(model => model.HasPlaca, "Possui placa? ", htmlAttributes: new { @class = "form-check-label" })
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <div class="col-md-12 pl-3 pr-3">
+                        @Html.CheckBox("IsPatInterno", false, htmlAttributes: new { @class = "form-check-input", @name = "IsPatInterno" })
+                        @Html.LabelFor(model => model.IsPatInterno, "É patrimônio interno? ", htmlAttributes: new { @class = "form-check-label" })
+                    </div>
+                </div>
+
+                </div>
+            </div>*@
+
                 <div class="modal-footer justify-content-end col-11 col-md-12">
                     <button type="submit" class="btn btn-default ">Gravar</button>
                 </div>

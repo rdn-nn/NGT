@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Web.UI.HtmlControls;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace NGT.Controllers
 {
@@ -46,7 +47,7 @@ namespace NGT.Controllers
                 Ocorrencia ocorrencia = new Ocorrencia();
                 ocorrencia.Obs = Oco.Obs;
                 ocorrencia.NumTicket = ticket;
-                ocorrencia.FotoOcorrencia = Oco.FotoOcorrencia;
+                ocorrencia.FotoOcorrencia = "\\Areas\\Admin\\Content\\Images\\imgNoFound.png";
                 ocorrencia.Email = Oco.Email;
                 ocorrencia.BlocoId = Oco.BlocoId;
                 ocorrencia.LocalId = Oco.LocalId;
@@ -60,7 +61,7 @@ namespace NGT.Controllers
 
                 if (FotoOcorrencia != null)
                 {
-                    Funcoes.CriarDiretorio(ocorrencia.NumTicket);
+                    //Funcoes.CriarDiretorio(ocorrencia.NumTicket);
                     string nomearq = "FotoOcorrencia" + ocorrencia.NumTicket + ".png";
                     valor = Funcoes.UploadArquivo(FotoOcorrencia, nomearq, ocorrencia.NumTicket);
                     if (valor == "sucesso")
@@ -78,7 +79,7 @@ namespace NGT.Controllers
                 {
                     string msg = "<h3>Sistema NewGen Tech</h3>";
                     msg += "<p>Seu chamado foi registrado com sucesso! Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + ticket + " </p>";
-                    Funcoes.EnviarEmail(Oco.Email, "Registro de Chamano no sistema da Fatec", msg);
+                    Funcoes.EnviarEmail(Oco.Email, "Registro de Chamado no sistema da Fatec", msg);
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -103,15 +104,14 @@ namespace NGT.Controllers
         [HttpPost]
         public ActionResult CarregaItem(int localId, int categId)
         {
-            // Filter the states by country. For example:
 
-            var itens = (from i in db.Itens.Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
-                         where i.Local.Id == localId && i.Categoria.Id == categId && i.Status.Nome == "Ativado"
+            var itens = (from i in db.ItemDescs.Include(x => x.Item).Include(x => x.Local).Include(x => x.Categoria).Include(x => x.Status)
+                         where i.Local.Id == localId && i.CategoriaId == categId && i.Status.Nome == "Ativado"
                          select new
                          {
-                             id = i.Id,
-                             nome = i.Nome
-                         }).ToArray();
+                             id = i.Item.Id,
+                             nome = i.Item.Nome,
+                         }).Distinct().ToArray();
             return Json(itens);
         }
 
