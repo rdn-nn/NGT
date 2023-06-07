@@ -35,14 +35,14 @@ namespace NGT
                 defaults: new { controller = "Home", action = "AtivaUser" },
                 namespaces: namespaces
             );
-           
+
 
 
             //Rotas de Ocorrencias
             routes.MapRoute(
                 name: "Home.Ocorrencia",
                 url: "novaocorrencia",
-                defaults: new { controller = "Ocorrencias", action = "Criar" }, 
+                defaults: new { controller = "Ocorrencias", action = "Criar" },
                 namespaces: namespaces
             );
             routes.MapRoute(
@@ -63,7 +63,13 @@ namespace NGT
                defaults: new { controller = "Ocorrencias", action = "ConsultaChamado" },
                namespaces: namespaces
            );
-            
+            routes.MapRoute(
+              name: "Home.Ocorrencia.CriarChamadoAPI",
+              url: "ocorrencias/CriarChamadoAPI",
+              defaults: new { controller = "Ocorrencias", action = "CriarChamadoAPI" },
+              namespaces: namespaces
+          );
+
 
         }
     }

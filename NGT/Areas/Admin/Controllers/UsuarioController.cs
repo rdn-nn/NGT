@@ -23,7 +23,7 @@ namespace NGT.Areas.Admin.Controllers
         public ActionResult Listar()
         {
 
-            ViewBag.usuarios = db.Usuarios.Include(x=>x.Perfil).ToList().OrderBy(u => u.Nome);
+            ViewBag.usuarios = db.Usuarios.Include(x => x.Perfil).ToList().OrderBy(u => u.Nome);
             return View("ListaUser");
         }
 
@@ -223,24 +223,11 @@ namespace NGT.Areas.Admin.Controllers
             if (u != null)
             {
                 ViewBag.Usuario = u;
-                if (u.Status.Nome == "Ativado")
-                {
 
-                    ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome");
-                }
-                else
-                {
-                    ViewBag.StatusId = new SelectList(db.Status.OrderBy(s => s.Id), "Id", "Nome");
-                }
+                ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome", u.Status.Id);
 
-                if (u.Perfil.Nome == "Administrador")
-                {
-                    ViewBag.PerfilId = new SelectList(db.Perfis.OrderBy(s => s.Id), "Id", "Nome");
-                }
-                else
-                {
-                    ViewBag.PerfilId = new SelectList(db.Perfis.OrderByDescending(s => s.Id), "Id", "Nome");
-                }
+                ViewBag.PerfilId = new SelectList(db.Perfis.OrderBy(s => s.Id), "Id", "Nome", u.Perfil.Id);
+
             }
             return View("EditUser");
         }
@@ -286,52 +273,42 @@ namespace NGT.Areas.Admin.Controllers
 
         public ActionResult AlteraSenha(string id)
         {
-
-            if (id == null)
+            Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
+            if (u != null)
             {
-                return View("ConsultaChamado");
+                ViewBag.Usuario = u;
             }
-            else
+            return View("AlteraSenhaUser");
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult AlteraSenha(string id, string passwordAtual, string passwordNovo, string novoRepete)
+        {
+            if (ModelState.IsValid)
             {
                 Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
-
                 if (u != null)
                 {
-                    return PartialView("_CarregaChamado", u);
+                    var senhaAtual = Funcoes.HashTexto(passwordAtual, "SHA512");
+                    if (senhaAtual == u.Senha)
+                    {
+                        var novaSenha = Funcoes.HashTexto(passwordNovo, "SHA512");
+
+                        u.Senha = novaSenha;
+
+                        db.Entry(u).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["MSG"] = "success|Senha de usuário atualizada com sucesso";
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    TempData["MSG"] = "error|Senha atual incorreta. Tente novamente.";
+                    return RedirectToAction("Index", "Dashboard");
                 }
-
-                return View("ConsultaChamado");
+                TempData["MSG"] = "error|Usuário não encontrado no cadastro";
+                return RedirectToAction("Index", "Dashboard");
             }
-            //    var encontrado = db.Ocorrencias.Where(x => x.NumTicket == termo).ToList().FirstOrDefault();
-            //    //TempData["LP"] = "x";
-            //    return PartialView("_CarregaChamado", encontrado);
-            //}
-
-            //    Usuario u = db.Usuarios.Find(Convert.ToInt32(id));
-            //if (u != null)
-            //{
-            //    ViewBag.Usuario = u;
-            //    if (u.Status.Nome == "Ativado")
-            //    {
-
-            //        ViewBag.StatusId = new SelectList(db.Status.OrderByDescending(s => s.Id), "Id", "Nome");
-            //    }
-            //    else
-            //    {
-            //        ViewBag.StatusId = new SelectList(db.Status.OrderBy(s => s.Id), "Id", "Nome");
-            //    }
-
-            //    if (u.Perfil.Nome == "Administrador")
-            //    {
-            //        ViewBag.PerfilId = new SelectList(db.Perfis.OrderBy(s => s.Id), "Id", "Nome");
-            //    }
-            //    else
-            //    {
-            //        ViewBag.PerfilId = new SelectList(db.Perfis.OrderByDescending(s => s.Id), "Id", "Nome");
-            //    }
-            //}
-            //return View("EditUser");
+            TempData["MSG"] = "warning|Preencha todos os campos|x";
+            return RedirectToAction("Index", "Dashboard");
         }
-
     }
+
 }

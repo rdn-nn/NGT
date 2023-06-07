@@ -11,7 +11,7 @@ namespace NGT.Data
 {
     public class Funcoes
     {
-       public static string HashTexto(string texto, string nomeHash)
+        public static string HashTexto(string texto, string nomeHash)
         {
             HashAlgorithm algoritmo = HashAlgorithm.Create(nomeHash);
             if (algoritmo == null)
@@ -81,7 +81,7 @@ namespace NGT.Data
                 double permitido = 5120;
                 if (flpUpload != null)
                 {
-                    
+
                     string arq = Path.GetFileName(flpUpload.FileName);
                     double tamanho = Convert.ToDouble(flpUpload.ContentLength) / 1024;
                     string extensao = Path.GetExtension(flpUpload.FileName).ToLower();
@@ -177,5 +177,234 @@ namespace NGT.Data
             string resultado = new String(decodeChar);
             return resultado;
         }
+
+        public static string GerarGraficoPizza2(string titulo, string dados)
+        {
+            string grafico = @"<script src=""https://code.highcharts.com/highcharts.js""></script>
+<script src=""https://code.highcharts.com/modules/exporting.js""></script>
+<script src=""https://code.highcharts.com/modules/export-data.js""></script>
+<script src=""https://code.highcharts.com/modules/accessibility.js""></script>
+<figure class=""highcharts-figure"">
+  <div id=""container""></div>
+</figure>
+
+<script type=""text/javascript"">
+Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Quantidade total de OS por Status',
+    align: 'center'
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+      }
+    }
+  },
+
+series: [
+    {
+      name: 'Status',
+      colorByPoint: true,
+      data: [" + dados + @"]
+    }
+  ]
+});
+</script>";
+            return grafico;
+        }
+
+        public static string GerarGraficoColunas(string titulo, string dados1, string dados2, int ano)
+        {
+            string grafico = @"<script src=""https://code.highcharts.com/highcharts.js""></script>
+<script src=""https://code.highcharts.com/modules/data.js""></script>
+<script src=""https://code.highcharts.com/modules/drilldown.js""></script>
+<script src=""https://code.highcharts.com/modules/exporting.js""></script>
+<script src=""https://code.highcharts.com/modules/export-data.js""></script>
+<script src=""https://code.highcharts.com/modules/accessibility.js""></script>
+
+<figure class=""highcharts-figure"">
+  <div id=""container3""></div>
+</figure>
+
+<script type=""text/javascript"">
+Highcharts.chart('container3', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    align: 'center',
+    text: 'Gastos (R$) com Forncedores - Ano " + ano + @"'
+  },
+  subtitle: {
+    align: 'center',
+    text: 'Selecione o fornecedor para visualizar gastos mensais.'
+  },
+  accessibility: {
+    announceNewData: {
+      enabled: true
+    }
+},
+  xAxis:
+{
+type: 'category'
+  },
+  yAxis:
+{
+title:
+    {
+    text: 'Valor em R$'
+    }
+},
+  legend:
+{
+enabled: false
+  },
+  plotOptions:
+{
+series:
+    {
+    borderWidth: 0,
+      dataLabels:
+        {
+        enabled: true,
+        format: '{point.y:.1f}'
+      }
+    }
+},
+
+  tooltip:
+{
+headerFormat: '<span style=""font-size:11px"">{series.name}</span><br>',
+    pointFormat: '<span style=""color:{point.color}"">{point.name}</span>: <b>{point.y:.2f}</b> reais<br/>'
+  },
+
+  series:
+[
+    {
+name: 'Fornecedores',
+      colorByPoint: true,
+      data:
+     [" + dados1 + @"]                                                                                                                              
+    }
+  ],
+  drilldown:
+{
+breadcrumbs:
+    {
+    position:
+        {
+        align: 'left'
+      }
+    },
+    series:
+    [" + dados2 + @"]    
+  }
+});
+</script>";
+            return grafico;
+
+        }
+
+        public static string GerarGraficoBarras(string titulo, string dados1, string dados2)
+        {
+            string grafico = @"<script src=""https://code.highcharts.com/highcharts.js""></script>
+<script src=""https://code.highcharts.com/modules/exporting.js""></script>
+<script src=""https://code.highcharts.com/modules/export-data.js""></script>
+<script src=""https://code.highcharts.com/modules/accessibility.js""></script>
+
+<figure class=""highcharts-figure"">
+  <div id=""container4""></div>
+</figure>
+
+<script type=""text/javascript"">
+Highcharts.chart('container4', {
+ chart: {
+    type: 'bar'
+  },
+  title: {
+    text: 'Gastos (R$) das OS por Tipo, classificados por CC',
+    align: 'left'
+  },
+  xAxis: {
+    categories: [" + dados1 + @"],
+    title: {
+      text: null
+    },
+    gridLineWidth: 1,
+    lineWidth: 0
+  },
+  yAxis:
+{
+min: 0,
+    title:
+    {
+    text: 'Valor em R$',
+      align: 'high'
+    },
+    labels:
+    {
+    overflow: 'justify'
+    },
+    gridLineWidth: 0
+  },
+  tooltip:
+{
+valueSuffix: ' reais'
+  },
+  plotOptions:
+{
+bar:
+    {
+    borderRadius: '50%',
+      dataLabels:
+        {
+        enabled: true
+      },
+      groupPadding: 0.1
+    }
+},
+  legend:
+{
+layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'top',
+    x: -10,
+    y: 50,
+    floating: true,
+    borderWidth: 1,
+    backgroundColor:
+    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+    shadow: true
+  },
+  credits:
+{
+enabled: false
+  },
+  series:
+[" + dados2 + @"]
+});
+</script>";
+            return grafico;
+
+        }
+
     }
 }

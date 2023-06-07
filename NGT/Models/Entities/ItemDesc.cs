@@ -24,11 +24,20 @@ namespace NGT.Models.Entities
         public int CategoriaId { get; set; }
         [Required]
         public int StatusId { get; set; }
+        public string ItemDescInfo
+        {
+            get { return $"{Item.Nome} - Patrim. {Patrimonio}"; }
+        }
+
+
         public virtual Item Item { get; set; }
         public virtual Local Local { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual Status Status { get; set; }
+
+
         //public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
-        public virtual ICollection<OrdServico> OrdServico { get; set; }
+        //public virtual ICollection<OrdServico> OrdServico { get; set; }
+        public virtual ICollection<OSItem> OSItem { get; set; }
     }
 }

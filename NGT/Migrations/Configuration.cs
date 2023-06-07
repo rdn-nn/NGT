@@ -38,17 +38,17 @@ namespace NGT.Migrations
 
             cont.Perfis.AddOrUpdate(
             p => p.Nome,
-                new Perfil { Id = 1, Nome = "Administrador" },
-                new Perfil { Id = 2, Nome = "Gerente" }
+                new Perfil { Id = 1, Nome = "Diretor de Serviços" },
+                new Perfil { Id = 2, Nome = "Administrador" }
             );
 
-            ////////Abc123
+            ////////Abcd123*
             cont.Usuarios.AddOrUpdate(
             u => u.Email,
-                 new Usuario { Id = 1, Nome = "Nice Montarroyos", Email = "nice.montarroyos@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2 , FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
-                 new Usuario { Id = 2, Nome = "Jessica Aquiles", Email = "jessica.lucio@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
-                 new Usuario { Id = 3, Nome = "Rudson Nunes", Email = "rudson.nunes@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 2, PerfilId = 1, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
-                 new Usuario { Id = 3, Nome = "Wanderson dos Santos", Email = "wanderson.santos6@fatec.sp.gov.br", Senha = "vDDsx1jGNpHGnmbYRjJmcJJL/5YJtf6/OcHobMqPtyeDrV5bcHY1nm1wm8WM03mt4UlZRfhZHph2yyY05DE5pg==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" }
+                 new Usuario { Id = 1, Nome = "Nice Montarroyos", Email = "nice.montarroyos@fatec.sp.gov.br", Senha = "641IWbeutP6fjoNs5swXN32h1bvBNz5tSCUNZe549ysNptjgB2Pz+dBPZ/D0GHrDkwOP3c4QCmjmc+UeWyk1TA==", StatusId = 1, PerfilId = 2 , FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 2, Nome = "Jessica Aquiles", Email = "jessica.lucio@fatec.sp.gov.br", Senha = "641IWbeutP6fjoNs5swXN32h1bvBNz5tSCUNZe549ysNptjgB2Pz+dBPZ/D0GHrDkwOP3c4QCmjmc+UeWyk1TA==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 3, Nome = "Rudson Nunes", Email = "rudson.nunes@fatec.sp.gov.br", Senha = "641IWbeutP6fjoNs5swXN32h1bvBNz5tSCUNZe549ysNptjgB2Pz+dBPZ/D0GHrDkwOP3c4QCmjmc+UeWyk1TA==", StatusId = 2, PerfilId = 1, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" },
+                 new Usuario { Id = 3, Nome = "Wanderson dos Santos", Email = "wanderson.santos6@fatec.sp.gov.br", Senha = "641IWbeutP6fjoNs5swXN32h1bvBNz5tSCUNZe549ysNptjgB2Pz+dBPZ/D0GHrDkwOP3c4QCmjmc+UeWyk1TA==", StatusId = 1, PerfilId = 2, FotoPerfil = "\\Areas\\Admin\\Content\\Images\\anonimo.jpg" }
             );
 
             cont.Blocos.AddOrUpdate(

@@ -20,7 +20,7 @@ namespace NGT.Areas.Admin.Controllers
         {
             ViewBag.Ocorrencias = db.Ocorrencias.Include(x => x.Bloco).Include(x => x.Categoria).Include(x => x.Item).Include(x => x.Local).Include(x => x.Motivo).Include(x => x.StatusTicket).ToList();
 
-            ViewBag.StatusTicketsId = db.StatusTickets.ToList();
+            //ViewBag.StatusTicketsId = db.StatusTickets.ToList();
 
             ViewBag.Pendente = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Pendente").Count();
             ViewBag.Andamento = db.Ocorrencias.Include(x => x.StatusTicket).Where(x => x.StatusTicket.Nome == "Em Andamento").Count();
@@ -45,6 +45,7 @@ namespace NGT.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string valor = "";
+                var email = db.Usuarios.Find(Convert.ToInt32(User.Identity.Name.Split('|')[0]));
                 var nomeBloco = db.Blocos.Where(x => x.Id == Oco.BlocoId).FirstOrDefault().Nome;
                 var letraBloco = nomeBloco.Substring(nomeBloco.Length - 1, 1);
                 var idoco = 0;
@@ -66,6 +67,7 @@ namespace NGT.Areas.Admin.Controllers
                     CategoriaId = Oco.CategoriaId,
                     ItemId = Oco.ItemId,
                     MotivoId = Oco.MotivoId,
+                    Email = email.Email,
                     StatusTicketId = db.StatusTickets.Where(x => x.Nome == "Pendente").FirstOrDefault().Id
                 };
 

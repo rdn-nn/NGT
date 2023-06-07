@@ -175,8 +175,20 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "OS", action = "CarregaItem" },
                 namespaces: namespaces
             );
+            context.MapRoute(
+                name: "admin.OS.EditaOS",
+                url: "admin/os/editaos/{id}",
+                defaults: new { controller = "OS", action = "EditaOS" },
+                namespaces: namespaces
+            );
 
 
+            context.MapRoute(
+               name: "Admin.OSItem.Index",
+               url: "admin/ositem",
+               defaults: new { controller = "OSItem", action = "Index" },
+               namespaces: namespaces
+           );
 
 
             context.MapRoute(
@@ -228,6 +240,51 @@ namespace NGT.Areas.Admin
                 defaults: new { controller = "Dashboard", action = "LogOut" },
                 namespaces: namespaces
             );
+
+
+
+
+
+
+            //TIPOS DE MANUTENÇÃO
+            context.MapRoute(
+              name: "Admin.ManutencaoTipo.Index",
+              url: "admin/manutencaotipo",
+              defaults: new { controller = "ManutencaoTipo", action = "Listar" },
+              namespaces: namespaces
+          );
+            context.MapRoute(
+               name: "Admin.ManutencaoTipo.Novo",
+               url: "admin/manutencaotipo/novo-tipo",
+               defaults: new { controller = "ManutencaoTipo", action = "Novo" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+                name: "Admin.ManutencaoTipo.EditaTipos",
+                url: "admin/manutencaotipo/editatipos/{id}",
+                defaults: new { controller = "ManutencaoTipo", action = "EditaTipos" },
+                namespaces: namespaces
+            );
+            context.MapRoute(
+               name: "Admin.ManutencaoTipo.TrocarStatus",
+               url: "admin/manutencaotipo/trocarstatus",
+               defaults: new { controller = "ManutencaoTipo", action = "TrocarStatus" },
+               namespaces: namespaces
+           );
+            context.MapRoute(
+              name: "Admin.ManutencaoTipo.Filtrar",
+              url: "admin/manutencaotipo/filtrar",
+              defaults: new { controller = "ManutencaoTipo", action = "ListarFiltrado" },
+              namespaces: namespaces
+          );
+            context.MapRoute(
+              name: "Admin.ManutencaoTipo.Remover",
+              url: "admin/manutencaotipo/remove-tipo",
+              defaults: new { controller = "ManutencaoTipo", action = "Remover" },
+              namespaces: namespaces
+          );
+
+
 
 
 

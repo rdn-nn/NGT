@@ -24,8 +24,9 @@ namespace NGT.Data
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
         public DbSet<OrdServico> OrdServicos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
-        public DbSet<OrdServicoOcorrencia> OrdServicoOcorrencias { get; set; }
-
+        public DbSet<OSItem> OSItem { get; set; }
+        public DbSet<ManutencaoTipo> ManutencaoTipo { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder mb)
         {
             mb.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -42,7 +43,9 @@ namespace NGT.Data
             mb.Configurations.Add(new OcorrenciaMap());
             mb.Configurations.Add(new OrdServicoMap());
             mb.Configurations.Add(new FornecedorMap());
-            mb.Configurations.Add(new OrdServicoOcorrenciaMap());
+            mb.Configurations.Add(new OSItemMap());
+            mb.Configurations.Add(new ManutencaoTipoMap());
+
             base.OnModelCreating(mb);
         }
     }

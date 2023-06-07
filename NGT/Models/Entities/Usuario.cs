@@ -28,6 +28,6 @@ namespace NGT.Models.Entities
 
         public virtual Perfil Perfil { get; set; }
         public virtual Status Status { get; set; }
-        
+        public virtual ICollection<OrdServico> OrdServico { get; set; }
     }
 }

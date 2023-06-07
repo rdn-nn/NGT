@@ -2586,6 +2586,7 @@
     <Content Include="Areas\Admin\Content\Libs\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.js" />
     <Content Include="Areas\Admin\Content\Libs\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
     <Content Include="Content\Css\open_area.css" />
+    <Content Include="Content\Css\style.css" />
     <Content Include="Content\Images\bgNGT.png" />
     <Content Include="Content\Images\buscaVazia.png" />
     <Content Include="Content\Images\NewGenTechDark.png" />
@@ -4804,6 +4805,9 @@
     <Content Include="Content\Libs\jquery\jquery.min.js" />
     <Content Include="Content\Libs\jquery\jquery.slim.js" />
     <Content Include="Content\Libs\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Libs\jquery\jquery.slimscroll.min.js" />
+    <Content Include="Content\Libs\prettify\prettify.css" />
+    <Content Include="Content\Libs\prettify\prettify.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -4820,9 +4824,11 @@
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemDescController.cs" />
     <Compile Include="Areas\Admin\Controllers\LocalController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManutencaoTipoController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotivoController.cs" />
     <Compile Include="Areas\Admin\Controllers\OcorrenciaController.cs" />
     <Compile Include="Areas\Admin\Controllers\OSController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OSItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OcorrenciasController.cs" />
@@ -4836,7 +4842,8 @@
     <Compile Include="Data\Mapping\MotivoMap.cs" />
     <Compile Include="Data\Mapping\OcorrenciaMap.cs" />
     <Compile Include="Data\Mapping\OrdServicoMap.cs" />
-    <Compile Include="Data\Mapping\OrdServicoOcorrenciaMap.cs" />
+    <Compile Include="Data\Mapping\ManutencaoTipoMap.cs" />
+    <Compile Include="Data\Mapping\OSItemMap.cs" />
     <Compile Include="Data\Mapping\PerfilMap.cs" />
     <Compile Include="Data\Mapping\StatusMap.cs" />
     <Compile Include="Data\Mapping\StatusTicketMap.cs" />
@@ -4852,10 +4859,11 @@
     <Compile Include="Models\Entities\Fornecedor.cs" />
     <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\Local.cs" />
+    <Compile Include="Models\Entities\ManutencaoTipo.cs" />
     <Compile Include="Models\Entities\Motivo.cs" />
     <Compile Include="Models\Entities\Ocorrencia.cs" />
     <Compile Include="Models\Entities\OrdServico.cs" />
-    <Compile Include="Models\Entities\OrdServicoOcorrencia.cs" />
+    <Compile Include="Models\Entities\OSItem.cs" />
     <Compile Include="Models\Entities\Perfil.cs" />
     <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\Entities\StatusTicket.cs" />
@@ -5066,6 +5074,12 @@
     <Content Include="Areas\Admin\Views\ItemDesc\Novo.cshtml" />
     <Content Include="Areas\Admin\Views\ItemDesc\EditaItemDesc.cshtml" />
     <Content Include="Areas\Admin\Views\Ocorrencia\NovaOcorrencia.cshtml" />
+    <Content Include="Areas\Admin\Views\OS\NovaOS.cshtml" />
+    <Content Include="Areas\Admin\Views\OS\EditaOS.cshtml" />
+    <Content Include="Areas\Admin\Views\ManutencaoTipo\ListaManutTipos.cshtml" />
+    <Content Include="Areas\Admin\Views\ManutencaoTipo\NovoManutTipos.cshtml" />
+    <Content Include="Areas\Admin\Views\ManutencaoTipo\EditaManutTipos.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuario\AlteraSenhaUser.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -5089,6 +5103,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Js\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\OSItem\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

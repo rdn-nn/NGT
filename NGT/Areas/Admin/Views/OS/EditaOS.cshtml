@@ -1,0 +1,189 @@
+﻿@model NGT.Models.Entities.OrdServico
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title txtBlack" id="EditaOcorrencia">Edição de Ordem de Serviços</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="overflow-hidden">
+
+            @using (Html.BeginForm("EditaOS", "OS", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="modal-footer col-11 col-md-12 m-0 pb-0 justify-content-between">
+                    <div>
+                        <label class="control-label text-muted">ID de registro:</label>
+                        @ViewBag.ordens.Id
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+
+                        <div class="form-group">
+                            <label class="control-label pl-3 pt-3">Item:</label>
+                            <div class="col-md-12 pl-3 pr-3">
+
+                                <select class="form-control col-11 col-md-12 select2" multiple="multiple" name="ItemDescId" style="width: 100%;">
+                                    @foreach (var item in ViewBag.ItemDescId)
+                                    {
+                                        var isSelected = false;
+                                        foreach (var itemSel in ViewBag.SelectedItems)
+                                        {
+                                            if (item.Value == itemSel.Text)
+                                            {
+                                                isSelected = true;
+                                            }
+                                        }
+
+                                        <option value="@item.Value" @(isSelected ? "selected" : "")>@item.Text</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DescProblema, "Desc. do Problema:", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                <textarea name="DescProblema" class="form-control col-11 col-md-12" rows="3" style="resize: none;">@ViewBag.ordens.DescProblema</textarea>
+                                @*@Html.TextAreaFor(model => model.DescProblema, new { @class = "form-control col-11 col-md-12", rows = "3" })*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Obs, "Observações:", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                <textarea name="Obs" class="form-control col-11 col-md-12" rows="3" style="resize: none;" placeholder="@ViewBag.ordens.Obs"></textarea>
+                                @*@Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "3" })*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FornecedorId, "Fornecedor: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("FornecedorId", null, "Selecione o Fornecedor", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group m-0">
+                            @Html.LabelFor(model => model.StatusTicketId, "Status: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("StatusTicketId", null, htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ManutencaoTipoId, "Tipo de Manutenção: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                @Html.DropDownList("ManutencaoTipoId", null, "Selecione o tipo de Manutenção", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Valor, "Valor Total do Serviço (R$): ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                <input type="text" name="Valor" class="form-control col-11 col-md-12" value="@ViewBag.ordens.Valor">
+                                @*@Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })*@
+                                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+            @Html.LabelFor(model => model.Desconto, "Desconto (%): ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+            <div class="col-md-12 pl-3 pr-3">
+                <input type="text" name="Desconto" class="form-control col-11 col-md-12" value="@ViewBag.ordens.Desconto">
+                @Html.EditorFor(model => model.Desconto, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })
+                @Html.ValidationMessageFor(model => model.Desconto, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                        <div class="form-group">
+                            <label class="control-label pl-3 pt-3">Data Previsão de Entrega:</label>
+                            <div class="input-group date col-md-12 pl-3 pr-3" id="prevDate" data-target-input="nearest">
+                                <input type="text" class="form-control col-11 col-md-12 datetimepicker-input" data-target="#prevDate" name="DataEntregaPrevis" value="@ViewBag.ordens.DataEntregaPrevis" />
+                                <div class="input-group-append" data-target="#prevDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label pl-3 pt-3">Data Entrega Real</label>
+                            <div class="input-group date col-md-12 pl-3 pr-3" id="rDate" data-target-input="nearest">
+                                <input type="text" class="form-control col-11 col-md-12 datetimepicker-input" data-target="#rDate" name="DataEntregaReal" value="@ViewBag.ordens.DataEntregaReal" />
+                                <div class="input-group-append" data-target="#rDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NotaF, "Nota Fiscal: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                <input type="text" name="NotaF" class="form-control col-11 col-md-12" value="@ViewBag.ordens.NotaF">
+                                @*@Html.EditorFor(model => model.NotaF, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })*@
+                                @Html.ValidationMessageFor(model => model.NotaF, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CentroCusto, "Centro de Custo: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                            <div class="col-md-12 pl-3 pr-3">
+                                <input type="text" name="CentroCusto" class="form-control col-11 col-md-12" value="@ViewBag.ordens.CentroCusto">
+                                @*@Html.EditorFor(model => model.CentroCusto, new { htmlAttributes = new { @class = "form-control col-11 col-md-12" } })*@
+                                @Html.ValidationMessageFor(model => model.CentroCusto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer col-11 col-md-12">
+                    <button type="submit" class="btn btn-default float-right">
+                        <i class="fas fa-solid fa-floppy-disk"></i>
+                        Salvar
+                    </button>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+@section ScriptPage {
+
+}
+<script src="~/Areas/Admin/Content/Libs/daterangepicker/daterangepicker.js"></script>
+<script src="~/Areas/Admin/Content/Libs/select2/js/select2.full.min.js"></script>
+<script src="~/Areas/Admin/Content/Libs/moment/moment.min.js"></script>
+<script src="~/Areas/Admin/Content/Libs/inputmask/jquery.inputmask.min.js"></script>
+<script src="~/Areas/Admin/Content/Libs/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Date picker
+        $('#prevDate').datetimepicker({
+            format: 'DD/MM/yyyy'
+        });
+        $('#rDate').datetimepicker({
+            format: 'DD/MM/yyyy'
+        });
+    })
+</script>

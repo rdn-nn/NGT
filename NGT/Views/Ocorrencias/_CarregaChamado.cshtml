@@ -112,37 +112,39 @@
                                         <h3 class="profile-username itens border-bottom">Item: <span class="float-right small text-muted">@Model.Item.Nome</span></h3>
                                         <div class="row g-0 justify-content-center">
                                             <div class="col-sm-6 col-md-8">
+
                                                 @if (Model.Obs != null)
                                                 {
-                                                    <div>
-
-                                                        <h3 class="profile-username itens border-bottom">
-                                                            Observações: <span class="small text-muted"> @Model.Obs</span>
+                                                    <div id="divObs">
+                                                        <h3 class="profile-username itens">
+                                                            Observações:<br /> <span class="small text-muted"> @Model.Obs</span>
                                                         </h3>
-
                                                     </div>
+
                                                 }
                                                 @if (Model.InfoAtualizacao != null)
                                                 {
-                                                    <div>
 
-                                                        <h3 class="profile-username itens border-bottom">
-                                                            Comentários:<br/> <span class="small text-muted"> @Html.Raw(Model.InfoAtualizacao.Replace("|", "<br/><br/>"))</span>
+                                                    <div id="divCom">
+                                                        <h3 class="profile-username itens">
+                                                            Comentários:<br /> <span class="small text-muted"> @Html.Raw(Model.InfoAtualizacao.Replace("|", "<br/>"))</span>
                                                         </h3>
-
                                                     </div>
                                                 }
                                             </div>
-                                            
 
-                                            <div class="col-6 col-md-4">
-                                                <img id="fotoChamado" src="@Model.FotoOcorrencia" alt="@Model.NumTicket" class="img-fluid">
+                                            <div class="col-6 col-md-4 d-flex justify-content-center align-items-center">
+                                                @if (@Model.FotoOcorrencia != null)
+                                                {
+                                                    <img id="fotoChamado" src="@Model.FotoOcorrencia" alt="@Model.NumTicket" class="img-fluid">
+
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Nenhuma imagem registrada!</span>
+                                                }
                                             </div>
                                         </div>
-
-                                        @*<div>
-                                        <img class="img-thumbnail" src="@Model.FotoOcorrencia" />
-                                                                    </div>*@
 
                                     </div>
 
@@ -165,22 +167,26 @@
             </div>
         }
     </div>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-default p-3 text-center txtBlack profile-username">
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-default p-3 text-center txtBlack profile-username">
 
-                    Não encontramos nenhum chamado com este código!
-                    <span>
-                        Por favor, confira se o código está correto e tente novamente.
-                    </span>
+                Não encontramos nenhum chamado com este código!
+                <span>
+                    Por favor, confira se o código está correto e tente novamente.
+                </span>
 
-                </div>
             </div>
         </div>
-    }
+    </div>
+}
+
+
+
+
 
 <script>
     // Get the modal
@@ -203,4 +209,26 @@
     span.onclick = function () {
         modal.style.display = "none";
     }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#divObs').slimscroll({
+            height: '140px',
+            color: '#007bff',
+            railVisible: true,
+            railBorderRadius: 5
+        }).parent().css({
+            border: 'none'
+        });
+    });
+    $(function () {
+        $('#divCom').slimscroll({
+            height: '140px',
+            color: '#007bff',
+            railVisible: true,
+            railBorderRadius: 5
+        }).parent().css({
+            border: 'none'
+        });
+    });
 </script>

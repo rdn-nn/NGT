@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title - NGT</title>
 
+    <link rel="icon" type="imagem/png" href="~/Content/Images/NGT.png" />
     @RenderSection("CssPage", false)
     <link href="~/Areas/Admin/Content/Libs/adminlte/css/adminlte.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/Libs/fontawesome-free/css/all.css" rel="stylesheet" />
@@ -34,7 +35,16 @@
     <script src="~/Areas/Admin/Content/Libs/bootstrap4/js/bootstrap.bundle.min.js"></script>
     <script src="~/Areas/Admin/Content/Libs/adminlte/js/adminlte.min.js"></script>
     @RenderSection("ScriptPage", false)
-    
+    <script>
+        $(function () {
+            $('.alteraSenha').click(function () {
+                var id = $(this).attr("ref");
+                $("#modalS").load("/admin/usuarios/alterasenha/" + id, function () {
+                    $("#modalS").modal();
+                });
+            });
+        });
+    </script>
     <script src="~/Areas/Admin/Content/Libs/sweetalert2/sweetalert2.js"></script>
 
 

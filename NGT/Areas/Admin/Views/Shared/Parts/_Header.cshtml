@@ -18,14 +18,13 @@
 
         <ul class="navbar-nav pr-3">
             <li class="nav-item dropdown">
-                <a id="dpMenuUser" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="otherLink dropdown-toggle">
+                <a id="dpMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="otherLink dropdown-toggle">
                     <span class="hideCollapse">
                         @User.Identity.Name.Split('|')[1]
                     </span>
                 </a>
-
                 <ul aria-labelledby="dpMenuUser" class="dropdown-menu border-0 shadow">
-                    <li><a id="alteraSenha" ref="@User.Identity.Name.Split('|')[0]" href="#" class="dropdown-item">Alterar senha</a></li>
+                    <li><a ref="@User.Identity.Name.Split('|')[0]" href="javascript:void(0);" class="dropdown-item alteraSenha">Alterar senha</a></li>
                 </ul>
             </li>
         </ul>
@@ -39,29 +38,8 @@
             </a>
         </div>
     </div>
-
-
 </nav>
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="TrocaSenha"></div>
-<script>
-   
-$(function () {
-            $('#alteraSenha').click(function () {
-                $("#modal").load("@Url.RouteUrl("Admin.Usuario.AlteraSenha")", function () {
-                    $("#modal").modal();
-                });
+<div id="modalS" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="TrocaSenha"></div>
 
-                $('#modal').html('<div class="c-loader m-4"></div>');
 
-                @*setTimeout(function () {
-                    var termo = $('#termo').val();
-                    $.get('@Url.Action("ConsultaChamado","Ocorrencias")', { termo: termo }, function (resultado) {
-                        $('#result').removeClass("d-flex justify-content-center");
-                        $('#result').html(resultado);
-                    });
-                }, 1500);*@
-
-            });
-        });
-</script>

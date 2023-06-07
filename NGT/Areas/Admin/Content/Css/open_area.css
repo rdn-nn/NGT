@@ -233,8 +233,16 @@ div.editLoc {
     background: #d8d8d8 !important;
 }
 
-.editaOco, .editaItd, .excluiItd {
+.editaOco, .editaOS, .editaItd, .excluiItd {
     cursor: pointer;
+}
+.statusOco {
+    padding-right: 10px;
+
+}
+.editaOco, .editaOS {
+    padding-left: 10px;
+    border-left: 1px solid;
 }
 
     .editaItd:hover {

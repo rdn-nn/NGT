@@ -12,7 +12,7 @@ namespace NGT.Models.Entities
         [MaxLength(250)]
         public string Obs { get; set; }
         public string InfoAtualizacao { get; set; }
-        public string Imagem { get; set; }
+        //public string Imagem { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
         public string NumTicket { get; set; }
@@ -44,7 +44,6 @@ namespace NGT.Models.Entities
         public virtual Item Item { get; set; }
         public virtual Motivo Motivo { get; set; }
         public virtual StatusTicket StatusTicket { get; set; }
-        public virtual ICollection<OrdServico> OrdServico { get; set; }
 
     }
 }

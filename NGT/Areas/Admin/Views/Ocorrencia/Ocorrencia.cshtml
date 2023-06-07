@@ -21,11 +21,11 @@
     <div class="row">
         <div class="col-sm-6 mb-3">
 
-            
+
 
         </div>
         <div class="col-sm-6 mb-3">
-            
+
             <a class="btn btn-primary btn-sm float-lg-right float-md-right float-sm-right float-left" id="novoChamado">
                 Novo Chamado
             </a>
@@ -35,86 +35,6 @@
 
 <div class="pl-3 pr-3 pb-3">
 
-
-    @*@using (Html.BeginForm("Criar", "Ocorrencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="card card-default collapsed-card">
-            <div class="card-header">
-                <h3 class="card-title">Novo Chamado</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-
-            </div>
-            <div class="card-body overflow-hidden">
-
-
-                @Html.AntiForgeryToken()
-
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BlocoId, "Bloco: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("BlocoId", null, "Selecione o bloco", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-
-                <div class="form-group d-none" id="divLocais">
-                    @Html.LabelFor(model => model.LocalId, "Local: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("LocalId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divCategs">
-                    @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12  pl-3 pr-3">
-                        @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divItens">
-                    @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divMotivos">
-                    @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divImg">
-                    @Html.LabelFor(model => model.FotoOcorrencia, "Deseja carregar uma imagem da ocorrência?: ", htmlAttributes: new { @class = "control-label  pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        <div class="input-group">
-                            <input type="file" class="form-control-file" name="FotoOcorrencia">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group d-none" id="divObs">
-                    @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
-                    <div class="col-md-12 pl-3 pr-3">
-                        @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="card-footer d-none justify-content-end col-11 col-md-12" id="divSubmit">
-                <button type="submit" class="btn btn-default ">Gravar</button>
-            </div>
-        </div>
-
-    }*@
-
     <div class="row">
         <div id="idPendente" class="col-lg-3 col-6">
             <div class="small-box bg-cardsAdmin">
@@ -122,7 +42,6 @@
                     <h3>@ViewBag.Pendente</h3>
                     <p>Pendentes</p>
                 </div>
-
                 <div class="icon text-info">
                     <i class="fas fa-solid fa-circle-pause"></i>
                 </div>
@@ -130,7 +49,6 @@
         </div>
 
         <div id="idAndamento" class="col-lg-3 col-6">
-            <!-- small card -->
             <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Andamento</h3>
@@ -143,7 +61,6 @@
         </div>
 
         <div id="idConcluido" class="col-lg-3 col-6">
-            <!-- small card -->
             <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Concluido</h3>
@@ -156,7 +73,6 @@
         </div>
 
         <div id="idCancelado" class="col-lg-3 col-6">
-            <!-- small card -->
             <div class="small-box bg-cardsAdmin">
                 <div class="inner">
                     <h3>@ViewBag.Cancelado</h3>
@@ -182,7 +98,7 @@
                             <th>@Html.DisplayNameFor(model => model.Categoria)</th>
                             <th>Item</th>
                             <th>@Html.DisplayNameFor(model => model.Motivo)</th>
-                            <th>@Html.DisplayNameFor(model => model.Obs)</th>
+                            <th>Observações</th>
                             <th>Foto</th>
                             <th>Criado em</th>
                             <th>Criado por</th>
@@ -223,17 +139,20 @@
                                     }
                                 </td>
                                 <td>
-                                    @if (item.DataAtualizacao != null)
+                                    @if (item.DataAtualizacao != null && item.InfoAtualizacao != null)
                                     {
-                                        @item.InfoAtualizacao
+                                        @Html.Raw(item.InfoAtualizacao.Replace("|", "<br/>"))
+                                        @*@item.InfoAtualizacao.Replace("|", "<br/>")*@
                                         @*<a href="#" rel="@item.Id" class="btn btn-default btn-sm">
                                                 Ver
                                             </a>*@
                                     }
                                 </td>
                                 <td>
-                                    @item.StatusTicket.Nome
-                                    <div class="float-right editaOco" rel="@item.Id"><i class="fas fa-pencil-alt"></i></div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="statusOco flex-grow-1">@item.StatusTicket.Nome</div>
+                                        <div class="float-left editaOco" rel="@item.Id"><i class="fas fa-pencil-alt"></i></div>
+                                    </div>
                                 </td>
                             </tr>
                         }

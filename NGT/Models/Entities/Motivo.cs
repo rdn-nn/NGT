@@ -14,8 +14,11 @@ namespace NGT.Models.Entities
         public string Nome { get; set; }
         [Required]
         public int StatusId { get; set; }
+
+
         public virtual Status Status { get; set; }
+
+
         public virtual ICollection<Ocorrencia> Ocorrencia { get; set; }
-        public virtual ICollection<OrdServico> OrdServico { get; set; }
     }
 }
