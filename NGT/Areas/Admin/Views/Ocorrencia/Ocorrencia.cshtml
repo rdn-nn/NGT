@@ -138,15 +138,17 @@
                                         @item.DataAtualizacao;
                                     }
                                 </td>
-                                <td>
-                                    @if (item.DataAtualizacao != null && item.InfoAtualizacao != null)
-                                    {
-                                        @Html.Raw(item.InfoAtualizacao.Replace("|", "<br/>"))
-                                        @*@item.InfoAtualizacao.Replace("|", "<br/>")*@
-                                        @*<a href="#" rel="@item.Id" class="btn btn-default btn-sm">
-                                                Ver
-                                            </a>*@
-                                    }
+                                <td >
+                                    <div id="smallScroll" class="smallOco small">
+                                        @if (item.DataAtualizacao != null && item.InfoAtualizacao != null)
+                                        {
+                                            @Html.Raw(item.InfoAtualizacao.Replace("|", "<br/>"))
+                                            @*@item.InfoAtualizacao.Replace("|", "<br/>")*@
+                                            @*<a href="#" rel="@item.Id" class="btn btn-default btn-sm">
+                    Ver
+                </a>*@
+                                        }
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-between">
@@ -189,6 +191,7 @@
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.print.js"></script>
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.colVis.js"></script>
     <script src="~/Areas/Admin/Content/Libs/ekko-lightbox/ekko-lightbox.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/jquery/jquery.slimscroll.min.js"></script>
 
     <script>
         $(function () {
@@ -260,6 +263,18 @@
                 $(this).ekkoLightbox({
                     alwaysShowClose: true
                 });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('div.smallOco').slimscroll({
+                height: 'fit-content',
+                color: '#007bff',
+                railVisible: true,
+                railBorderRadius: 5
+            }).parent().css({
+                border: 'none'
             });
         });
     </script>

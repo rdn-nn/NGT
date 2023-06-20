@@ -96,7 +96,6 @@ namespace NGT.Areas.Admin.Controllers
             return RedirectToAction("Index", "Ocorrencia");
         }
 
-
         [HttpPost]
         public ActionResult CarregaLocal(int blocoId)
         {
@@ -151,10 +150,10 @@ namespace NGT.Areas.Admin.Controllers
                         {
                             if (oco.InfoAtualizacao != null)
                             {
-oco.InfoAtualizacao = InfoAtualizacao + " Data: " + oco.DataAtualizacao + "   |   " + oco.InfoAtualizacao;
+                                oco.InfoAtualizacao = "● " + InfoAtualizacao + " - Data: " + oco.DataAtualizacao + " | " + oco.InfoAtualizacao;
                             } else
                             {
-                                oco.InfoAtualizacao = InfoAtualizacao + " Data: " + oco.DataAtualizacao;
+                                oco.InfoAtualizacao = "● " + InfoAtualizacao + " - Data: " + oco.DataAtualizacao;
                             }
                             
                         }

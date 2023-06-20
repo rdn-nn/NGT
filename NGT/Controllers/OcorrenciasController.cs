@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 
 namespace NGT.Controllers
 {
+    
     public class OcorrenciasController : Controller
     {
         private NgtContexto db = new NgtContexto();
@@ -125,46 +126,6 @@ namespace NGT.Controllers
             {
                 return Json("nao");
             }
-            //if (ModelState.IsValid)
-            //{
-            //    string valor = "";
-            //    var nomeBloco = db.Blocos.Where(x => x.Id == Oco.BlocoId).FirstOrDefault().Nome;
-            //    var letraBloco = nomeBloco.Substring(nomeBloco.Length - 1, 1);
-            //    var idoco = 0;
-            //    if (db.Ocorrencias.FirstOrDefault() != null)
-            //    {
-            //        idoco = db.Ocorrencias.OrderByDescending(x => x.Id).FirstOrDefault().Id;
-            //        idoco++;
-            //    }
-
-            //    var ticket = letraBloco + idoco + DateTime.Now.Day + DateTime.Now.Second;
-
-            //    Ocorrencia ocorrencia = new Ocorrencia();
-            //    ocorrencia.Obs = Oco.Obs;
-            //    ocorrencia.NumTicket = ticket;
-            //    ocorrencia.FotoOcorrencia = "\\Areas\\Admin\\Content\\Images\\imgNoFound.png";
-            //    ocorrencia.Email = Oco.Email;
-            //    ocorrencia.BlocoId = Oco.BlocoId;
-            //    ocorrencia.LocalId = Oco.LocalId;
-            //    ocorrencia.CategoriaId = Oco.CategoriaId;
-            //    ocorrencia.ItemId = Oco.ItemId;
-            //    ocorrencia.MotivoId = Oco.MotivoId;
-            //    ocorrencia.StatusTicketId = db.StatusTickets.Where(x => x.Nome == "Pendente").FirstOrDefault().Id;
-
-            //    db.Ocorrencias.Add(ocorrencia);
-            //    db.SaveChanges();
-
-
-            //    if (Oco.Email != null)
-            //    {
-            //        string msg = "<h3>Sistema NewGen Tech</h3>";
-            //        msg += "<p>Seu chamado foi registrado com sucesso! Para consultar o seu chamado, utilize o código abaixo no campo de consulta do site:</p><p> Chamado registrado - " + ticket + " </p>";
-            //        Funcoes.EnviarEmail(Oco.Email, "Registro de Chamado no sistema da Fatec", msg);
-            //    }
-
-            //    return Json("Ok");
-            //}
-            //return Json("nao");
         }
 
         [HttpPost]
@@ -196,6 +157,21 @@ namespace NGT.Controllers
             }
 
         }
+
+
+        //Rotas de Carregamento Mobile
         
+        [HttpPost]
+        public ActionResult BlocoMob()
+        {
+           var blocos = (from b in db.Blocos.Include(x => x.Status)
+                          where b.Status.Nome == "Ativado"
+                          select new
+                          {
+                              id = b.Id,
+                              nome = b.Nome
+                          }).ToList();
+            return Json(blocos, JsonRequestBehavior.AllowGet);
+        }
     }
 }

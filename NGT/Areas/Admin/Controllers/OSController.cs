@@ -149,11 +149,11 @@ namespace NGT.Areas.Admin.Controllers
                     {
                         if (ordem.Obs != null)
                         {
-                            ordem.Obs = ors.Obs + " - Data: " + ordem.DataAtualizacao + " | " + ordem.Obs;
+                            ordem.Obs = "● " + ors.Obs + " - Data: " + ordem.DataAtualizacao + " | " + ordem.Obs;
                         }
                         else
                         {
-                            ordem.Obs = ors.Obs + " - Data: " + ordem.DataAtualizacao;
+                            ordem.Obs = "● " + ors.Obs + " - Data: " + ordem.DataAtualizacao;
                         }
                     }
 

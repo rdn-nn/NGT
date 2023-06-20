@@ -107,12 +107,19 @@
                     </thead>
                     <tbody class="tbodybg">
                         @foreach (var item in @ViewBag.Ordens)
-                                    {
+                        {
                             <tr>
                                 <th>@item.NumTicketOS</th>
                                 <td>@item.ManutencaoTipo.Nome</td>
                                 <td>@item.DescProblema</td>
-                                <td>@item.Obs</td>
+                                <td>
+                                    @if (item.Obs != null)
+                                    {
+                                        <div id="smallScroll" class="smallOS small">
+                                            @Html.Raw(item.Obs.Replace("|", "<br/>"))
+                                        </div>
+                                    }
+                                </td>
                                 <td>@item.Fornecedor.NomeFantasia</td>
                                 <td>
                                     @foreach (var i in ViewBag.Itens)
@@ -180,7 +187,7 @@
 }
 
 
-                        @section ScriptPage{
+@section ScriptPage{
     <script src="~/Areas/Admin/Content/Libs/datatables/jquery.dataTables.js"></script>
     <script src="~/Areas/Admin/Content/Libs/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/Areas/Admin/Content/Libs/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -194,6 +201,7 @@
     @*<script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.flash.min.js"></script>*@
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.print.js"></script>
     <script src="~/Areas/Admin/Content/Libs/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="~/Areas/Admin/Content/Libs/jquery/jquery.slimscroll.min.js"></script>
 
     <script>
         $(function () {
@@ -240,5 +248,16 @@
             });
         });
     </script>
-
+    <script type="text/javascript">
+        $(function () {
+            $('div.smallOS').slimscroll({
+                height: 'fit-content',
+                color: '#007bff',
+                railVisible: true,
+                railBorderRadius: 5
+            }).parent().css({
+                border: 'none'
+            });
+        });
+    </script>
 }

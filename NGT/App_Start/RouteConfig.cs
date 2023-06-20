@@ -71,6 +71,14 @@ namespace NGT
           );
 
 
+            //Rotas Mobile
+            routes.MapRoute(
+              name: "Home.Ocorrencia.BlocoMob",
+              url: "ocorrencias/carregablocos",
+              defaults: new { controller = "Ocorrencias", action = "BlocoMob" },
+              namespaces: namespaces
+          );
+
         }
     }
 }

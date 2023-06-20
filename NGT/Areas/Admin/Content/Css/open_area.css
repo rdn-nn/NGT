@@ -329,7 +329,14 @@ div.editLoc {
     box-shadow: 1px 1px 0px #808080ff;
 }
 
-@media(max-width:1533px){
+#smallScroll.smallOco{
+    max-height: 100px;
+}
+#smallScroll.smallOS {
+    max-height: 150px;
+}
+
+@media(max-width:1533px) {
     .widget-user .widget-user-image {
         bottom: 37.5% !important;
     }

@@ -111,10 +111,11 @@ namespace NGT.Areas.Admin.Controllers
                 colDados2 += "['" + mes + "', " + item.total.ToString().Replace(",", ".") + "],";
 
             }
-
-            colDados2 = colDados2.Substring(0, colDados2.Length - 1);
-            colDados2 += "]}";
-
+            if (colDados2 != "") {
+                colDados2 = colDados2.Substring(0, colDados2.Length - 1);
+                colDados2 += "]}";
+            }
+            
             ViewBag.GraficoColunas = Funcoes.GerarGraficoColunas("Total OS por Status", colDados, colDados2, anoAtual);
 
 

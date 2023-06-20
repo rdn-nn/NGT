@@ -2359,6 +2359,7 @@
     <Content Include="Areas\Admin\Content\Libs\jquery\jquery.min.js" />
     <Content Include="Areas\Admin\Content\Libs\jquery\jquery.slim.js" />
     <Content Include="Areas\Admin\Content\Libs\jquery\jquery.slim.min.js" />
+    <Content Include="Areas\Admin\Content\Libs\jquery\jquery.slimscroll.min.js" />
     <Content Include="Areas\Admin\Content\Libs\jszip\jszip.js" />
     <Content Include="Areas\Admin\Content\Libs\jszip\jszip.min.js" />
     <Content Include="Areas\Admin\Content\Libs\moment\locales.js" />
@@ -2507,6 +2508,8 @@
     <Content Include="Areas\Admin\Content\Libs\pdfmake\pdfmake.js" />
     <Content Include="Areas\Admin\Content\Libs\pdfmake\pdfmake.min.js" />
     <Content Include="Areas\Admin\Content\Libs\pdfmake\vfs_fonts.js" />
+    <Content Include="Areas\Admin\Content\Libs\prettify\prettify.css" />
+    <Content Include="Areas\Admin\Content\Libs\prettify\prettify.js" />
     <Content Include="Areas\Admin\Content\Libs\select2\css\select2.css" />
     <Content Include="Areas\Admin\Content\Libs\select2\css\select2.min.css" />
     <Content Include="Areas\Admin\Content\Libs\select2\js\i18n\af.js" />
