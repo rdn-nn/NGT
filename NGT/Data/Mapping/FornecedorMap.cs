@@ -27,7 +27,7 @@ namespace NGT.Data.Mapping
             Property(x => x.CargoResp).HasColumnName("for_cargoresp");
             Property(x => x.RamoAtiv).HasColumnName("for_ramoativ");
             Property(x => x.Obs).HasColumnName("for_obs");
-            Property(x => x.Id).HasColumnName("sta_codigo");
+            Property(x => x.StatusId).HasColumnName("sta_codigo");
         }
     }
 }

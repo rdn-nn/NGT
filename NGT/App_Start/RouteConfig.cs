@@ -78,6 +78,12 @@ namespace NGT
               defaults: new { controller = "Ocorrencias", action = "BlocoMob" },
               namespaces: namespaces
           );
+            routes.MapRoute(
+              name: "Home.Ocorrencia.UsuariosMob",
+              url: "ocorrencias/carregausers",
+              defaults: new { controller = "Ocorrencias", action = "UsuariosMob" },
+              namespaces: namespaces
+          );
 
         }
     }

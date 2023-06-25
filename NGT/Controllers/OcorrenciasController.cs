@@ -104,31 +104,6 @@ namespace NGT.Controllers
         }
 
         [HttpPost]
-        public ActionResult CriarChamadoAPI(Bloco blo)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                        Bloco bloco = new Bloco
-                    {
-                        Nome = blo.Nome,
-                        StatusId = db.Status.Where(x => x.Nome == "Desativado").FirstOrDefault().Id
-                    };
-
-                    db.Blocos.Add(bloco);
-                    db.SaveChanges();
-                    return Json("sim");
-                }
-                return Json("nao");
-            }
-            catch (Exception)
-            {
-                return Json("nao");
-            }
-        }
-
-        [HttpPost]
         public ActionResult CarregaItem(int localId, int categId)
         {
 
@@ -164,7 +139,9 @@ namespace NGT.Controllers
         [HttpPost]
         public ActionResult BlocoMob()
         {
-           var blocos = (from b in db.Blocos.Include(x => x.Status)
+            //ViewBag.Ocorrencias = db.Ocorrencias.Include(x => x.Bloco).Include(x => x.Categoria).Include(x => x.Item).Include(x => x.Local).Include(x => x.Motivo).Include(x => x.StatusTicket).ToList();
+            //var bloco = new SelectList(db.Blocos.Include(x => x.Status)).ToList(); 
+            var blocos = (from b in db.Blocos.Include(x => x.Status)
                           where b.Status.Nome == "Ativado"
                           select new
                           {
@@ -173,5 +150,6 @@ namespace NGT.Controllers
                           }).ToList();
             return Json(blocos, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

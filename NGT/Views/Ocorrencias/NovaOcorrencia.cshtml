@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group d-none" id="divCategs">
-                        @Html.LabelFor(model => model.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        @Html.LabelFor(model => model.CategoriaId, "Categoria: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                         <div class="col-md-12  pl-3 pr-3">
                             @Html.DropDownList("CategoriaId", null, "Selecione a Categoria", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
                         </div>
@@ -48,14 +48,14 @@
                 <div class="col-lg-6 col-12">
 
                     <div class="form-group d-none" id="divItens">
-                        @Html.LabelFor(model => model.ItemId, "Item", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        @Html.LabelFor(model => model.ItemId, "Item: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                         <div class="col-md-12 pl-3 pr-3">
                             @Html.DropDownList("ItemId", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control col-11 col-md-12" })
                         </div>
                     </div>
 
                     <div class="form-group d-none" id="divMotivos">
-                        @Html.LabelFor(model => model.MotivoId, "Motivo", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        @Html.LabelFor(model => model.MotivoId, "Motivo: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                         <div class="col-md-12 pl-3 pr-3">
                             @Html.DropDownList("MotivoId", null, "Selecione o Motivo", htmlAttributes: new { @class = "form-control col-11 col-md-12" })
                         </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
                     <div class="form-group d-none" id="divObs">
-                        @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label pl-3 pt-3" })
+                        @Html.LabelFor(model => model.Obs, "Observações: ", htmlAttributes: new { @class = "control-label pl-3 pt-3" })
                         <div class="col-md-12 pl-3 pr-3">
                             @Html.TextAreaFor(model => model.Obs, new { @class = "form-control col-11 col-md-12", rows = "5" })
                         </div>
